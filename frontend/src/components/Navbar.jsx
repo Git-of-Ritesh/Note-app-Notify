@@ -9,7 +9,7 @@ const Navbar = () => {
 
       <div className="flex items-center">
         <img src={logo} alt="Logo" className="h-16 w-auto" />
-        <span className="-ml-1 text-lg font-bold font-Logo">Notetify</span>
+        <span className="-ml-1 text-3xl font-bold font-Logo">Notetify</span>
       </div>
 
       {/*search bar*/}
