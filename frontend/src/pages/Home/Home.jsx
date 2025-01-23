@@ -8,8 +8,14 @@ const Home = () => {
     <div className='flex flex-col h-screen'>
       <Navbar />
       <div className='flex h-screen'>
+        <div>
         <Sidebar />
+        </div>     
+
+        <div>
         <Notespage />
+        </div> 
+
       </div>
     </div>
   )

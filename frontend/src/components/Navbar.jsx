@@ -21,7 +21,7 @@ const Navbar = () => {
 
 
       <div className='flex items-center w-2/4 justify-between'>
-        <div className='flex space-x-20'>
+        <div className='flex space-x-14'>
           <SlTag className='size-5' />
           <CiImport className='size-6' />
         </div>
