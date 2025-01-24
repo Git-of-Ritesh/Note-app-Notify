@@ -7,7 +7,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        Logo: ['Handlee', 'serif'], // Add your Google Font here
+        Logo: ['Handlee', 'serif'],
+        Ubuntu: ['Ubuntu', 'serif'],
+        lala: ['Great Vibes', 'serif'], // Add your Google Font here
         instumrntalSans:['Instrument Sans', 'serif']
       },
       colors:{
