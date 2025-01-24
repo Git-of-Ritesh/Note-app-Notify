@@ -1,12 +1,12 @@
 import React from 'react'
 
-const Notecard = () => {
+const Notecard = ({title, content, date, isPinned}) => {
     return (
         <div>
-            <div className='flex flex-col bg-my-grey w-fit rounded-3xl p-3 mt-3'>
-                <h1>Project of web</h1>
-                <p>Here is the para you want to write it in here is dispalyed here w whis is the world is here is the page</p>
-                <h3>10 min</h3>
+            <div className='flex justify-between flex-col bg-my-grey w-full h-36 rounded-3xl p-3 mt-3'>
+                <h1 className='font-bold'>{title}</h1>
+                <p className='text-sm opacity-65'>{content?.slice(0, 150)}</p>
+                <h3 className='text-sm font-semibold'>{date}</h3>
             </div>
         </div>
     )

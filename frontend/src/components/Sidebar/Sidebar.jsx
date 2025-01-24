@@ -8,7 +8,7 @@ import { MdOutlinePrivacyTip } from "react-icons/md";
 
 const Sidebar = () => {
     return (
-        <aside className="mt-3 h-full w-60 flex flex-col justify-between">
+        <aside className="mt-3 h-full w-60 pb-4 flex flex-col justify-between">
             <div>
                 <div className="flex items-center gap-2 py-2 px-6 font-bold text-gray-700"><HiOutlineTemplate />Templates</div>
                 <div className="flex items-center gap-2 py-2 px-6 font-bold text-gray-700"><TbFileImport />Import</div>
