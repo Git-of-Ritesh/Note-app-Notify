@@ -7,15 +7,14 @@ const Home = () => {
   return (
     <div className='flex flex-col h-screen'>
       <Navbar />
-      <div className='flex h-screen'>
+      <div className='flex h-screen overflow-hidden'>
         <div>
         <Sidebar />
-        </div>     
+        </div>  
 
         <div>
         <Notespage />
         </div> 
-
       </div>
     </div>
   )
