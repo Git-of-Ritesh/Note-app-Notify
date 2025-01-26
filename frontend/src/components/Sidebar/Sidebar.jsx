@@ -8,11 +8,11 @@ import { MdOutlinePrivacyTip } from "react-icons/md";
 
 const Sidebar = () => {
     return (
-        <aside className="mt-3 h-full w-60 pb-4 flex flex-col justify-between">
+        <aside className="mt-3 h-full w-56 pb-4 flex flex-col justify-between">
             <div>
-                <div className="flex items-center gap-2 py-2 px-6 font-bold text-gray-700"><HiOutlineTemplate />Templates</div>
-                <div className="flex items-center gap-2 py-2 px-6 font-bold text-gray-700"><TbFileImport />Import</div>
-                <div className="flex items-center gap-2 py-2 px-6 font-bold text-gray-700"><RiDeleteBin5Line />Trash</div>
+                <div className="flex items-center gap-2 py-2 px-6 font-bold text-gray-700"><HiOutlineTemplate className='size-6'/>Templates</div>
+                <div className="flex items-center gap-2 py-2 px-6 font-bold text-gray-700"><TbFileImport className='size-6' />Import</div>
+                <div className="flex items-center gap-2 py-2 px-6 font-bold text-gray-700"><RiDeleteBin5Line className='size-6'/>Trash</div>
             </div>
 
             <div>
