@@ -28,3 +28,41 @@ export const addNote = async (req, res, next) => {
         return next(error);
     }
 }
+
+export const editNote = async (req, res, next) => {
+    const note = await notes.findById(req.params.noteId);
+
+    if(!note){
+        return next(errorHndler(404, "Note not found"));
+    }
+
+    if(req.user.id !== note.userId){
+        return next(errorHndler(403, "You are not authorized to edit this note"));
+    }
+
+    const { title, content } = req.body;
+
+    if(!title && !content){
+        return next(errorHndler(400, "No changes made"));
+    }
+
+    try{
+        if(title){
+            note.title = title;
+        }
+        if(content){
+            note.content = content;
+        }
+
+        await note.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Note updated successfully",
+            note,
+        });
+
+    }catch(error){
+        return next(error);
+    }
+}
