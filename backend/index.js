@@ -20,8 +20,10 @@ app.listen(3000, () => {
 
 //import routes
 import authRoutes from './routes/auth.route.js';
+import noteRoutes from './routes/note.route.js';
 
 app.use('/api/auth', authRoutes);
+app.use('/api/note', noteRoutes);
 
 //error handling 
 app.use((err, req, res, next) => {
