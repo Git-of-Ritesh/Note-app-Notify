@@ -1,7 +1,7 @@
-import React, { useState } from 'react'; // Importing useState hook
+import React, { useState } from 'react'; 
 import bgImage from '../../../assets/logo/bgImage.png';
-import logoImage from '../../../assets/logo/logo.png'; // Logo image
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import logoImage from '../../../assets/logo/logo.png'; 
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signInFailure } from '../../../redux/user/userSlice';
 import { signInStart } from '../../../redux/user/userSlice';
@@ -9,9 +9,9 @@ import { signInSuccess } from '../../../redux/user/userSlice';
 import axios from 'axios';
 
 const Login = () => {
-  const [email, setEmail] = useState(""); // State for email
-  const [password, setPassword] = useState(""); // State for password
-  const [error, setError] = useState(""); // State for error messages
+  const [email, setEmail] = useState(""); 
+  const [password, setPassword] = useState(""); 
+  const [error, setError] = useState(""); 
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
