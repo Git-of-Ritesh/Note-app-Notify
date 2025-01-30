@@ -2,20 +2,50 @@ import React, { useState } from 'react'; // Importing useState hook
 import bgImage from '../../../assets/logo/bgImage.png';
 import logoImage from '../../../assets/logo/logo.png'; // Logo image
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useDispatch } from 'react-redux';
+import { signInFailure } from '../../../redux/user/userSlice';
+import { signInStart } from '../../../redux/user/userSlice';
+import { signInSuccess } from '../../../redux/user/userSlice';
+import axios from 'axios';
 
 const Login = () => {
   const [email, setEmail] = useState(""); // State for email
   const [password, setPassword] = useState(""); // State for password
   const [error, setError] = useState(""); // State for error messages
 
-  const navigate = useNavigate(); // Initialize useNavigate
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
+    
+    e.preventDefault();
+
     if (!email || !password) {
       setError("Email and Password are required");
     } else {
       setError("");
-      // Handle login logic here
+    }
+    //Login API
+    try {
+      dispatch(signInStart());
+
+      const res = await axios.post('http://localhost:3000/api/auth/signin', {
+        email,
+        password
+      }, { withCredentials: true });
+
+      if (res.data.status === false) {
+        console.log(res.data);
+        dispatch(signInFailure(res.data.message));
+      }
+
+      dispatch(signInSuccess(res.data));
+      navigate('/'); 
+      
+
+    } catch (error) {
+      console.log(error);
+      dispatch(signInFailure(error.message));
     }
   };
 

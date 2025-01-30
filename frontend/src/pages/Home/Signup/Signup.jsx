@@ -1,23 +1,33 @@
-import React, { useState } from 'react'; // Importing useState hook
-import bgImage from '../../../assets/logo/bgImage.png';// Background image
-import logoImage from '../../../assets/logo/logo.png'; // Logo image
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import React, { useState } from 'react';
+import bgImage from '../../../assets/logo/bgImage.png';
+import logoImage from '../../../assets/logo/logo.png';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
-  const [email, setEmail] = useState(""); // State for email
-  const [password, setPassword] = useState(""); // State for password
-  const [confirmPassword, setConfirmPassword] = useState(""); // State for confirm password
-  const [name, setName] = useState(""); // State for full name
-  const [error, setError] = useState(""); // State for error messages
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     if (!name || !email || !password || !confirmPassword) {
       setError("All fields are required");
-    } else if (password !== confirmPassword) {
+    }
+
+    if(!validateEmail(email)) {
+      setError("Invalid Email");
+    }
+
+    else if (password !== confirmPassword) {
       setError("Passwords do not match");
-    } else {
+    }
+
+    else {
       setError("");
     }
   };
@@ -63,7 +73,7 @@ const Signup = () => {
               type="text"
               placeholder="Enter your Name"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               className="w-50% h-9 text-black py-1 mb-2 mt-0 mx-3 px-2 bg-transparent border border-[#D9D9D9] rounded-md"
             />
             <p className="mt-1 px-2 text-sm">Email</p>
