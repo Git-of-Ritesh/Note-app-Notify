@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import bgImage from '../../../assets/logo/bgImage.png';
 import logoImage from '../../../assets/logo/logo.png';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -19,16 +20,29 @@ const Signup = () => {
       setError("All fields are required");
     }
 
-    if(!validateEmail(email)) {
-      setError("Invalid Email");
-    }
-
     else if (password !== confirmPassword) {
       setError("Passwords do not match");
     }
 
     else {
       setError("");
+    }
+
+    // singup API call
+    try {
+      const res = await axios.post('http://localhost:3000/api/auth/signup', {username: name, email, password}, { withCredentials: true });
+
+      if (res.data.status === false) {
+        setError(res.data.message);
+      }
+
+      setError("");
+
+      navigate('/Login'); // Redirect to login page
+
+    } catch (error) {
+      console.log(error.message)
+      setError(error.message)
     }
   };
 
@@ -72,7 +86,7 @@ const Signup = () => {
             <input
               type="text"
               placeholder="Enter your Name"
-              value={email}
+              value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-50% h-9 text-black py-1 mb-2 mt-0 mx-3 px-2 bg-transparent border border-[#D9D9D9] rounded-md"
             />
