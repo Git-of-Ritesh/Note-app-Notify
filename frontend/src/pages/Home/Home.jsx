@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import Notespage from '../../components/Notespage/Notespage'
-import CreateNote from '../../components/Createnotes/CreateNote'
+import CreateNote from '../../components/Createnotes/NoteEditor'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -34,7 +34,7 @@ const Home = () => {
           <Notespage onNewNote={() => setIsCreateOpen(true)} />
         </div>
 
-        <div className={`w-full transition-all ${isCreateOpen ? 'block' : 'hidden'}`}>
+        <div className={`w-full pb-4 transition-all ${isCreateOpen ? 'block' : 'hidden'}`}>
           <CreateNote onClose={() => setIsCreateOpen(false) }/>
         </div>
       </div>
