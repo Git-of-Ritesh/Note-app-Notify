@@ -8,3 +8,24 @@ body {
     padding-right: 0px;
     margin: 0;
 }
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 2px; /* Width of the scrollbar */
+    display: none
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Track color */
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #bbbbbb; /* Scroll thumb color */
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a0a0a0; /* Scroll thumb color on hover */
+  }
+  
