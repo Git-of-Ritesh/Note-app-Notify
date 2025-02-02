@@ -1,6 +1,8 @@
 import React, { useState } from 'react'; 
-import bgImage from '../../../assets/logo/bgImage.png';
-import logoImage from '../../../assets/logo/logo.png'; 
+import LoginImage from '../../../assets/logo/LoginImage.jpg'
+import Logo from '../../../assets/logo/logo.png'
+import { FcGoogle } from "react-icons/fc";
+import { GrApple } from "react-icons/gr";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signInFailure } from '../../../redux/user/userSlice';
@@ -54,104 +56,96 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex items-start">
-      <div className="relative w-1/2 h-screen flex flex-col">
-        {/* Background Image with Specific Dimensions */}
-        <img
-          src={bgImage}
-          alt="Background"
-          className="rounded-2xl object-cover w-full h-[700px]"
-        />
-
-        {/* Cropped Portion of Background with Matching Border Radius */}
-        <div className="absolute top-0 left-0 w-[150px] h-[100px] bg-white overflow-hidden rounded-2xl"></div>
-
-        {/* Logo */}
-        <img
-          src={logoImage}
-          alt="Logo"
-          className="absolute top-0 left-0 w-1/4 h-16 object-contain"
-        />
-        <span className="absolute top-0 left-24 w-1/4 h-16 text-lg font-bold -ml-1 font-Logo">
-          otetify
-        </span>
-      </div>
-
-      <div className="w-3/4 md:w-1/2 h-full bg-white flex flex-col p-6">
-        <div className="flex flex-col gap-6">
-          <h1 className="tracking-wide text-[2.5rem] text-center text-black font-Ubuntu">
-            Keep Your Notes Organized.
-          </h1>
-
-          <h1 className="text-center font-lala text-[2rem] tracking-wide">Welcome Back</h1>
-        </div>
-        <div className="flex flex-col justify-between">
-          <p className="text-center mb-4 text-sm">Enter your Email and password to access your notes account</p>
-          <div className="box-border border-2 rounded-md w-3/5 justify-center flex flex-col p-4 mx-auto h-44%">
-            <p className="mt-2 px-2 text-sm">Email</p>
-            <input
-              type="email"
-              placeholder="Enter your Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-50% h-4% text-black py-1 mb-2 mt-1 mx-2 px-2 bg-transparent border border-[#D9D9D9] rounded-md"
-            />
-
-            <p className="mt-2 px-2 text-sm">Password</p>
-            <input
-              type="password"
-              placeholder="Enter your Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-50% h-4% text-black py-1 mb-2 mt-1 mx-2 px-2 bg-transparent border border-[#D9D9D9] rounded-md"
-            />
-
-            {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-
-            <div className="w-50% h-4% flex flex-col my-3">
-              <button
-                onClick={handleSubmit}
-                className="w-50% h-4% text-white mx-2 my-2 font-semibold bg-black rounded-md py-2 text-center flex items-center justify-center"
-              >
-                Log-In
-              </button>
+     <div className='flex justify-between bg-gradient-to-r from-[#F8A128] to-[#F5F5F5] h-screen py-14 px-28'>
+                <div className='flex h-full w-full bg-white rounded-[35px] drop-shadow-[6px_4px_6px_rgba(0,0,0,0.20)]'>
+                    {/* Left Side */}
+                    <div className='flex justify-center items-center w-[40%] h-full p-5'>
+                        <img className='h-full w-full rounded-2xl' src={LoginImage} alt="image of notes" />
+                    </div>
+    
+                    {/* Right Side */}
+                    <div className='flex flex-col justify-center items-center w-3/5 h-full p-5'>
+    
+                        {/* Logo div */}
+                        <div className='flex justify-center items-center'>
+                            <img className='size-12' src={Logo} alt="Logo image" />
+                            <span className="text-2xl font-Logo ml-[-7.4%] ">
+                                otetify
+                            </span>
+                        </div>
+    
+                        {/* header div */}
+                        <div className='flex flex-col items-center gap-7'>
+                            <h1 className="font-instumrntalSans font-semibold text-4xl">
+                                Keep Your Notes Organized.
+                            </h1>
+    
+                            {/* Welcome Back */}
+                            <div className='flex flex-col items-center'>
+                                <h1 className="font-instumrntalSans font-medium text-3xl tracking-tight">
+                                    Welcome Back
+                                </h1>
+                                <p className="text-center text-[#7C7B7B] mb-4 text-sm">Enter your Email and password to access your notes account</p>
+                            </div>
+                        </div>
+    
+                        {/* Form div */}
+                        <div className='flex flex-col mt-5 gap-4'>
+                            <input className='border border-[#A09F9F] w-96 rounded-3xl h-11 p-4 ' type="text"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)} placeholder='Email' />
+    
+                            <input className='border border-[#A09F9F] w-96 rounded-3xl h-11 p-4 ' type="text"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)} placeholder='Password' />
+    
+                            {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+    
+                            <div className="flex items-center justify-between mx-4">
+                                <div className='flex items-center'>
+                                    <input type="checkbox" className="w-5 h-5 mr-2 border border-black appearance-none rounded-full checked:bg-blue-500" />
+                                    <p className="text-sm">Remember me</p>
+                                </div>
+                                <p className="text-sm font-medium  whitespace-nowrap cursor-pointer ">
+                                    Forget Password?
+                                </p>
+                            </div>
+    
+                            <button onClick={handleSubmit} className=' flex justify-center items-center w-96 rounded-3xl h-11 p-4 bg-my-yellow text-white font-semibold '>Sign in</button>
+    
+                            <div className='flex justify-center items-center gap-3'>
+                                <hr className='w-32 border-[#A09F9F] border-1' />
+                                <span className='text-[#827E7E] tracking-tight'>Or login with</span>
+                                <hr className='w-32 border-[#A09F9F] border-1' />
+                            </div>
+    
+                            <div className='flex justify-center items-center gap-6'>
+                                <button>
+                                    <FcGoogle className='size-9' />
+                                </button>
+    
+                                <button>
+                                    <GrApple className='size-9' />
+                                </button>
+                            </div>
+    
+                            <div className="flex items-center justify-center mt-4">
+                                <p className="text-sm font-normal text-[#827E7E]">
+                                    Don't have an account?{" "}
+                                    <span onClick={handleSignUpRedirect}
+                                        className="font-semibold text-black cursor-pointer"
+                                    >
+                                        Sign Up
+                                    </span>
+                                </p>
+                            </div>
+    
+                        </div>
+    
+    
+                    </div>
+                </div>
             </div>
-
-            <div className="w-50% h-4% mx-2 flex items-center justify-between">
-              <div className="flex items-center">
-                <input type="checkbox" className="w-4 h-4 mr-2" />
-                <p className="text-sm">Remember me</p>
-              </div>
-
-              <p className="text-sm font-medium mr-4 mb-2 whitespace-nowrap cursor-pointer underline underline-offset-2">
-                Forget Password?
-              </p>
-            </div>
-            <div className="w-50% h-4% text-[#FFFFFF] cursor-pointer mx-2 my-2 font-semibold bg-[#1877F2] border-black rounded-md py-2 text-center flex items-center justify-center shadow-md shadow-black/20">
-              Continue with Facebook
-            </div>
-            <div className="w-50% h-4% text-[#0000008A] cursor-pointer mx-2 my-2 font-semibold bg-[#FFFFFF] border-black rounded-md py-2 text-center flex items-center justify-center shadow-md shadow-black/20">
-              Continue with Google
-            </div>
-            <div className="w-50% h-4% text-[#FFFFFF] cursor-pointer mx-2 my-1 font-semibold bg-black border-black rounded-md py-2 text-center flex items-center justify-center shadow-md shadow-black/20">
-              Continue with Github
-            </div>
-          </div>
-
-          <div className="flex items-center justify-center mt-4">
-            <p className="text-sm font-normal text-black">
-              Don't have an account?{" "}
-              <span
-                onClick={handleSignUpRedirect} // Call the redirection function
-                className="font-semibold underline underline-offset-2 cursor-pointer"
-              >
-                Sign Up
-              </span>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
   );
 };
 
