@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Notecard = ({title, content, date, isPinned}) => {
+const Notecard = ({title, content, date}) => {
     return (
         <div>
             <div className='flex justify-between flex-col bg-white w-full h-36 rounded-3xl p-4 mt-3'>
