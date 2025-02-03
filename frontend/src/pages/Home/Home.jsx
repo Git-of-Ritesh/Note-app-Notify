@@ -51,7 +51,7 @@ const Home = () => {
         </div>
 
         <div>
-          <Notespage allNotes={allNotes} onNewNote={() => setIsCreateOpen(true)} />
+          <Notespage allNotes={allNotes} onNewNote={() => setIsCreateOpen(true)} isCreateOpen={isCreateOpen} />
         </div>
 
         <div className={`w-full pb-4 transition-all ${isCreateOpen ? 'block' : 'hidden'}`}>

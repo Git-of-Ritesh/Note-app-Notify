@@ -9,6 +9,7 @@ body {
     margin: 0;
 }
 
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
     width: 2px; /* Width of the scrollbar */
