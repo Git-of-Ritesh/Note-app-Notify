@@ -18,10 +18,11 @@ import { LiaHashtagSolid } from "react-icons/lia";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 
-const Sidebar = () => {
+const Sidebar = ({userInfo}) => {
 
     const [categoryisOpen, setCategoryIsOpen] = useState(false);
     const [tagisOpen, setTagIsOpen] = useState(false);
+    
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -147,7 +148,7 @@ const Sidebar = () => {
                     <div className='flex justify-start gap-2 items-center'>
                         <img src={profile} alt="profile" className='w-9 h-9 rounded-full object-cover cursor-pointer hover:scale-110 transition-transform' />
 
-                        <span className='font-instumrntalSans font-semibold'>John snow</span>
+                        <span className='font-instumrntalSans font-semibold'>{userInfo?.username}</span>
                     </div>
                     <button className='flex justify-between bg-[#F8A025] rounded-xl p-1 px-3 font-instumrntalSans' onClick={onLogOut} >Logout <HiOutlineLogout className='size-6' /></button>
                 </div>
