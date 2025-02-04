@@ -24,7 +24,7 @@ const Login = () => {
         if (!email || !password) {
             setError("Email and Password are required");
         } else {
-            setError("Invalid credentials");
+            setError("");
         }
 
         //Login API

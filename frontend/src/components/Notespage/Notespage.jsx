@@ -10,12 +10,14 @@ const Notespage = ({ onNewNote, allNotes, isCreateOpen }) => {
   return (
     <div className='w-full h-screen px-0'>
 
+      <div className={`flex ${isCreateOpen ? '' : 'justify-center'}`}>
+        {/*  search bar*/}
+        <Searchbar isCreateOpen={isCreateOpen} />
+      </div>
+
       <div className='flex flex-col w-96 justify-between '>
 
-        {/*  search bar*/}
-        <Searchbar />
-
-        <div className='flex w-96 justify-between mt-5'>
+        <div className='flex w-96 gap-5 mt-5'>
           <h1 className='font-instumrntalSans font-semibold text-4xl ml-3'>Notes</h1>
           <button
             onClick={onNewNote}
@@ -24,9 +26,9 @@ const Notespage = ({ onNewNote, allNotes, isCreateOpen }) => {
 
       </div>
 
-      {/* h-[calc(100vh-100px)] */}
 
-      <div className={`content-start flex overflow-y-auto w-full h-[calc(100vh-100px)] mt-3 gap-x-2 gap-y-0.5 ${isCreateOpen ? 'flex-col' : 'flex-row flex-wrap'}`}>
+
+      <div className={`content-start flex overflow-y-auto w-full h-[calc(100vh-100px)] mt-3 gap-x-2  ${isCreateOpen ? 'flex-col' : 'flex-row flex-wrap'}`}>
         {allNotes.map((note, index) => (
           <Notecard
             key={note._id}

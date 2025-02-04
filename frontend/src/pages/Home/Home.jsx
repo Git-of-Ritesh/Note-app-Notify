@@ -55,7 +55,7 @@ const Home = () => {
         </div>
 
         <div className={`w-full pb-4 transition-all ${isCreateOpen ? 'block' : 'hidden'}`}>
-          <CreateNote onClose={() => setIsCreateOpen(false)} />
+          <CreateNote onClose={() => setIsCreateOpen(false)} getAllNotes={getAllNotes} />
         </div>
       </div>
     </div>
