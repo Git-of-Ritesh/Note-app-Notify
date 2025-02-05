@@ -19,7 +19,38 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
   }, [selectedNote]);
 
   //delete note
-  const deleteNote = async () => {}
+  const deleteNote = async () => {
+
+    if(!selectedNote?._id){
+      console.error("Error: Note ID is missing!");
+      setError("Note ID is missing!");
+      return;
+    }
+
+    try {
+      const res = await axios.delete(`http://localhost:3000/api/note/delete-note/${selectedNote._id}`, {withCredentials: true})
+      
+      if (res.data.success === false) {
+        console.log(res.data.message)
+        setError(res.data.message)
+        return
+      }
+
+      getAllNotes()
+      onClose()
+
+    } catch (error) {
+      console.log(error.message)
+      setError(error.message)    
+    }
+  }
+
+  //consfirm delete
+  const confirmDelete = () => {
+    if (window.confirm("Are you sure you want to delete this note?")) {
+      deleteNote();
+    }
+  };
 
   // edit note
   const editNote = async () => {
@@ -74,7 +105,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
           <button className="p-2 rounded-md hover:bg-gray-200"><FiList className="size-5" /></button>
         </div>
         <div className="flex gap-2">
-          <button className="flex items-center py-2 px-3 gap-2 rounded-xl border border-[#7D7B7B] text-[#4B4A4A] hover:bg-red-200"><FiTrash className="size-5" />Delete</button>
+          <button className="flex items-center py-2 px-3 gap-2 rounded-xl border border-[#7D7B7B] text-[#4B4A4A] hover:bg-red-200" onClick={confirmDelete} ><FiTrash className="size-5" />Delete</button>
           <button className="flex items-center py-2 px-3 gap-2 rounded-xl text-white bg-my-yellow hover:bg-yellow-500"
             onClick={selectedNote ? editNote : addNote}  ><FiSave className="size-5" /> {selectedNote ? "Update" : "Save"}</button>
         </div>
