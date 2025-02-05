@@ -14,8 +14,8 @@ import { MdOutlinePrivacyTip } from "react-icons/md";
 import { MdOutlineWbIncandescent } from "react-icons/md";
 import { BiCategory } from "react-icons/bi";
 import { LiaHashtagSolid } from "react-icons/lia";
-
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import Searchbar from "../searchbar/searchbar"
 
 
 const Sidebar = ({userInfo}) => {
@@ -56,6 +56,7 @@ const Sidebar = ({userInfo}) => {
 
 
                 <div className="flex flex-col gap-1">
+                    <Searchbar/>
                     <button className='flex items-center gap-5 w-full px-2 py-2 font-semibold text-[#575656] bg-transparent hover:bg-gray-100 rounded-lg transition-all '><LuNotebookText className='size-5' />All notes</button>
 
                     <button className='flex items-center gap-5 w-full px-2 py-2 font-semibold text-[#575656] bg-transparent hover:bg-gray-100 rounded-lg transition-all'><BsPinAngle className='size-5' strokeWidth={0.5} />Pinned notes</button>
