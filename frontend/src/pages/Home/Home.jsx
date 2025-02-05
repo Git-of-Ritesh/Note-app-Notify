@@ -41,7 +41,8 @@ const Home = () => {
         console.log(res.data)
       } 
       else {
-        setAllNotes(res.data.note || [])
+        setAllNotes(res.data.note.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+        // setAllNotes(res.data.note || [])
       }
 
     } catch (error) {
@@ -57,7 +58,7 @@ const Home = () => {
         </div>
 
         <div>
-          <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor} selectedNote={selectedNote} isCreateOpen={isCreateOpen} />
+          <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor} selectedNote={selectedNote} isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} closeEditor={() => {setIsCreateOpen(false)}} />
         </div>
 
         <div className={`w-full pb-4 transition-all ${isCreateOpen ? 'block' : 'hidden'}`}>

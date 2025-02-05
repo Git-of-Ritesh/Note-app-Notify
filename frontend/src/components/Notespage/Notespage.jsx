@@ -1,9 +1,31 @@
 import React, { useState } from 'react'
 import { FiPlus } from "react-icons/fi"
 import Notecard from '../Notecard/Notecard'
+import axios from 'axios'
 
 
-const Notespage = ({ onNewNote, allNotes, isCreateOpen, onEditNote, selectedNote }) => {
+const Notespage = ({getAllNotes, onNewNote, allNotes, isCreateOpen, onEditNote, selectedNote, closeEditor }) => {
+
+  //delete note
+  const deleteNote = async (noteId) => {
+
+    try {
+      const res = await axios.delete(`http://localhost:3000/api/note/delete-note/${noteId}`, {withCredentials: true})
+      
+      if (res.data.success === false) {
+        console.log(res.data.message)
+        return
+      }
+
+      getAllNotes()
+      if(isCreateOpen){
+        closeEditor()
+      }
+
+    } catch (error) {
+      console.log(error.message)  
+    }
+  }
 
 
   return (
@@ -22,7 +44,7 @@ const Notespage = ({ onNewNote, allNotes, isCreateOpen, onEditNote, selectedNote
 
 
 
-      <div className={`content-start flex overflow-y-auto w-full h-[calc(100vh-100px)] mt-3 gap-x-2  ${isCreateOpen ? 'flex-col' : 'flex-row flex-wrap'}`}>
+      <div className={`content-start flex  overflow-y-auto w-full h-[calc(100vh-100px)] mt-3 gap-x-2  ${isCreateOpen ? 'flex-col' : 'flex-row flex-wrap'}`}>
         {allNotes.map((note, index) => (
           <Notecard
             key={note._id}
@@ -31,6 +53,7 @@ const Notespage = ({ onNewNote, allNotes, isCreateOpen, onEditNote, selectedNote
             content={note.content}
             isSelected={selectedNote?._id === note._id}
             onClick={()=> onEditNote(note)}
+            onDelete={()=>deleteNote(note._id)}
           />
         ))}
       </div>
