@@ -1,15 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiBold, FiItalic, FiUnderline, FiList, FiTrash, FiSave, FiX } from "react-icons/fi";
 import axios from "axios"
 
-const NoteEditor = ({ onClose, getAllNotes }) => {
+const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
 
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [error, setError] = useState(null)
 
+  useEffect(() => {
+    if (selectedNote) {
+      setTitle(selectedNote.title);
+      setContent(selectedNote.content);
+    } else {
+      setTitle("");
+      setContent("");
+    }
+  }, [selectedNote]);
+
+  //delete note
+  const deleteNote = async () => {}
+
   // edit note
-  const editNote = async () => { }
+  const editNote = async () => {
+    try {
+      const res = await axios.post(`http://localhost:3000/api/note/edit-note/${selectedNote._id}`, { title, content }, { withCredentials: true })
+
+      if (res.data.success === false) {
+        console.log(res.data.message)
+        setError(res.data.message)
+        return
+      }
+
+      getAllNotes()
+      onClose()
+
+    } catch (error) {
+      console.log(error.message)
+      setError(error.message)
+    }
+  }
 
   // add note
   const addNote = async () => {
@@ -45,7 +75,8 @@ const NoteEditor = ({ onClose, getAllNotes }) => {
         </div>
         <div className="flex gap-2">
           <button className="flex items-center py-2 px-3 gap-2 rounded-xl border border-[#7D7B7B] text-[#4B4A4A] hover:bg-red-200"><FiTrash className="size-5" />Delete</button>
-          <button className="flex items-center py-2 px-3 gap-2 rounded-xl text-white bg-my-yellow hover:bg-yellow-500" onClick={addNote}  ><FiSave className="size-5" />Save</button>
+          <button className="flex items-center py-2 px-3 gap-2 rounded-xl text-white bg-my-yellow hover:bg-yellow-500"
+            onClick={selectedNote ? editNote : addNote}  ><FiSave className="size-5" /> {selectedNote ? "Update" : "Save"}</button>
         </div>
       </div>
 

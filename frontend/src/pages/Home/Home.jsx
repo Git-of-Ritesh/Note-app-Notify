@@ -11,6 +11,12 @@ const Home = () => {
   const { currentUser, loading, errorDispatch } = useSelector((state) => state.user)
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [selectedNote, setSelectedNote] = useState(null);
+
+  const handleOpenEditor = (note = null) => {
+    setIsCreateOpen(true);
+    setSelectedNote(note);
+  }
 
   const [userInfo, setUserInfo] = useState(null)
   const [allNotes, setAllNotes] = useState([])
@@ -51,11 +57,11 @@ const Home = () => {
         </div>
 
         <div>
-          <Notespage allNotes={allNotes} onNewNote={() => setIsCreateOpen(true)} isCreateOpen={isCreateOpen} />
+          <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor} isCreateOpen={isCreateOpen} />
         </div>
 
         <div className={`w-full pb-4 transition-all ${isCreateOpen ? 'block' : 'hidden'}`}>
-          <CreateNote onClose={() => setIsCreateOpen(false)} getAllNotes={getAllNotes} />
+          <CreateNote onClose={() => { setIsCreateOpen(false); setSelectedNote(null); }} getAllNotes={getAllNotes} selectedNote={selectedNote} />
         </div>
       </div>
     </div>
