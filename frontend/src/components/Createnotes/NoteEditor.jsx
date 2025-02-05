@@ -86,6 +86,9 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
       getAllNotes()
       onClose()
 
+      setTitle("");  
+      setContent(""); 
+
 
     } catch (error) {
       console.log(error.message)

@@ -8,9 +8,9 @@ import axios from 'axios'
 
 const Home = () => {
 
-  const { currentUser, loading, errorDispatch } = useSelector((state) => state.user)
+  const { currentUser, loading, errorDispatch } = useSelector((state) => state.user) // used for current user detail
 
-  const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [isCreateOpen, setIsCreateOpen] = useState(false); 
   const [selectedNote, setSelectedNote] = useState(null);
 
   const handleOpenEditor = (note = null) => {
@@ -57,7 +57,7 @@ const Home = () => {
         </div>
 
         <div>
-          <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor} isCreateOpen={isCreateOpen} />
+          <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor} selectedNote={selectedNote} isCreateOpen={isCreateOpen} />
         </div>
 
         <div className={`w-full pb-4 transition-all ${isCreateOpen ? 'block' : 'hidden'}`}>
