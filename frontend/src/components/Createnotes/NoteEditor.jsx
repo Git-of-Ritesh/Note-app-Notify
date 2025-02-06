@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { FiBold, FiItalic, FiUnderline, FiList, FiTrash, FiSave, FiX } from "react-icons/fi";
 import axios from "axios"
+import { FiPlus } from "react-icons/fi"
+import { FiChevronDown }  from "react-icons/fi";
 
 const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
 
@@ -21,15 +23,15 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
   //delete note
   const deleteNote = async () => {
 
-    if(!selectedNote?._id){
+    if (!selectedNote?._id) {
       console.error("Error: Note ID is missing!");
       setError("Note ID is missing!");
       return;
     }
 
     try {
-      const res = await axios.delete(`http://localhost:3000/api/note/delete-note/${selectedNote._id}`, {withCredentials: true})
-      
+      const res = await axios.delete(`http://localhost:3000/api/note/delete-note/${selectedNote._id}`, { withCredentials: true })
+
       if (res.data.success === false) {
         console.log(res.data.message)
         setError(res.data.message)
@@ -41,7 +43,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
 
     } catch (error) {
       console.log(error.message)
-      setError(error.message)    
+      setError(error.message)
     }
   }
 
@@ -86,8 +88,8 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
       getAllNotes()
       onClose()
 
-      setTitle("");  
-      setContent(""); 
+      setTitle("");
+      setContent("");
 
 
     } catch (error) {
@@ -97,7 +99,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
   }
 
   return (
-    <div className="flex flex-col w-full h-full bg-white  rounded-3xl ">
+    <div className="flex flex-col w-full h-full bg-white  rounded-3xl pb-4 ">
 
       {/* Toolbar */}
       <div className="flex items-center justify-between border-b px-2 py-3 ">
@@ -130,6 +132,12 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
           <FiX className="size-5" />
         </button>
 
+      </div>
+
+      {/* tag and category */}
+      <div className="flex px-3 py-3 gap-2">
+        <div className="flex items-center border border-[#A9A8A8] py-1 px-2 rounded-md"><input className="focus:outline-none" type="text" placeholder="Add tags..." /><button><FiPlus/></button></div>
+        <button className="flex items-center border-[#A9A8A8] border py-1 px-2 rounded-md text-[#A9A8A8] gap-3">Category<FiChevronDown/></button>
       </div>
 
       {/* Editable Content Area */}
