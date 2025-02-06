@@ -3,6 +3,8 @@ import { FiBold, FiItalic, FiUnderline, FiList, FiTrash, FiSave, FiX } from "rea
 import axios from "axios"
 import { FiPlus } from "react-icons/fi"
 import { FiChevronDown } from "react-icons/fi";
+import { TiPinOutline, TiPin } from "react-icons/ti";
+
 
 const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
 
@@ -10,6 +12,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
   const [content, setContent] = useState("")
   const [tags, setTags] = useState([])
   const [inputTag, setInputTag] = useState("")
+  const [isPinned, setIsPinned] = useState(false)
   const [error, setError] = useState(null)
 
   useEffect(() => {
@@ -17,13 +20,24 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
       setTitle(selectedNote.title);
       setContent(selectedNote.content);
       setTags(selectedNote.tags || []);
+      setIsPinned(selectedNote.isPinned || false);
     } else {
       setTitle("");
       setContent("");
       setTags([]);
+      setIsPinned(false)
     }
   }, [selectedNote]);
 
+  // tongle pin
+  const togglePin = () => {
+    setIsPinned((prev) => {
+      const newPinState = !prev;
+      console.log("Toggled isPinned:", newPinState);  // ✅ Log the new state here
+      return newPinState;
+    });
+  };
+  
   // add tag
   const handleAddTag = () => {
     if (inputTag.trim() !== " " && !tags.includes(inputTag.trim())) {
@@ -75,7 +89,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
   // edit note
   const editNote = async () => {
     try {
-      const res = await axios.post(`http://localhost:3000/api/note/edit-note/${selectedNote._id}`, { title, content, tags }, { withCredentials: true })
+      const res = await axios.post(`http://localhost:3000/api/note/edit-note/${selectedNote._id}`, { title, content, tags, isPinned }, { withCredentials: true })
 
       if (res.data.success === false) {
         console.log(res.data.message)
@@ -95,7 +109,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
   // add note
   const addNote = async () => {
     try {
-      const res = await axios.post("http://localhost:3000/api/note/add-note", { title, content, tags }, { withCredentials: true })
+      const res = await axios.post("http://localhost:3000/api/note/add-note", { title, content, tags, isPinned }, { withCredentials: true })
 
       if (res.data.success === false) {
         console.log(res.data.message)
@@ -108,6 +122,8 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
 
       setTitle("");
       setContent("");
+      setIsPinned(false);
+      setTags([]);
 
 
     } catch (error) {
@@ -145,27 +161,35 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        {/* Close Button */}
-        <button onClick={onClose} className=" p-2 rounded-md text-gray-500 hover:bg-gray-200">
-          <FiX className="size-5" />
-        </button>
+        <div className="flex items-center gap-1">
+          {/* Pinned button */}
+          <button className="p-2 rounded-md text-gray-500 hover:bg-gray-200" onClick={togglePin}>
+            {isPinned ?<TiPin className="size-5"/> : <TiPinOutline className="size-5" />}
+          </button>
+
+          {/* Close Button */}
+          <button onClick={onClose} className=" p-2 rounded-md text-gray-500 hover:bg-gray-200">
+            <FiX className="size-5" />
+          </button>
+        </div>
+
 
       </div>
 
       {/* tag and category */}
       <div className="flex px-3 py-3 gap-2">
         <div className="flex items-center border border-[#A9A8A8] py-1 px-2 rounded-md">
-          <input className="focus:outline-none" 
-          type="text" placeholder="Add tags..." 
-          value={inputTag} 
-          onChange={(e) => setInputTag(e.target.value)} />
+          <input className="focus:outline-none"
+            type="text" placeholder="Add tags..."
+            value={inputTag}
+            onChange={(e) => setInputTag(e.target.value)} />
           <button onClick={handleAddTag}><FiPlus /></button>
         </div>
         <button className="flex items-center border-[#A9A8A8] border py-1 px-2 rounded-md text-[#A9A8A8] gap-3">Category<FiChevronDown /></button>
       </div>
 
-        {/* Display Added Tags */}
-        <div className="flex flex-wrap gap-2 px-3">
+      {/* Display Added Tags */}
+      <div className="flex flex-wrap gap-2 px-3">
         {tags.map((tag, index) => (
           <div key={index} className="flex items-center bg-gray-200 py-1 px-2 rounded-md">
             <span>{tag}</span>

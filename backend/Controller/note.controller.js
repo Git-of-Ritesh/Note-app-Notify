@@ -41,7 +41,7 @@ export const editNote = async (req, res, next) => {
         return next(errorHndler(403, "You are not authorized to edit this note"));
     }
 
-    const { title, content, tags } = req.body;
+    const { title, content, tags, isPinned } = req.body;
 
     if (!title && !content) {
         return next(errorHndler(400, "No changes made"));
@@ -57,6 +57,9 @@ export const editNote = async (req, res, next) => {
 
         if(tags){
             note.tags = tags;
+        }
+        if(isPinned !== undefined){
+            note.isPinned = isPinned;
         }
 
         await note.save();
