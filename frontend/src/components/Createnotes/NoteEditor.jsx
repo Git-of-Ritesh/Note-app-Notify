@@ -2,23 +2,41 @@ import { useState, useEffect } from "react";
 import { FiBold, FiItalic, FiUnderline, FiList, FiTrash, FiSave, FiX } from "react-icons/fi";
 import axios from "axios"
 import { FiPlus } from "react-icons/fi"
-import { FiChevronDown }  from "react-icons/fi";
+import { FiChevronDown } from "react-icons/fi";
 
 const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
 
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
+  const [tags, setTags] = useState([])
+  const [inputTag, setInputTag] = useState("")
   const [error, setError] = useState(null)
 
   useEffect(() => {
     if (selectedNote) {
       setTitle(selectedNote.title);
       setContent(selectedNote.content);
+      setTags(selectedNote.tags || []);
     } else {
       setTitle("");
       setContent("");
+      setTags([]);
     }
   }, [selectedNote]);
+
+  // add tag
+  const handleAddTag = () => {
+    if (inputTag.trim() !== " " && !tags.includes(inputTag.trim())) {
+      setTags([...tags, inputTag.trim()])
+      setInputTag("")
+    }
+  }
+
+  // delete tag
+  const handleDeleteTag = (index) => {
+    const updateTags = tags.filter((_, i) => i !== index)
+    setTags(updateTags)
+  }
 
   //delete note
   const deleteNote = async () => {
@@ -57,7 +75,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
   // edit note
   const editNote = async () => {
     try {
-      const res = await axios.post(`http://localhost:3000/api/note/edit-note/${selectedNote._id}`, { title, content }, { withCredentials: true })
+      const res = await axios.post(`http://localhost:3000/api/note/edit-note/${selectedNote._id}`, { title, content, tags }, { withCredentials: true })
 
       if (res.data.success === false) {
         console.log(res.data.message)
@@ -77,7 +95,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
   // add note
   const addNote = async () => {
     try {
-      const res = await axios.post("http://localhost:3000/api/note/add-note", { title, content }, { withCredentials: true })
+      const res = await axios.post("http://localhost:3000/api/note/add-note", { title, content, tags }, { withCredentials: true })
 
       if (res.data.success === false) {
         console.log(res.data.message)
@@ -136,8 +154,24 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote }) => {
 
       {/* tag and category */}
       <div className="flex px-3 py-3 gap-2">
-        <div className="flex items-center border border-[#A9A8A8] py-1 px-2 rounded-md"><input className="focus:outline-none" type="text" placeholder="Add tags..." /><button><FiPlus/></button></div>
-        <button className="flex items-center border-[#A9A8A8] border py-1 px-2 rounded-md text-[#A9A8A8] gap-3">Category<FiChevronDown/></button>
+        <div className="flex items-center border border-[#A9A8A8] py-1 px-2 rounded-md">
+          <input className="focus:outline-none" 
+          type="text" placeholder="Add tags..." 
+          value={inputTag} 
+          onChange={(e) => setInputTag(e.target.value)} />
+          <button onClick={handleAddTag}><FiPlus /></button>
+        </div>
+        <button className="flex items-center border-[#A9A8A8] border py-1 px-2 rounded-md text-[#A9A8A8] gap-3">Category<FiChevronDown /></button>
+      </div>
+
+        {/* Display Added Tags */}
+        <div className="flex flex-wrap gap-2 px-3">
+        {tags.map((tag, index) => (
+          <div key={index} className="flex items-center bg-gray-200 py-1 px-2 rounded-md">
+            <span>{tag}</span>
+            <button onClick={() => handleDeleteTag(index)} className="ml-2 text-black"><FiX /></button>
+          </div>
+        ))}
       </div>
 
       {/* Editable Content Area */}

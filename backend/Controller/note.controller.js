@@ -2,7 +2,7 @@ import notes from '../Models/notes.model.js';
 import { errorHndler } from '../utils/error.js';
 
 export const addNote = async (req, res, next) => {
-    const { title, content } = req.body;
+    const { title, content, tags } = req.body;
 
     const { id } = req.user;
 
@@ -14,6 +14,7 @@ export const addNote = async (req, res, next) => {
         const newNote = new notes({
             title,
             content,
+            tags: tags || [],
             userId: id,
         });
 
@@ -40,7 +41,7 @@ export const editNote = async (req, res, next) => {
         return next(errorHndler(403, "You are not authorized to edit this note"));
     }
 
-    const { title, content } = req.body;
+    const { title, content, tags } = req.body;
 
     if (!title && !content) {
         return next(errorHndler(400, "No changes made"));
@@ -52,6 +53,10 @@ export const editNote = async (req, res, next) => {
         }
         if (content) {
             note.content = content;
+        }
+
+        if(tags){
+            note.tags = tags;
         }
 
         await note.save();

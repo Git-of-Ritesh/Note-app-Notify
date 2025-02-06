@@ -3,7 +3,7 @@ import moment from 'moment'
 import { AiOutlineDelete } from "react-icons/ai";
 import Tagcard from "../Tagcards/Tagcard"
 
-const Notecard = ({ title, content, date, onClick, isSelected, onDelete }) => {
+const Notecard = ({ title, content, date, tags, onClick, isSelected, onDelete }) => {
     return (
         <div className='h-fit' onClick={onClick}>
             <div className={`flex justify-between flex-col w-96 h-48 rounded-3xl p-4 mt-3 ${isSelected ? "bg-my-yellow" : "bg-white"} `}>
@@ -14,7 +14,7 @@ const Notecard = ({ title, content, date, onClick, isSelected, onDelete }) => {
 
 
                 <div>
-                    <Tagcard isSelected={isSelected} />
+                    <Tagcard tags={tags} isSelected={isSelected} />
                 </div>
 
                 <div className='flex justify-between items-center'>

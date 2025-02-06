@@ -51,6 +51,7 @@ const Notespage = ({getAllNotes, onNewNote, allNotes, isCreateOpen, onEditNote, 
             title={note.title}
             date={note.createdAt}
             content={note.content}
+            tags={note.tags}
             isSelected={selectedNote?._id === note._id}
             onClick={()=> onEditNote(note)}
             onDelete={()=>deleteNote(note._id)}
