@@ -1,12 +1,12 @@
 import React from 'react'
 
 const Tagcard = ({ tags, isSelected }) => {
-  
+
   return (
-      <div className="flex flex-wrap gap-2">
+      <div className="flex items-center overflow-x-auto gap-2">
           {tags && tags.length > 0 ? (
-              tags.map((tag, index) => (
-                  <span key={index} className={`px-2 py-1 rounded-md text-xs font-medium ${isSelected ? "bg-white text-black" : "bg-gray-300 text-gray-700"}`}>
+               tags.slice(0, 4).map((tag, index) => (
+                  <span key={index} className={`flex px-2 py-1 rounded-md text-xs font-medium ${isSelected ? "bg-white text-black" : "bg-gray-300 text-gray-700"}`}>
                       {tag}
                   </span>
               ))
