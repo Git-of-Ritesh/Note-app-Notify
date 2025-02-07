@@ -18,13 +18,16 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import Searchbar from "../searchbar/searchbar"
 
 
-const Sidebar = ({userInfo}) => {
+const Sidebar = ({ userInfo, getAllNotes, getPinnedNotes }) => {
 
+    const [activeTab, setActiveTab] = useState("all")
     const [categoryisOpen, setCategoryIsOpen] = useState(false);
     const [tagisOpen, setTagIsOpen] = useState(false);
-    
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    
 
     const onLogOut = async () => {
         try {
@@ -56,10 +59,20 @@ const Sidebar = ({userInfo}) => {
 
 
                 <div className="flex flex-col gap-1">
-                    <Searchbar/>
-                    <button className='flex items-center gap-5 w-full px-2 py-2 font-semibold text-[#575656] bg-transparent hover:bg-gray-100 rounded-lg transition-all '><LuNotebookText className='size-5' />All notes</button>
+                    <Searchbar />
+                    <button className={`flex items-center gap-5 w-full px-2 py-2 font-semibold rounded-lg transition-all ${activeTab === "all" ? "bg-my-yellow text-white" : "bg-transparent text-[#575656] hover:bg-gray-100 "}`}
+                        onClick={() => {
+                            setActiveTab("all");
+                            getAllNotes();
+                        }}>
+                        <LuNotebookText className='size-5' />All notes</button>
 
-                    <button className='flex items-center gap-5 w-full px-2 py-2 font-semibold text-[#575656] bg-transparent hover:bg-gray-100 rounded-lg transition-all'><BsPinAngle className='size-5' strokeWidth={0.5} />Pinned notes</button>
+                    <button className={`flex items-center gap-5 w-full px-2 py-2 font-semibold rounded-lg transition-all ${activeTab === "Pinned" ? "bg-my-yellow text-white" : "bg-transparent text-[#575656] hover:bg-gray-100 "}`}
+                    onClick={() => {
+                        setActiveTab("Pinned");
+                        getPinnedNotes();
+                    }}
+                    ><BsPinAngle className='size-5' strokeWidth={0.5} />Pinned notes</button>
 
                     <button className='flex items-center gap-5 w-full px-2 py-2 font-semibold text-[#575656] bg-transparent hover:bg-gray-100 rounded-lg transition-all'><RiDeleteBin5Line className='size-5' />Deleted notes</button>
 

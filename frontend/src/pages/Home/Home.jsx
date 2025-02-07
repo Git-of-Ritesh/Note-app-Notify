@@ -50,11 +50,17 @@ const Home = () => {
     }
   }
 
+  // pinned notes
+  const getPinnedNotes = () => {
+    const pinnedNotes = allNotes.filter(note => note.isPinned)
+    setAllNotes(pinnedNotes)
+}
+
   return (
     <div className='bg-[#FFECD1] w-screen  px-4 pt-4 h-screen'>
       <div className='flex w-full h-full gap-3 overflow-hidden'>
         <div className='pb-4'>
-          <Sidebar userInfo={userInfo} />
+          <Sidebar getAllNotes={getAllNotes} userInfo={userInfo} getPinnedNotes={getPinnedNotes} />
         </div>
 
         <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor} selectedNote={selectedNote} isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} closeEditor={() => { setIsCreateOpen(false) }} />
