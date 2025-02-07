@@ -97,7 +97,7 @@ const Signup = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)} placeholder='Email' />
 
-            <input className='border border-[#A09F9F] w-96 rounded-3xl h-11 p-4 ' type="text"
+            <input className='border border-[#A09F9F] w-96 rounded-3xl h-11 p-4 ' type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)} placeholder='Password' />
 

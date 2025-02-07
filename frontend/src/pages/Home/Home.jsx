@@ -10,7 +10,7 @@ const Home = () => {
 
   const { currentUser, loading, errorDispatch } = useSelector((state) => state.user) // used for current user detail
 
-  const [isCreateOpen, setIsCreateOpen] = useState(false); 
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
 
   const handleOpenEditor = (note = null) => {
@@ -39,7 +39,7 @@ const Home = () => {
 
       if (res.data.success === false) {
         console.log(res.data)
-      } 
+      }
       else {
         setAllNotes(res.data.note.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
         // setAllNotes(res.data.note || [])
@@ -51,15 +51,13 @@ const Home = () => {
   }
 
   return (
-    <div className='flex bg-[#FFECD1] px-4 pt-4 flex-col h-screen'>
-      <div className='flex h-screen gap-3 overflow-hidden'>
+    <div className='bg-[#FFECD1] w-screen  px-4 pt-4 h-screen'>
+      <div className='flex w-full h-full gap-3 overflow-hidden'>
         <div className='pb-4'>
           <Sidebar userInfo={userInfo} />
         </div>
 
-        <div>
-          <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor} selectedNote={selectedNote} isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} closeEditor={() => {setIsCreateOpen(false)}} />
-        </div>
+        <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor} selectedNote={selectedNote} isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} closeEditor={() => { setIsCreateOpen(false) }} />
 
         <div className={`w-full pb-4 transition-all ${isCreateOpen ? 'block' : 'hidden'}`}>
           <CreateNote onClose={() => { setIsCreateOpen(false); setSelectedNote(null); }} getAllNotes={getAllNotes} selectedNote={selectedNote} />
