@@ -29,7 +29,7 @@ const Notespage = ({getAllNotes, onNewNote, allNotes, isCreateOpen, onEditNote, 
 
 
   return (
-    <div className='w-auto h-screen px-0'>
+    <div className='w-auto h-screen'>
 
       <div className='w-96 justify-between'>
 
@@ -44,7 +44,7 @@ const Notespage = ({getAllNotes, onNewNote, allNotes, isCreateOpen, onEditNote, 
 
 
 
-      <div className={`content-start flex overflow-y-auto w-full h-[calc(100vh-100px)] mt-3 gap-x-2 ${isCreateOpen ? 'flex-col' : 'flex-row flex-wrap'}`}>
+      <div className={`content-start overflow-y-auto w-auto h-[calc(100vh-100px)] mt-3 gap-x-2 ${isCreateOpen ? 'flex-col' : 'flex flex-wrap'}`}>
         {allNotes.map((note, index) => (
           <Notecard
             key={note._id}
