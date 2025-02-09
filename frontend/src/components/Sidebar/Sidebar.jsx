@@ -58,38 +58,38 @@ const Sidebar = ({ userInfo, getAllNotes, getPinnedNotes }) => {
                 </div>
 
 
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-0">
                     <Searchbar />
-                    <button className={`flex items-center gap-5 w-full px-2 py-2 font-semibold rounded-lg transition-all ${activeTab === "all" ? "bg-my-yellow text-white" : "bg-transparent text-[#575656] hover:bg-gray-100 "}`}
+                    <button className={`flex items-center gap-5 w-full px-2 py-2 font-semibold text-sm rounded-lg transition-all ${activeTab === "all" ? "bg-my-yellow text-white" : "bg-transparent text-[#575656] hover:bg-gray-100 "}`}
                         onClick={() => {
                             setActiveTab("all");
                             getAllNotes();
                         }}>
-                        <LuNotebookText className='size-5' />All notes</button>
+                        <LuNotebookText className='size-4' />All notes</button>
 
-                    <button className={`flex items-center gap-5 w-full px-2 py-2 font-semibold rounded-lg transition-all ${activeTab === "Pinned" ? "bg-my-yellow text-white" : "bg-transparent text-[#575656] hover:bg-gray-100 "}`}
+                    <button className={`flex items-center gap-5 w-full px-2 py-2 font-semibold text-sm rounded-lg transition-all ${activeTab === "Pinned" ? "bg-my-yellow text-white" : "bg-transparent text-[#575656] hover:bg-gray-100 "}`}
                     onClick={() => {
                         setActiveTab("Pinned");
                         getPinnedNotes();
                     }}
-                    ><BsPinAngle className='size-5' strokeWidth={0.5} />Pinned notes</button>
+                    ><BsPinAngle className='size-4' strokeWidth={0.5} />Pinned notes</button>
 
-                    <button className='flex items-center gap-5 w-full px-2 py-2 font-semibold text-[#575656] bg-transparent hover:bg-gray-100 rounded-lg transition-all'><RiDeleteBin5Line className='size-5' />Deleted notes</button>
+                    <button className='flex items-center gap-5 w-full px-2 py-2 font-semibold text-sm text-[#575656] bg-transparent hover:bg-gray-100 rounded-lg transition-all'><RiDeleteBin5Line className='size-4' />Deleted notes</button>
 
                     {/* drop down  */}
 
                     <div className=" relative w-full">
                         {/* Main Button */}
                         <button
-                            className="flex items-center justify-between w-full px-2 py-2 font-semibold text-[#575656] bg-transparent hover:bg-gray-100 rounded-lg transition-all"
+                            className="flex items-center justify-between w-full px-2 py-2 text-sm font-semibold text-[#575656] bg-transparent hover:bg-gray-100 rounded-lg transition-all"
                             onClick={() => setCategoryIsOpen(!categoryisOpen)}
                         >
                             <div className="flex items-center gap-5">
                                 <BiCategory
-                                    className="size-5" />
+                                    className="size-4" />
                                 Categories
                             </div>
-                            {categoryisOpen ? <FiChevronUp className="size-5" /> : <FiChevronDown className="size-5" />}
+                            {categoryisOpen ? <FiChevronUp className="size-4" /> : <FiChevronDown className="size-5" />}
                         </button>
 
                         {/* Dropdown Menu */}
@@ -114,15 +114,15 @@ const Sidebar = ({ userInfo, getAllNotes, getPinnedNotes }) => {
                     <div className="relative w-full">
                         {/* Main Button */}
                         <button
-                            className="flex items-center justify-between w-full px-2 py-2 font-semibold text-[#575656] bg-transparent hover:bg-gray-100 rounded-lg transition-all"
+                            className="flex items-center justify-between w-full px-2 py-2 text-sm font-semibold text-[#575656] bg-transparent hover:bg-gray-100 rounded-lg transition-all"
                             onClick={() => setTagIsOpen(!tagisOpen)}
                         >
                             <div className="flex items-center gap-5">
                                 <LiaHashtagSolid
-                                    className="size-5" />
+                                    className="size-4" />
                                 Tags
                             </div>
-                            {tagisOpen ? <FiChevronUp className="size-5" /> : <FiChevronDown className="size-5" />}
+                            {tagisOpen ? <FiChevronUp className="size-4" /> : <FiChevronDown className="size-5" />}
                         </button>
 
                         {/* Dropdown Menu */}
@@ -149,13 +149,13 @@ const Sidebar = ({ userInfo, getAllNotes, getPinnedNotes }) => {
 
 
             <div className='space-y-8'>
-                <div className='flex flex-col gap-1'>
+                <div className='flex flex-col gap-0'>
                     <hr />
-                    <button className='flex items-center gap-5 w-full px-2 py-2 font-semibold text-[#575656] bg-transparent hover:bg-gray-100 rounded-lg transition-all '><AiOutlineSetting className='size-5' />Settings</button>
+                    <button className='flex items-center gap-5 w-full px-2 py-2 text-sm font-semibold text-[#575656] bg-transparent hover:bg-gray-100 rounded-lg transition-all '><AiOutlineSetting className='size-4' />Settings</button>
 
-                    <button className='flex items-center gap-5 w-full px-2 py-2 font-semibold text-[#575656] bg-transparent hover:bg-gray-100 rounded-lg transition-all '><MdOutlinePrivacyTip className='size-5' />Privacy policy</button>
+                    <button className='flex items-center gap-5 w-full px-2 py-2 text-sm font-semibold text-[#575656] bg-transparent hover:bg-gray-100 rounded-lg transition-all '><MdOutlinePrivacyTip className='size-4' />Privacy policy</button>
 
-                    <button className='flex items-center gap-5 w-full px-2 py-2 font-semibold text-[#575656] bg-transparent hover:bg-gray-100 rounded-lg transition-all'><MdOutlineWbIncandescent className='size-5' />What's new</button>
+                    <button className='flex items-center gap-5 w-full px-2 py-2 text-sm font-semibold text-[#575656] bg-transparent hover:bg-gray-100 rounded-lg transition-all'><MdOutlineWbIncandescent className='size-4' />What's new</button>
                 </div>
 
                 <div className=' flex flex-col border-[0.5px] border-[#000000] rounded-2xl px-2 py-3 gap-1'>
