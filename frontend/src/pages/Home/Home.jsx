@@ -57,9 +57,9 @@ const Home = () => {
 }
 
   return (
-    <div className='bg-[#FFECD1] w-screen  px-4 pt-4 h-screen'>
+    <div className='bg-gray-50 w-screen h-screen'>
       <div className='flex w-full h-full gap-3 overflow-hidden'>
-        <div className='pb-4'>
+        <div className=''>
           <Sidebar getAllNotes={getAllNotes} userInfo={userInfo} getPinnedNotes={getPinnedNotes} />
         </div>
 
