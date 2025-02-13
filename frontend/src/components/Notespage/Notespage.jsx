@@ -47,7 +47,7 @@ const Notespage = ({getAllNotes, onNewNote, allNotes, isCreateOpen, onEditNote, 
 
 
 
-      <div className="content-start flex flex-col overflow-y-auto w-full h-[calc(100vh-100px)] gap-x-2">
+      <div className="content-start flex flex-col overflow-y-auto overflow-x-hidden w-full h-[calc(100vh-100px)] gap-x-2">
         {allNotes.map((note, index) => (
           <Notecard
             key={note._id}
