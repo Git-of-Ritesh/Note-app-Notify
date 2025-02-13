@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FiBold, FiItalic, FiUnderline, FiList, FiTrash, FiSave, FiX } from "react-icons/fi";
 import axios from "axios"
 import { FiPlus } from "react-icons/fi"
-import { FiChevronDown, FiSidebar } from "react-icons/fi";
+import { FiChevronDown, FiSidebar, FiMaximize2, FiMinimize2, FiLink2 } from "react-icons/fi";
 import { TiPinOutline, TiPin } from "react-icons/ti";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+
 
 
 const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
@@ -15,6 +16,8 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
   const [inputTag, setInputTag] = useState("")
   const [isPinned, setIsPinned] = useState(false)
   const [error, setError] = useState(null)
+  const [maximaize, setMaximaize] = useState(false)
+
 
   useEffect(() => {
     if (selectedNote) {
@@ -29,6 +32,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
       setIsPinned(false)
     }
   }, [selectedNote]);
+
 
   // tongle pin
   const togglePin = () => {
@@ -136,10 +140,20 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
   return (
     <div className="flex flex-col w-full h-full bg-white  rounded-3xl pb-4 ">
 
-      <div className="flex items-center gap-x-3 px-4 py-4  border-b">
-        <button className="hover:bg-gray-200 rounded-md p-1" onClick={noteClose}><FiSidebar /></button>
-        <div className="border-l px-3">
-          <Breadcrumbs selectedNote={selectedNote} />
+      <div className="flex justify-between items-center border-b">
+        <div className="flex items-center gap-x-3 px-4 py-4">
+          <button className="hover:bg-gray-200 rounded-md p-1" onClick={noteClose}><FiSidebar /></button>
+          <div className="border-l px-3">
+            <Breadcrumbs selectedNote={selectedNote} />
+          </div>
+        </div>
+        <div className="px-2">
+          {/* maximaize button */}
+          <button onClick={() => setMaximaize(!maximaize)} className="p-2 rounded-md text-gray-950 hover:bg-gray-200">{maximaize ? <FiMinimize2 /> : <FiMaximize2 />}</button>
+          {/* Close Button */}
+          <button onClick={onClose} className=" p-2 rounded-md text-gray-950 hover:bg-gray-200">
+            <FiX className="size-4" />
+          </button>
         </div>
       </div>
 
@@ -150,6 +164,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
           <button className="p-2 rounded-md hover:bg-gray-200"><FiItalic className="size-4" /></button>
           <button className="p-2 rounded-md hover:bg-gray-200"><FiUnderline className="size-4" /></button>
           <button className="p-2 rounded-md hover:bg-gray-200"><FiList className="size-4" /></button>
+          <button className="p-2 rounded-md hover:bg-gray-200"><FiLink2 className="size-4" /></button>
         </div>
         <div className="flex gap-2">
           <button className="px-2 py-1 rounded-md hover:bg-gray-200" onClick={togglePin}>
@@ -161,31 +176,21 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
         </div>
       </div>
 
-      <div className="flex justify-between px-3 py-3">
-
+      <div className={`flex py-3 ${maximaize ? "px-3" : "px-52"}`}>
         {/* Title Input */}
         <input
           type="text"
-          className="w-full text-2xl font-bold focus:outline-none"
+          className="w-full text-3xl font-bold focus:outline-none"
           placeholder="Enter title..."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-
-        <div className="flex items-center">
-          {/* Close Button */}
-          <button onClick={onClose} className=" p-2 rounded-md text-gray-500 hover:bg-gray-200">
-            <FiX className="size-4" />
-          </button>
-        </div>
-
-
       </div>
 
       {/* tag and category */}
-      <div className="flex px-3 py-3 gap-2">
-        <div className="flex items-center border border-[#A9A8A8] py-1 px-2 rounded-md">
-          <input className="focus:outline-none"
+      <div className={`flex py-3 gap-2 ${maximaize ? "px-3" : "px-52"}`}>
+        <div className="flex items-center border py-1 px-2 rounded-md">
+          <input className="focus:outline-none text-sm"
             type="text" placeholder="Add tags..."
             value={inputTag}
             onChange={(e) => setInputTag(e.target.value)} />
@@ -194,28 +199,31 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
       </div>
 
       {/* Display Added Tags */}
-      <div className="flex flex-wrap gap-2 px-3">
+      <div className={`flex flex-wrap gap-2 ${maximaize ? "px-3" : "px-52"}`}>
         {tags.map((tag, index) => (
           <div key={index} className="flex items-center bg-gray-200 py-1 px-2 rounded-md">
-            <span>{tag}</span>
-            <button onClick={() => handleDeleteTag(index)} className="ml-2 text-black"><FiX /></button>
+            <span className="text-sm font-normal">{tag}</span>
+            <button onClick={() => handleDeleteTag(index)} className="ml-2 text-black"><FiX className="size-4" /></button>
           </div>
         ))}
       </div>
 
       {/* Editable Content Area */}
       <div
-        className="w-full h-full flex-grow  text-gray-800 focus:outline-none rounded-2xl overflow-y-auto ">
+        className="w-full h-full flex-grow text-gray-700 focus:outline-none overflow-y-auto ">
+
         <textarea
-          className="w-full h-full p-3  outline-none resize-none"
-          placeholder="Your text here"
-          rows="1"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
+          className={`w-full h-full py-3 font-normal outline-none resize-none ${maximaize ? "px-3" : "px-52"}`}
+        placeholder="Your text here"
+        rows="1"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
         ></textarea>
-      </div>
+
     </div>
+    </div >
   );
 };
+
 
 export default NoteEditor;
