@@ -3,9 +3,9 @@ import {SlMagnifier} from 'react-icons/sl'
 
 const searchbar = () => {
   return (
-    <div className="flex items-center gap-5 h-9 px-2 py-1 border mb-3  bg-white rounded-lg shadow-inner ">
-      <SlMagnifier className='size-5' />
-      <input className='w-full focus:outline-none' type='text' placeholder='Search notes' />
+    <div className="flex items-center h-8 gap-5 px-1 py-1 border bg-white rounded-lg ">
+      <SlMagnifier className='size-4' />
+      <input className='w-full focus:outline-none text-sm' type='text' placeholder='Search notes' />
     </div>
   )
 }

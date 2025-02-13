@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { FiPlus } from "react-icons/fi"
 import Notecard from '../Notecard/Notecard'
 import axios from 'axios'
+import Searchbar from '../searchbar/searchbar'
 
 
 const Notespage = ({getAllNotes, onNewNote, allNotes, isCreateOpen, onEditNote, selectedNote, closeEditor }) => {
@@ -29,22 +30,24 @@ const Notespage = ({getAllNotes, onNewNote, allNotes, isCreateOpen, onEditNote, 
 
 
   return (
-    <div className='w-auto h-screen'>
+    <div className='w-80 h-screen border-r'>
 
-      <div className='w-96 justify-between'>
+      <div className='flex flex-col w-full border-b justify-between gap-y-3 p-4'>
 
-        <div className='flex w-96 gap-5 mt-5'>
-          <h1 className='font-instumrntalSans font-semibold text-4xl ml-3'>Notes</h1>
+        <div className='flex w-full justify-between'>
+          <h1 className='font-instumrntalSans font-normal text-lg'>All Notes</h1>
           <button
             onClick={onNewNote}
-            className='flex items-center gap-2 shadow-md drop-shadow-lg bg-my-yellow text-white font-bold py-2 px-4 rounded-2xl'><FiPlus />New Note</button>
+            className='flex items-center gap-2 shadow-md bg-gray-950 text-white text-xs font-light py-1 px-2 rounded-lg'><FiPlus />New Note</button>
         </div>
+
+        <Searchbar/>
 
       </div>
 
 
 
-      <div className={`content-start overflow-y-auto w-auto h-[calc(100vh-100px)] mt-3 gap-x-2 ${isCreateOpen ? 'flex-col' : 'flex flex-wrap'}`}>
+      <div className="content-start flex flex-col overflow-y-auto w-full h-[calc(100vh-100px)] gap-x-2">
         {allNotes.map((note, index) => (
           <Notecard
             key={note._id}
