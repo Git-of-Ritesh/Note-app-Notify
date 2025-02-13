@@ -31,7 +31,7 @@ const Notecard = ({ title, content, date, tags, isPinned, onClick, isSelected, o
                     </h1>
 
 
-                    <p className={`break-words text-xs ${isSelected ? "text-white" : "text-[#6F6F6F]"}`}>{content?.length > 120 ? content.slice(0, 120) + "..." : content}</p>
+                    <p className={`break-words text-xs ${isSelected ? "text-white" : "text-gray-600"}`}>{content?.length > 120 ? content.slice(0, 120) + "..." : content}</p>
                 </div>
 
 
