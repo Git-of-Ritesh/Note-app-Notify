@@ -5,7 +5,7 @@ import axios from 'axios'
 import Searchbar from '../searchbar/searchbar'
 
 
-const Notespage = ({getAllNotes, onNewNote, allNotes, isCreateOpen, onEditNote, selectedNote, closeEditor }) => {
+const Notespage = ({getAllNotes, onNewNote, allNotes, isCreateOpen, onEditNote, closeEditor }) => {
 
   //delete note
   const deleteNote = async (noteId) => {
@@ -56,7 +56,6 @@ const Notespage = ({getAllNotes, onNewNote, allNotes, isCreateOpen, onEditNote, 
             content={note.content}
             tags={note.tags}
             isPinned={note.isPinned}
-            isSelected={selectedNote?._id === note._id}
             onClick={()=> onEditNote(note)}
             onDelete={()=>deleteNote(note._id)}
           />

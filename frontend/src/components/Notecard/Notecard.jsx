@@ -5,16 +5,16 @@ import Tagcard from "../Tagcards/Tagcard"
 import { TiPinOutline, TiPin } from "react-icons/ti";
 import { PiDotsThreeOutlineLight } from "react-icons/pi";
 
-const Notecard = ({ title, content, date, tags, isPinned, onClick, isSelected, onDelete }) => {
+const Notecard = ({ title, content, date, tags, isPinned, onClick, onDelete }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false)
 
     return (
         <div className='w-80 h-fit border-b group' onClick={onClick}>
 
-            <div className={`flex justify-between flex-col w-full h-40 p-4 ${isSelected ? "bg-my-yellow" : "bg-transparent"} `}>
+            <div className="flex justify-between flex-col w-full h-40 p-4">
 
                 <div className='flex flex-col gap-2'>
-                    <h1 className={`flex items-center justify-between font-normal ${isSelected ? "text-white" : "text-black"}`}>{title}
+                    <h1 className="flex items-center justify-between font-normal text-gray-950">{title}
                         <div className='flex items-center gap-x-4'><button>{isPinned ? <TiPin className='size-5' /> : ""}</button>
                             <div className='relative'>
                                 <div>
@@ -31,13 +31,13 @@ const Notecard = ({ title, content, date, tags, isPinned, onClick, isSelected, o
                     </h1>
 
 
-                    <p className={`break-words text-xs ${isSelected ? "text-white" : "text-gray-600"}`}>{content?.length > 120 ? content.slice(0, 120) + "..." : content}</p>
+                    <p className="break-words text-xs text-gray-600">{content?.length > 120 ? content.slice(0, 120) + "..." : content}</p>
                 </div>
 
 
                 <div className='flex justify-between items-center '>
-                    <Tagcard tags={tags} isSelected={isSelected} />
-                    <h3 className={`text-xs font-light ${isSelected ? "text-white" : "text-gray-700"}`}>{moment(date).startOf('day').fromNow()}</h3>
+                    <Tagcard tags={tags} />
+                    <h3 className="text-xs font-light text-gray-600">{moment(date).startOf('day').fromNow()}</h3>
                 </div>
 
                 {/* <div className='flex justify-between items-center'>

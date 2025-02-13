@@ -12,6 +12,7 @@ const Home = () => {
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
+  const [noteOpen, setNoteOpen] = useState(true);
 
   const handleOpenEditor = (note = null) => {
     setIsCreateOpen(true);
@@ -54,19 +55,21 @@ const Home = () => {
   const getPinnedNotes = () => {
     const pinnedNotes = allNotes.filter(note => note.isPinned)
     setAllNotes(pinnedNotes)
-}
+  }
 
   return (
     <div className='bg-gray-50 w-screen h-screen'>
       <div className='flex w-full h-full overflow-hidden'>
-        <div className=''>
+        <div>
           <Sidebar getAllNotes={getAllNotes} userInfo={userInfo} getPinnedNotes={getPinnedNotes} />
         </div>
 
-        <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor} selectedNote={selectedNote} isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} closeEditor={() => { setIsCreateOpen(false) }} />
+        <div className={`transition-all duration-700 ease-in-out ${noteOpen ? "max-w-[400px]" : "max-w-0"}`}>
+          <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor}  isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} closeEditor={() => { setIsCreateOpen(false) }} />
+        </div>
 
         <div className={`w-full pb-4 transition-all ${isCreateOpen ? 'block' : 'hidden'}`}>
-          <CreateNote onClose={() => { setIsCreateOpen(false); setSelectedNote(null); }} getAllNotes={getAllNotes} selectedNote={selectedNote} />
+          <CreateNote onClose={() => { setIsCreateOpen(false); setSelectedNote(null); }} getAllNotes={getAllNotes} selectedNote={selectedNote} noteClose={() => { setNoteOpen(!noteOpen) }} />
         </div>
       </div>
     </div>
