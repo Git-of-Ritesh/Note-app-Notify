@@ -9,6 +9,21 @@ body {
     margin: 0;
 }
 
+ul {
+  list-style-type: disc; /* Ensure bullets show */
+  margin-left: 1rem;
+}
+
+.ProseMirror a {
+  color: rgb(82, 82, 248);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+.ProseMirror:focus {
+  outline: none !important;
+}
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {

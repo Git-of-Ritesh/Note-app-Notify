@@ -5,6 +5,7 @@ import { FiPlus } from "react-icons/fi"
 import { FiChevronDown, FiSidebar, FiMaximize2, FiMinimize2, FiLink2 } from "react-icons/fi";
 import { TiPinOutline, TiPin } from "react-icons/ti";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import TextEditor from "../TextEditor/TextEditor";
 
 
 
@@ -17,19 +18,19 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
   const [isPinned, setIsPinned] = useState(false)
   const [error, setError] = useState(null)
   const [maximaize, setMaximaize] = useState(false)
-
+  const editorRef = useRef(null);
 
   useEffect(() => {
     if (selectedNote) {
       setTitle(selectedNote.title);
-      setContent(selectedNote.content);
+      setContent(selectedNote.content || "<p></p>"); // Ensure content is set properly
       setTags(selectedNote.tags || []);
       setIsPinned(selectedNote.isPinned || false);
     } else {
       setTitle("");
-      setContent("");
+      setContent("<p></p>");
       setTags([]);
-      setIsPinned(false)
+      setIsPinned(false);
     }
   }, [selectedNote]);
 
@@ -160,12 +161,20 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
       {/* Toolbar */}
       <div className="flex items-center justify-between border-b px-2 py-2 ">
         <div className="flex gap-2">
-          <button className="p-2 rounded-md hover:bg-gray-200"><FiBold className="size-4" /></button>
-          <button className="p-2 rounded-md hover:bg-gray-200"><FiItalic className="size-4" /></button>
-          <button className="p-2 rounded-md hover:bg-gray-200"><FiUnderline className="size-4" /></button>
-          <button className="p-2 rounded-md hover:bg-gray-200"><FiList className="size-4" /></button>
-          <button className="p-2 rounded-md hover:bg-gray-200"><FiLink2 className="size-4" /></button>
+          <button onClick={() => editorRef.current?.toggleBold()} className="p-2 rounded-md hover:bg-gray-200" ><FiBold className="size-4" /></button>
+
+          <button onClick={() => editorRef.current?.toggleItalic()} className="p-2 rounded-md hover:bg-gray-200"><FiItalic className="size-4" /></button>
+
+          <button onClick={() => editorRef.current?.toggleUnderline()} className="p-2 rounded-md hover:bg-gray-200"><FiUnderline className="size-4" /></button>
+
+          <button onClick={() => editorRef.current?.toggleBulletList()} className="p-2 rounded-md hover:bg-gray-200"><FiList className="size-4" /></button>
+
+          <button onClick={() => {
+            const url = prompt("Enter URL:");
+            if (url) editorRef.current?.setLink(url);
+          }} className="p-2 rounded-md hover:bg-gray-200"><FiLink2 className="size-4" /></button>
         </div>
+
         <div className="flex gap-2">
           <button className="px-2 py-1 rounded-md hover:bg-gray-200" onClick={togglePin}>
             {isPinned ? <TiPin className="size-5" /> : <TiPinOutline className="size-5" />}
@@ -210,17 +219,18 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
 
       {/* Editable Content Area */}
       <div
-        className="w-full h-full flex-grow text-gray-700 focus:outline-none overflow-y-auto ">
-
-        <textarea
+        className="w-full h-full flex-grow text-gray-700 overflow-y-auto ">
+        <div className={`w-full flex-grow ${maximaize ? "px-3" : "px-52"}`}>
+          <TextEditor ref={editorRef} content={content} onChange={setContent} />
+        </div>
+        {/* <textarea
           className={`w-full h-full py-3 font-normal outline-none resize-none ${maximaize ? "px-3" : "px-52"}`}
         placeholder="Your text here"
         rows="1"
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        ></textarea>
-
-    </div>
+        ></textarea> */}
+      </div>
     </div >
   );
 };
