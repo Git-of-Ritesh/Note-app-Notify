@@ -3,9 +3,16 @@ import { FiBold, FiItalic, FiUnderline, FiList, FiTrash, FiSave, FiX } from "rea
 import axios from "axios"
 import { FiPlus } from "react-icons/fi"
 import { FiChevronDown, FiSidebar, FiMaximize2, FiMinimize2, FiLink2 } from "react-icons/fi";
+import { PiHighlighterFill } from "react-icons/pi";
 import { TiPinOutline, TiPin } from "react-icons/ti";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import TextEditor from "../TextEditor/TextEditor";
+import { BsBlockquoteLeft, BsTypeH1, BsTypeH2, BsTypeH3 } from "react-icons/bs";
+import { VscHorizontalRule } from "react-icons/vsc";
+import { MdOutlineFormatListNumbered } from "react-icons/md";
+import { RiCodeSSlashFill } from "react-icons/ri";
+import { AiOutlineStrikethrough } from "react-icons/ai";
+
 
 
 
@@ -139,7 +146,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
   }
 
   return (
-    <div className="flex flex-col w-full h-full bg-white  rounded-3xl pb-4 ">
+    <div className="flex flex-col w-full h-full bg-white  rounded-3xl ">
 
       <div className="flex justify-between items-center border-b">
         <div className="flex items-center gap-x-3 px-4 py-4">
@@ -173,6 +180,25 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
             const url = prompt("Enter URL:");
             if (url) editorRef.current?.setLink(url);
           }} className="p-2 rounded-md hover:bg-gray-200"><FiLink2 className="size-4" /></button>
+
+          <button onClick={() => { console.log("toggled"), editorRef.current?.toggleHighlight()}} className="p-2 rounded-md hover:bg-gray-200"><PiHighlighterFill className="size-4" /></button>
+
+          <button onClick={() =>  editorRef.current?.toggleBlockquote()} className="p-2 rounded-md hover:bg-gray-200"><BsBlockquoteLeft className="size-4" /></button>
+
+          <button onClick={() =>  editorRef.current?.toggleHeadingL1()} className="p-2 rounded-md hover:bg-gray-200"><BsTypeH1 className="size-4" /></button>
+
+          <button onClick={() =>  editorRef.current?.toggleHeadingL2()} className="p-2 rounded-md hover:bg-gray-200"><BsTypeH2 className="size-4" /></button>
+
+          <button onClick={() =>  editorRef.current?.toggleHeadingL3()} className="p-2 rounded-md hover:bg-gray-200"><BsTypeH3 className="size-4" /></button>
+
+          <button onClick={() =>  editorRef.current?.setHorizontalRule()} className="p-2 rounded-md hover:bg-gray-200"><VscHorizontalRule className="size-4" /></button>
+
+          <button onClick={() =>  editorRef.current?.toggleOrderedList()} className="p-2 rounded-md hover:bg-gray-200"><MdOutlineFormatListNumbered  className="size-4" /></button> 
+
+          <button onClick={() =>  editorRef.current?.toggleCodeBlock()} className="p-2 rounded-md hover:bg-gray-200"><RiCodeSSlashFill className="size-4" /></button> 
+
+          <button onClick={() =>  editorRef.current?.toggleStrike()} className="p-2 rounded-md hover:bg-gray-200"><AiOutlineStrikethrough className="size-4" /></button> 
+
         </div>
 
         <div className="flex gap-2">
@@ -185,7 +211,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
         </div>
       </div>
 
-      <div className={`flex py-3 ${maximaize ? "px-3" : "px-52"}`}>
+      <div className={`flex py-3 mt-9 ${maximaize ? "px-3" : "px-52"}`}>
         {/* Title Input */}
         <input
           type="text"

@@ -68,7 +68,7 @@ const Home = () => {
           <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor}  isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} closeEditor={() => { setIsCreateOpen(false) }} />
         </div>
 
-        <div className={`w-full pb-4 transition-all ${isCreateOpen ? 'block' : 'hidden'}`}>
+        <div className={`w-full pb-0 transition-all ${isCreateOpen ? 'block' : 'hidden'}`}>
           <CreateNote onClose={() => { setIsCreateOpen(false); setSelectedNote(null); }} getAllNotes={getAllNotes} selectedNote={selectedNote} noteClose={() => { setNoteOpen(!noteOpen) }} />
         </div>
       </div>

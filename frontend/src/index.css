@@ -4,13 +4,30 @@
 
 
 body {
-    padding-left: 0px;
-    padding-right: 0px;
-    margin: 0;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin: 0;
+}
+
+mark {
+  background-color: #FAF594;
+  border-radius: 0.4rem;
+  box-decoration-break: clone;
+  padding: 0.1rem 0.3rem;
+}
+
+blockquote {
+  border-left: 2px solid #a3a3a3;
+  /* Blue border */
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+  font-style: italic;
+  color: #555;
 }
 
 ul {
-  list-style-type: disc; /* Ensure bullets show */
+  list-style-type: disc;
+  /* Ensure bullets show */
   margin-left: 1rem;
 }
 
@@ -20,6 +37,58 @@ ul {
   cursor: pointer;
 }
 
+/* Code styling */
+.hljs-comment,
+.hljs-quote {
+  color: #616161;
+}
+
+.hljs-variable,
+.hljs-template-variable,
+.hljs-attribute,
+.hljs-tag,
+.hljs-name,
+.hljs-regexp,
+.hljs-link,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #f98181;
+}
+
+.hljs-number,
+.hljs-meta,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params {
+  color: #fbbc88;
+}
+
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet {
+  color: #b9f18d;
+}
+
+.hljs-title,
+.hljs-section {
+  color: #faf594;
+}
+
+.hljs-keyword,
+.hljs-selector-tag {
+  color: #70cff8;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: 700;
+}
 
 .ProseMirror:focus {
   outline: none !important;
@@ -27,21 +96,24 @@ ul {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-    width: 3px; /* Width of the scrollbar */
+  width: 3px;
+  /* Width of the scrollbar */
 
-  }
-  
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Track color */
-    border-radius: 10px;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: #bbbbbb; /* Scroll thumb color */
-    border-radius: 10px;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: #a0a0a0; /* Scroll thumb color on hover */
-  }
-  
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Track color */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bbbbbb;
+  /* Scroll thumb color */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+  /* Scroll thumb color on hover */
+}
