@@ -21,6 +21,7 @@ const Home = () => {
 
   const [userInfo, setUserInfo] = useState(null)
   const [allNotes, setAllNotes] = useState([])
+  const [activeTab, setActiveTab] = useState('null')
 
   const navigate = useNavigate()
 
@@ -61,15 +62,15 @@ const Home = () => {
     <div className='bg-gray-50 w-screen h-screen'>
       <div className='flex w-full h-full overflow-hidden'>
         <div>
-          <Sidebar getAllNotes={getAllNotes} userInfo={userInfo} getPinnedNotes={getPinnedNotes} />
+          <Sidebar getAllNotes={getAllNotes} userInfo={userInfo} getPinnedNotes={getPinnedNotes} activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
 
         <div className={`transition-all duration-700 ease-in-out ${noteOpen ? "max-w-[400px]" : "max-w-0"}`}>
-          <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor}  isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} closeEditor={() => { setIsCreateOpen(false) }} />
+          <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor}  isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} closeEditor={() => { setIsCreateOpen(false) }} activeTab={activeTab} />
         </div>
 
         <div className={`w-full pb-0 transition-all ${isCreateOpen ? 'block' : 'hidden'}`}>
-          <CreateNote onClose={() => { setIsCreateOpen(false); setSelectedNote(null); }} getAllNotes={getAllNotes} selectedNote={selectedNote} noteClose={() => { setNoteOpen(!noteOpen) }} />
+          <CreateNote onClose={() => { setIsCreateOpen(false); setSelectedNote(null); }} getAllNotes={getAllNotes} selectedNote={selectedNote} noteClose={() => { setNoteOpen(!noteOpen) }} activeTab={activeTab} />
         </div>
       </div>
     </div>

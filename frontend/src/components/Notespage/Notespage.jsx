@@ -5,7 +5,20 @@ import axios from 'axios'
 import Searchbar from '../searchbar/searchbar'
 
 
-const Notespage = ({getAllNotes, onNewNote, allNotes, isCreateOpen, onEditNote, closeEditor }) => {
+const Notespage = ({getAllNotes, onNewNote, allNotes, isCreateOpen, onEditNote, closeEditor, activeTab }) => {
+
+  // Rendering tabs
+  const renderTabs = () => {
+    if(activeTab === 'all'){
+      return <p>All Notes</p>; 
+    }
+    else if(activeTab === 'pinned'){
+      return <p>Pinned Notes</p>
+    }
+    else {
+      return <p>All Notes</p>
+    }
+  }
 
   //delete note
   const deleteNote = async (noteId) => {
@@ -35,7 +48,7 @@ const Notespage = ({getAllNotes, onNewNote, allNotes, isCreateOpen, onEditNote, 
       <div className='flex flex-col w-full border-b justify-between gap-y-3 p-4'>
 
         <div className='flex w-full justify-between'>
-          <h1 className='font-instumrntalSans font-normal text-lg'>All Notes</h1>
+          <h1 className='font-instumrntalSans font-normal text-lg'>{renderTabs()}</h1>
           <button
             onClick={onNewNote}
             className='flex items-center gap-2 shadow-md bg-gray-950 text-white text-xs font-light py-1 px-2 rounded-lg'><FiPlus />New Note</button>

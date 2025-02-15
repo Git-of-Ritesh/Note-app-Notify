@@ -11,6 +11,7 @@ import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import Image from '@tiptap/extension-image'
 import TaskItem from '@tiptap/extension-task-item'
 import TaskList from '@tiptap/extension-task-list'
+import TextAlign from '@tiptap/extension-text-align'
 import { common, createLowlight } from 'lowlight'
 import { useEffect } from "react";
 import { forwardRef, useImperativeHandle } from "react";
@@ -39,7 +40,11 @@ const TextEditor = forwardRef(({ content, onChange }, ref) => {
             }), TaskList,
             TaskItem.configure({
                 nested: true,
-            }),],
+            }),
+            TextAlign.configure({
+                types: ['heading', 'paragraph'],
+                alignments: ['left', 'right', 'center'],
+              })],
         content: content || "<p></p>",
         onUpdate: ({ editor }) => {
             onChange(editor.getHTML());
@@ -47,8 +52,14 @@ const TextEditor = forwardRef(({ content, onChange }, ref) => {
     });
 
     useImperativeHandle(ref, () => ({
-        toggleBold: () => editor?.chain().focus().toggleBold().run(),
-        toggleItalic: () => editor?.chain().focus().toggleItalic().run(),
+        toggleBold: () => {editor?.chain().focus().toggleBold().run(); 
+            setTimeout(() => editor?.isActive("bold"), 0);
+            return editor?.isActive("bold")},
+            isActive: (type) => editor?.isActive(type),
+        toggleItalic: () => {editor?.chain().focus().toggleItalic().run(); 
+            setTimeout(() => editor?.isActive("italic"), 0);
+            return editor?.isActive("italic");
+        },
         toggleUnderline: () => editor?.chain().focus().toggleUnderline().run(),
         toggleBulletList: () => editor?.chain().focus().toggleBulletList().run(),
         setLink: (url) => {
@@ -78,6 +89,9 @@ const TextEditor = forwardRef(({ content, onChange }, ref) => {
             }
         },
         toggleTaskList: () => editor?.chain().focus().toggleList("taskList", "taskItem").run(),
+        setTextAlignLeft: () => editor?.chain().focus().setTextAlign('left').run(),
+        setTextAlignCenter: () => editor?.chain().focus().setTextAlign('center').run(),
+        setTextAlignRight: () => editor?.chain().focus().setTextAlign('right').run(),
     }));
 
     useEffect(() => {

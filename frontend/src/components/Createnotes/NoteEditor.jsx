@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { FiBold, FiItalic, FiUnderline, FiList, FiTrash, FiSave, FiX } from "react-icons/fi";
 import axios from "axios"
 import { FiPlus } from "react-icons/fi"
-import { FiChevronDown, FiSidebar, FiMaximize2, FiMinimize2, FiLink2, FiImage } from "react-icons/fi";
+import { FiChevronDown, FiSidebar, FiMaximize2, FiMinimize2, FiLink2, FiImage, FiAlignLeft, FiAlignCenter, FiAlignRight } from "react-icons/fi";
 import { PiHighlighterFill } from "react-icons/pi";
 import { TiPinOutline, TiPin } from "react-icons/ti";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -17,7 +17,7 @@ import { GoTasklist } from "react-icons/go";
 
 
 
-const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
+const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }) => {
 
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
@@ -26,6 +26,8 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
   const [isPinned, setIsPinned] = useState(false)
   const [error, setError] = useState(null)
   const [maximaize, setMaximaize] = useState(false)
+  const [isBold, setIsBold] = useState(false)
+  const [isItalic, setIsItalic] = useState(false)
   const editorRef = useRef(null);
 
   useEffect(() => {
@@ -41,6 +43,30 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
       setIsPinned(false);
     }
   }, [selectedNote]);
+
+  // rendering tabs
+   // Rendering tabs
+   const renderTabs = () => {
+    if(activeTab === 'all'){
+      return <p>All Notes</p>; 
+    }
+    else if(activeTab === 'pinned'){
+      return <p>Pinned Notes</p>
+    }
+    else {
+      return <p>All Notes</p>
+    }
+  }
+
+  // Bold toggle
+  const toggleHandleBold = () => { editorRef.current?.toggleBold(); 
+    setIsBold(editorRef.current?.isActive('bold'));
+  }
+
+  // toggle Italic
+  const toggleHandleItalic = () => { editorRef.current?.toggleItalic(); 
+    setIsItalic(editorRef.current?.isActive('italic'));
+  }
 
 
   // tongle pin
@@ -153,7 +179,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
         <div className="flex items-center gap-x-3 px-4 py-4">
           <button className="hover:bg-gray-200 rounded-md p-1" onClick={noteClose}><FiSidebar /></button>
           <div className="border-l px-3">
-            <Breadcrumbs selectedNote={selectedNote} />
+            <Breadcrumbs selectedNote={selectedNote} renderTabs={renderTabs} />
           </div>
         </div>
         <div className="px-2">
@@ -169,9 +195,9 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
       {/* Toolbar */}
       <div className="flex items-center justify-between border-b px-2 py-2 ">
         <div className="flex gap-2">
-          <button onClick={() => editorRef.current?.toggleBold()} className="p-2 rounded-md hover:bg-gray-200" ><FiBold className="size-4" /></button>
+          <button onClick={toggleHandleBold} className={`p-2 rounded-md hover:bg-gray-200 ${isBold? "bg-gray-300" : ""}`} ><FiBold className="size-4" /></button>
 
-          <button onClick={() => editorRef.current?.toggleItalic()} className="p-2 rounded-md hover:bg-gray-200"><FiItalic className="size-4" /></button>
+          <button onClick={toggleHandleItalic} className={`p-2 rounded-md hover:bg-gray-200 ${isItalic ? "bg-gray-300" : ""}`}><FiItalic className="size-4" /></button>
 
           <button onClick={() => editorRef.current?.toggleUnderline()} className="p-2 rounded-md hover:bg-gray-200"><FiUnderline className="size-4" /></button>
 
@@ -203,6 +229,12 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
           <button onClick={() => editorRef.current?.addImage()} className="p-2 rounded-md hover:bg-gray-200"><FiImage className="size-4" /></button>
 
           <button onClick={() => editorRef.current?.toggleTaskList()} className="p-2 rounded-md hover:bg-gray-200"><GoTasklist className="size-4" /></button>
+
+          <button onClick={() => editorRef.current?.setTextAlignLeft()} className="p-2 rounded-md hover:bg-gray-200"><FiAlignLeft className="size-4" /></button>
+
+          <button onClick={() => editorRef.current?.setTextAlignCenter()} className="p-2 rounded-md hover:bg-gray-200"><FiAlignCenter className="size-4" /></button>
+
+          <button onClick={() => editorRef.current?.setTextAlignRight()} className="p-2 rounded-md hover:bg-gray-200"><FiAlignRight className="size-4" /></button>
 
         </div>
 

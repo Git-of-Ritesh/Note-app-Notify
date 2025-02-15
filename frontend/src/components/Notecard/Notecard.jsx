@@ -7,6 +7,7 @@ import { PiDotsThreeOutlineLight } from "react-icons/pi";
 
 const Notecard = ({ title, content, date, tags, isPinned, onClick, onDelete }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false)
+    const plainText = content.replace(/<[^>]+>/g, "");
 
     return (
         <div className='w-80 h-fit border-b group' onClick={onClick}>
@@ -18,12 +19,12 @@ const Notecard = ({ title, content, date, tags, isPinned, onClick, onDelete }) =
                         <div className='flex items-center gap-x-4'><button>{isPinned ? <TiPin className='size-5' /> : ""}</button>
                             <div className='relative'>
                                 <div>
-                                    <button className='opacity-0 group-hover:opacity-100' onClick={(e)=> {e.stopPropagation(); setDropdownOpen(!dropdownOpen);}} ><PiDotsThreeOutlineLight /></button>
+                                    <button className='opacity-0 group-hover:opacity-100' onClick={(e) => { e.stopPropagation(); setDropdownOpen(!dropdownOpen); }} ><PiDotsThreeOutlineLight /></button>
                                 </div>
 
                                 {dropdownOpen && (
                                     <div className="absolute right-0 w-28 bg-white border shadow-md rounded-md">
-                                       <button className='flex w-full font-light gap-x-2 text-sm items-center p-1 rounded-md hover:bg-gray-100' onClick={(e)=> {e.stopPropagation(); onDelete();}} ><AiOutlineDelete />Delete</button>
+                                        <button className='flex w-full font-light gap-x-2 text-sm items-center p-1 rounded-md hover:bg-gray-100' onClick={(e) => { e.stopPropagation(); onDelete(); }} ><AiOutlineDelete />Delete</button>
                                     </div>
                                 )}
                             </div>
@@ -31,7 +32,9 @@ const Notecard = ({ title, content, date, tags, isPinned, onClick, onDelete }) =
                     </h1>
 
 
-                    <p className="break-words text-xs text-gray-600">{content?.length > 120 ? content.slice(0, 120) + "..." : content}</p>
+                    <p className="break-words text-xs text-gray-600">
+                        {plainText.length > 120 ? plainText.slice(0, 120) + "..." : plainText}
+                    </p>
                 </div>
 
 
