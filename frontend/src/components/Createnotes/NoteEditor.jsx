@@ -182,27 +182,27 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
             if (url) editorRef.current?.setLink(url);
           }} className="p-2 rounded-md hover:bg-gray-200"><FiLink2 className="size-4" /></button>
 
-          <button onClick={() => { console.log("toggled"), editorRef.current?.toggleHighlight()}} className="p-2 rounded-md hover:bg-gray-200"><PiHighlighterFill className="size-4" /></button>
+          <button onClick={() => { console.log("toggled"), editorRef.current?.toggleHighlight() }} className="p-2 rounded-md hover:bg-gray-200"><PiHighlighterFill className="size-4" /></button>
 
-          <button onClick={() =>  editorRef.current?.toggleBlockquote()} className="p-2 rounded-md hover:bg-gray-200"><BsBlockquoteLeft className="size-4" /></button>
+          <button onClick={() => editorRef.current?.toggleBlockquote()} className="p-2 rounded-md hover:bg-gray-200"><BsBlockquoteLeft className="size-4" /></button>
 
-          <button onClick={() =>  editorRef.current?.toggleHeadingL1()} className="p-2 rounded-md hover:bg-gray-200"><BsTypeH1 className="size-4" /></button>
+          <button onClick={() => editorRef.current?.toggleHeadingL1()} className="p-2 rounded-md hover:bg-gray-200"><BsTypeH1 className="size-4" /></button>
 
-          <button onClick={() =>  editorRef.current?.toggleHeadingL2()} className="p-2 rounded-md hover:bg-gray-200"><BsTypeH2 className="size-4" /></button>
+          <button onClick={() => editorRef.current?.toggleHeadingL2()} className="p-2 rounded-md hover:bg-gray-200"><BsTypeH2 className="size-4" /></button>
 
-          <button onClick={() =>  editorRef.current?.toggleHeadingL3()} className="p-2 rounded-md hover:bg-gray-200"><BsTypeH3 className="size-4" /></button>
+          <button onClick={() => editorRef.current?.toggleHeadingL3()} className="p-2 rounded-md hover:bg-gray-200"><BsTypeH3 className="size-4" /></button>
 
-          <button onClick={() =>  editorRef.current?.setHorizontalRule()} className="p-2 rounded-md hover:bg-gray-200"><VscHorizontalRule className="size-4" /></button>
+          <button onClick={() => editorRef.current?.setHorizontalRule()} className="p-2 rounded-md hover:bg-gray-200"><VscHorizontalRule className="size-4" /></button>
 
-          <button onClick={() =>  editorRef.current?.toggleOrderedList()} className="p-2 rounded-md hover:bg-gray-200"><MdOutlineFormatListNumbered  className="size-4" /></button> 
+          <button onClick={() => editorRef.current?.toggleOrderedList()} className="p-2 rounded-md hover:bg-gray-200"><MdOutlineFormatListNumbered className="size-4" /></button>
 
-          <button onClick={() =>  editorRef.current?.toggleCodeBlock()} className="p-2 rounded-md hover:bg-gray-200"><RiCodeSSlashFill className="size-4" /></button> 
+          <button onClick={() => editorRef.current?.toggleCodeBlock()} className="p-2 rounded-md hover:bg-gray-200"><RiCodeSSlashFill className="size-4" /></button>
 
-          <button onClick={() =>  editorRef.current?.toggleStrike()} className="p-2 rounded-md hover:bg-gray-200"><AiOutlineStrikethrough className="size-4" /></button>
+          <button onClick={() => editorRef.current?.toggleStrike()} className="p-2 rounded-md hover:bg-gray-200"><AiOutlineStrikethrough className="size-4" /></button>
 
-          <button onClick={() =>  editorRef.current?.addImage()} className="p-2 rounded-md hover:bg-gray-200"><FiImage className="size-4" /></button>  
+          <button onClick={() => editorRef.current?.addImage()} className="p-2 rounded-md hover:bg-gray-200"><FiImage className="size-4" /></button>
 
-          <button onClick={() =>  editorRef.current?.toggleTaskList()} className="p-2 rounded-md hover:bg-gray-200"><GoTasklist className="size-4" /></button>  
+          <button onClick={() => editorRef.current?.toggleTaskList()} className="p-2 rounded-md hover:bg-gray-200"><GoTasklist className="size-4" /></button>
 
         </div>
 
@@ -216,51 +216,58 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
         </div>
       </div>
 
-      <div className={`flex py-3 mt-9 ${maximaize ? "px-3" : "px-52"}`}>
-        {/* Title Input */}
-        <input
-          type="text"
-          className="w-full text-3xl font-bold focus:outline-none"
-          placeholder="Enter title..."
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </div>
 
-      {/* tag and category */}
-      <div className={`flex py-3 gap-2 ${maximaize ? "px-3" : "px-52"}`}>
-        <div className="flex items-center border py-1 px-2 rounded-md">
-          <input className="focus:outline-none text-sm"
-            type="text" placeholder="Add tags..."
-            value={inputTag}
-            onChange={(e) => setInputTag(e.target.value)} />
-          <button onClick={handleAddTag}><FiPlus /></button>
+      {/* Editor space */}
+      <div className={`flex flex-col ${maximaize ? "px-3" : "px-52"} overflow-y-auto `}>
+
+        <div className={`flex py-3 mt-9 `}>
+          {/* Title Input */}
+          <input
+            type="text"
+            className="w-full text-3xl font-bold focus:outline-none"
+            placeholder="Enter title..."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
         </div>
-      </div>
 
-      {/* Display Added Tags */}
-      <div className={`flex flex-wrap gap-2 ${maximaize ? "px-3" : "px-52"}`}>
-        {tags.map((tag, index) => (
-          <div key={index} className="flex items-center bg-gray-200 py-1 px-2 rounded-md">
-            <span className="text-sm font-normal">{tag}</span>
-            <button onClick={() => handleDeleteTag(index)} className="ml-2 text-black"><FiX className="size-4" /></button>
+        {/* tag and category */}
+        <div className={`flex py-3 gap-2 `}>
+          <div className="flex items-center border py-1 px-2 rounded-md">
+            <input className="focus:outline-none text-sm"
+              type="text" placeholder="Add tags..."
+              value={inputTag}
+              onChange={(e) => setInputTag(e.target.value)} />
+            <button onClick={handleAddTag}><FiPlus /></button>
           </div>
-        ))}
-      </div>
-
-      {/* Editable Content Area */}
-      <div
-        className="w-full h-full flex-grow text-gray-700 overflow-y-auto ">
-        <div className={`w-full flex-grow ${maximaize ? "px-3" : "px-52"}`}>
-          <TextEditor ref={editorRef} content={content} onChange={setContent} />
         </div>
-        {/* <textarea
+
+        {/* Display Added Tags */}
+        <div className={`flex flex-wrap gap-2 `}>
+          {tags.map((tag, index) => (
+            <div key={index} className="flex items-center bg-gray-200 py-1 px-2 rounded-md">
+              <span className="text-sm font-normal">{tag}</span>
+              <button onClick={() => handleDeleteTag(index)} className="ml-2 text-black"><FiX className="size-4" /></button>
+            </div>
+          ))}
+        </div>
+
+        {/* Editable Content Area */}
+        <div
+          className="w-full h-full flex-grow text-gray-700  ">
+          <div className={`w-full flex-grow `}>
+            <TextEditor ref={editorRef} content={content} onChange={setContent} />
+          </div>
+
+          {/* <textarea
           className={`w-full h-full py-3 font-normal outline-none resize-none ${maximaize ? "px-3" : "px-52"}`}
         placeholder="Your text here"
         rows="1"
         value={content}
         onChange={(e) => setContent(e.target.value)}
         ></textarea> */}
+        </div>
+
       </div>
     </div >
   );
