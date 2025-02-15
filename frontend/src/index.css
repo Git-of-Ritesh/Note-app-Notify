@@ -94,6 +94,41 @@ ul {
   outline: none !important;
 }
 
+ul[data-type="taskList"] {
+  list-style: none;
+  margin-left: 0;
+  padding: 0;
+}
+
+ul[data-type="taskList"] li {
+  display: flex;
+  align-items: center; /* Fix checkbox alignment */
+  gap: 0.5rem; /* Add space between checkbox and text */
+}
+
+ul[data-type="taskList"] li > label {
+  display: flex;
+  align-items: center; /* Ensure label and checkbox are aligned */
+  flex: 0 0 auto;
+  margin-right: 0.5rem;
+  user-select: none;
+  cursor: pointer;
+}
+
+ul[data-type="taskList"] li > div {
+  flex: 1 1 auto;
+}
+
+ul[data-type="taskList"] input[type="checkbox"] {
+  cursor: pointer;
+}
+
+ul[data-type="taskList"] ul[data-type="taskList"] {
+  margin-left: 1.5rem; /* Proper indentation for nested tasks */
+}
+
+
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 3px;

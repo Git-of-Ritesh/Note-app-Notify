@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { FiBold, FiItalic, FiUnderline, FiList, FiTrash, FiSave, FiX } from "react-icons/fi";
 import axios from "axios"
 import { FiPlus } from "react-icons/fi"
-import { FiChevronDown, FiSidebar, FiMaximize2, FiMinimize2, FiLink2 } from "react-icons/fi";
+import { FiChevronDown, FiSidebar, FiMaximize2, FiMinimize2, FiLink2, FiImage } from "react-icons/fi";
 import { PiHighlighterFill } from "react-icons/pi";
 import { TiPinOutline, TiPin } from "react-icons/ti";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -12,6 +12,7 @@ import { VscHorizontalRule } from "react-icons/vsc";
 import { MdOutlineFormatListNumbered } from "react-icons/md";
 import { RiCodeSSlashFill } from "react-icons/ri";
 import { AiOutlineStrikethrough } from "react-icons/ai";
+import { GoTasklist } from "react-icons/go";
 
 
 
@@ -197,7 +198,11 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose }) => {
 
           <button onClick={() =>  editorRef.current?.toggleCodeBlock()} className="p-2 rounded-md hover:bg-gray-200"><RiCodeSSlashFill className="size-4" /></button> 
 
-          <button onClick={() =>  editorRef.current?.toggleStrike()} className="p-2 rounded-md hover:bg-gray-200"><AiOutlineStrikethrough className="size-4" /></button> 
+          <button onClick={() =>  editorRef.current?.toggleStrike()} className="p-2 rounded-md hover:bg-gray-200"><AiOutlineStrikethrough className="size-4" /></button>
+
+          <button onClick={() =>  editorRef.current?.addImage()} className="p-2 rounded-md hover:bg-gray-200"><FiImage className="size-4" /></button>  
+
+          <button onClick={() =>  editorRef.current?.toggleTaskList()} className="p-2 rounded-md hover:bg-gray-200"><GoTasklist className="size-4" /></button>  
 
         </div>
 
