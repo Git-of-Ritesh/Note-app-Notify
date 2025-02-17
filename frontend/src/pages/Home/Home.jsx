@@ -65,7 +65,7 @@ const Home = () => {
           <Sidebar getAllNotes={getAllNotes} userInfo={userInfo} getPinnedNotes={getPinnedNotes} activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
 
-        <div className={`transition-all duration-700 ease-in-out ${noteOpen ? "max-w-[400px]" : "max-w-0"}`}>
+        <div className={`transition-all duration-[0.4s] ease-in-out ${noteOpen ? "max-w-[400px]" : "max-w-0"}`}>
           <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor}  isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} closeEditor={() => { setIsCreateOpen(false) }} activeTab={activeTab} />
         </div>
 
