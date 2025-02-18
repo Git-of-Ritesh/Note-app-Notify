@@ -5,6 +5,8 @@ import CreateNote from '../../components/Createnotes/NoteEditor'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import illus from '../../assets/illustration2.svg'
+import logo from '../../assets/logo/logo4.png'
 
 const Home = () => {
 
@@ -66,7 +68,21 @@ const Home = () => {
         </div>
 
         <div className={`transition-all duration-[0.4s] ease-in-out ${noteOpen ? "max-w-[400px]" : "max-w-0"}`}>
-          <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor}  isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} closeEditor={() => { setIsCreateOpen(false) }} activeTab={activeTab} />
+          <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor} isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} closeEditor={() => { setIsCreateOpen(false) }} activeTab={activeTab} />
+        </div>
+
+        <div className={`w-full h-full p-7 transition-all ${isCreateOpen ? 'hidden' : 'block'}`}>
+          <div className='flex flex-col h-full justify-center items-center '>
+
+            <div className='flex justify-center items-center size-28 rounded-xl shadow-lg drop-shadow-lg border'>
+              <div className='flex justify-center items-center size-20 rounded-xl shadow-xl drop-shadow-lg border'>
+                <img className='size-14 rounded-xl shadow-xl drop-shadow-lg ' src={logo} alt="" />
+              </div>
+            </div>
+
+            <h1 className='font-semibold text-4xl mt-6'>Think, Memorize and Write</h1>
+            <h3 className='font-medium text-3xl mt-3 text-gray-500'>all in one place</h3>
+          </div>
         </div>
 
         <div className={`w-full pb-0 transition-all ${isCreateOpen ? 'block' : 'hidden'}`}>
