@@ -12,6 +12,10 @@ import Image from '@tiptap/extension-image'
 import TaskItem from '@tiptap/extension-task-item'
 import TaskList from '@tiptap/extension-task-list'
 import TextAlign from '@tiptap/extension-text-align'
+import Table from '@tiptap/extension-table'
+import TableCell from '@tiptap/extension-table-cell'
+import TableHeader from '@tiptap/extension-table-header'
+import TableRow from '@tiptap/extension-table-row'
 import { common, createLowlight } from 'lowlight'
 import { useEffect } from "react";
 import { forwardRef, useImperativeHandle } from "react";
@@ -44,7 +48,13 @@ const TextEditor = forwardRef(({ content, onChange }, ref) => {
             TextAlign.configure({
                 types: ['heading', 'paragraph'],
                 alignments: ['left', 'right', 'center'],
-              })],
+              }),
+              Table.configure({
+                resizable: true,
+              }),
+              TableRow,
+              TableHeader,
+              TableCell,],
         content: content || "<p></p>",
         onUpdate: ({ editor }) => {
             onChange(editor.getHTML());
@@ -92,6 +102,16 @@ const TextEditor = forwardRef(({ content, onChange }, ref) => {
         setTextAlignLeft: () => editor?.chain().focus().setTextAlign('left').run(),
         setTextAlignCenter: () => editor?.chain().focus().setTextAlign('center').run(),
         setTextAlignRight: () => editor?.chain().focus().setTextAlign('right').run(),
+        insertTable: () => editor?.chain().focus().insertTable({rows : 2, cols : 2, withHeaderRow: true}).run(),
+        deleteTable: () =>  editor?.chain().focus().deleteTable().run(),
+        addRowAfter: () => editor?.chain().focus().addRowAfter().run(),
+        addColumnAfter: () => editor?.chain().focus().addColumnAfter().run(),
+        deleteRow: () => editor?.chain().focus().deleteRow().run(),
+        deleteColumn: () => editor?.chain().focus().deleteColumn().run(),
+        mergeCells: () => editor?.chain().focus().mergeCells().run(),
+        splitCell: () => editor?.chain().focus().splitCell().run(),
+        toggleHeaderColumn: () => editor?.chain().focus().toggleHeaderColumn().run(),
+        toggleHeaderCell: () => editor?.chain().focus().toggleHeaderCell().run(),
     }));
 
     useEffect(() => {

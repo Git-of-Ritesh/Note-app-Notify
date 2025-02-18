@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { FiBold, FiItalic, FiUnderline, FiList, FiTrash, FiSave, FiX } from "react-icons/fi";
 import axios from "axios"
 import { FiPlus } from "react-icons/fi"
-import { FiChevronDown, FiSidebar, FiMaximize2, FiMinimize2, FiLink2, FiImage, FiAlignLeft, FiAlignCenter, FiAlignRight } from "react-icons/fi";
-import { PiHighlighterFill } from "react-icons/pi";
+import { FiChevronDown, FiSidebar, FiMaximize2, FiMinimize2, FiLink2, FiImage, FiAlignLeft, FiAlignCenter, FiAlignRight, FiTable } from "react-icons/fi";
+import { PiHighlighterFill, PiColumnsDuotone, PiRectangleDuotone } from "react-icons/pi";
 import { TiPinOutline, TiPin } from "react-icons/ti";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import TextEditor from "../TextEditor/TextEditor";
@@ -13,6 +13,8 @@ import { MdOutlineFormatListNumbered } from "react-icons/md";
 import { RiCodeSSlashFill } from "react-icons/ri";
 import { AiOutlineStrikethrough } from "react-icons/ai";
 import { GoTasklist } from "react-icons/go";
+import { TbTableOff, TbTableRow, TbTableColumn, TbRowRemove, TbColumnRemove   } from "react-icons/tb";
+import { AiOutlineMergeCells, AiOutlineSplitCells } from "react-icons/ai";
 
 
 
@@ -29,6 +31,22 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
   const [isBold, setIsBold] = useState(false)
   const [isItalic, setIsItalic] = useState(false)
   const editorRef = useRef(null);
+
+  const [isTableOpen, setIsTableOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  //drop down of tables
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsTableOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
 
   useEffect(() => {
     if (selectedNote) {
@@ -236,6 +254,46 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
 
           <button onClick={() => editorRef.current?.setTextAlignRight()} className="p-2 rounded-md hover:bg-gray-200"><FiAlignRight className="size-4" /></button>
 
+          <button ref={dropdownRef}  onClick={() => setIsTableOpen(!isTableOpen)} className="relative group p-2 rounded-md hover:bg-gray-200"><FiTable className="size-4" />
+
+          {isTableOpen && (
+          <div className="absolute top-full -left-40 mt-2 flex bg-white shadow-md rounded-lg transition-opacity duration-200 border border-gray-300 p-1 z-10">
+
+            {/* add table */}
+            <button onClick={() => editorRef.current?.insertTable()} className="p-2 rounded-md hover:bg-gray-200"><FiTable className="size-4" /></button>
+
+            {/* insert row */}
+            <button onClick={() => editorRef.current?.addRowAfter()} className="p-2 rounded-md hover:bg-gray-200"><TbTableRow className="size-4" /></button>
+
+            {/* delete row */}
+            <button onClick={() => editorRef.current?.deleteRow()} className="p-2 rounded-md hover:bg-gray-200"><TbRowRemove className="size-4" /></button>
+
+            {/* insert coloum */}
+            <button onClick={() => editorRef.current?.addColumnAfter()} className="p-2 rounded-md hover:bg-gray-200"><TbTableColumn className="size-4" /></button>
+
+            {/* delete coloum */}
+            <button onClick={() => editorRef.current?.deleteColumn()} className="p-2 rounded-md hover:bg-gray-200"><TbColumnRemove className="size-4" /></button>
+
+            {/* merge cell */} 
+            <button onClick={() => editorRef.current?.mergeCells()} className="p-2 rounded-md hover:bg-gray-200"><AiOutlineMergeCells className="size-4" /></button>
+
+            {/* split cell */}
+            <button onClick={() => editorRef.current?.splitCell()} className="p-2 rounded-md hover:bg-gray-200"><AiOutlineSplitCells className="size-4" /></button>
+
+            {/* toggle header coloum */}
+            <button onClick={() => editorRef.current?.toggleHeaderColumn()} className="p-2 rounded-md hover:bg-gray-200"><PiColumnsDuotone className="size-4" /></button>
+
+            {/* header cell */}
+            <button onClick={() => editorRef.current?.toggleHeaderCell()} className="p-2 rounded-md hover:bg-gray-200"><PiRectangleDuotone className="size-4" /></button>
+
+            {/* delete table */}
+            <button onClick={() => editorRef.current?.deleteTable()} className="p-2 rounded-md hover:bg-gray-200"><TbTableOff className="size-4" /></button>
+
+          </div>
+          )}
+          </button>
+
+          
         </div>
 
         <div className="flex gap-2">
