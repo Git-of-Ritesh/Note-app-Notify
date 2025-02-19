@@ -96,7 +96,7 @@ const Sidebar = ({ userInfo, getAllNotes, getPinnedNotes, setActiveTab }) => {
                             <img src={profile} alt="profile" className="w-10 h-9 rounded-md object-cover" />
                             <div className='flex flex-col'>
                                 <span className="font-medium text-gray-700">{userInfo?.username}</span>
-                                <span className="font-normal text-xs -mt-1 text-gray-950">a@gamil.com</span>
+                                <span className="font-normal text-xs -mt-1 text-gray-950">{userInfo.email}</span>
                             </div>
                         </div>
 

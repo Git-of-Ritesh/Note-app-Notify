@@ -1,5 +1,4 @@
 import React, { useState, useSelector } from 'react';
-import LoginImage from '../../../assets/logo/LoginImage.jpg'
 import Logo4 from '../../../assets/logo/logo4.png'
 import { FcGoogle } from "react-icons/fc";
 import { GrApple } from "react-icons/gr";
