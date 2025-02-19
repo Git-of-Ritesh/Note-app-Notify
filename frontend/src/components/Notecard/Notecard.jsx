@@ -15,7 +15,7 @@ const Notecard = ({ title, content, date, tags, isPinned, onClick, onDelete }) =
             <div className="flex justify-between flex-col w-full h-40 p-4">
 
                 <div className='flex flex-col gap-2'>
-                    <h1 className="flex items-center justify-between font-normal text-gray-950">{title}
+                    <h1 className="flex items-center justify-between font-normal text-gray-950">{title.length > 24 ? title.slice(0, 24) + '...' : title}
                         <div className='flex items-center gap-x-4'><button>{isPinned ? <TiPin className='size-5' /> : ""}</button>
                             <div className='relative'>
                                 <div>

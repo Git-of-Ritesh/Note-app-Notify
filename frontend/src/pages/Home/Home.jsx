@@ -54,17 +54,47 @@ const Home = () => {
     }
   }
 
+//get trash notes
+  const getTrashNotes = async() => {
+    try {
+      const res = await axios.get("http://localhost:3000/api/note/trash", { withCredentials: true })
+
+      if (res.data.success === false) {
+        console.log(res.data)
+      }
+      else {
+        setAllNotes(res.data.note.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+        // setAllNotes(res.data.note || [])
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   // pinned notes
-  const getPinnedNotes = () => {
-    const pinnedNotes = allNotes.filter(note => note.isPinned)
-    setAllNotes(pinnedNotes)
+  const getPinnedNotes = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/api/note/pinned", { withCredentials: true })
+
+      if (res.data.success === false) {
+        console.log(res.data)
+      }
+      else {
+        setAllNotes(res.data.note.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+        // setAllNotes(res.data.note || [])
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
     <div className='bg-gray-50 w-screen h-screen'>
       <div className='flex w-full h-full overflow-hidden'>
         <div>
-          <Sidebar getAllNotes={getAllNotes} userInfo={userInfo} getPinnedNotes={getPinnedNotes} activeTab={activeTab} setActiveTab={setActiveTab} />
+          <Sidebar getAllNotes={getAllNotes} getTrashNotes={getTrashNotes} userInfo={userInfo} getPinnedNotes={getPinnedNotes} activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
 
         <div className={`transition-all duration-[0.4s] ease-in-out ${noteOpen ? "max-w-[400px]" : "max-w-0"}`}>

@@ -110,39 +110,73 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
     setTags(updateTags)
   }
 
-  //delete note
-  const deleteNote = async () => {
-
-    if (!selectedNote?._id) {
-      console.error("Error: Note ID is missing!");
-      setError("Note ID is missing!");
-      return;
-    }
-
-    try {
-      const res = await axios.delete(`http://localhost:3000/api/note/delete-note/${selectedNote._id}`, { withCredentials: true })
-
-      if (res.data.success === false) {
-        console.log(res.data.message)
-        setError(res.data.message)
-        return
+  //trash note
+  const trashNote = async () => {
+      if (!selectedNote?._id) {
+        console.error("Error: Note ID is missing!");
+        setError("Note ID is missing!");
+        return;
       }
-
-      getAllNotes()
-      onClose()
-
-    } catch (error) {
-      console.log(error.message)
-      setError(error.message)
+  
+      try {
+        const res = await axios.put(`http://localhost:3000/api/note/move-to-trash/${selectedNote._id}`,{}, { withCredentials: true })
+  
+        if (res.data.success === false) {
+          console.log(res.data.message)
+          setError(res.data.message)
+          return
+        }
+  
+        await getAllNotes(); 
+        onClose()
+  
+      } catch (error) {
+        console.log(error.message)
+        setError(error.message)
+      }
     }
-  }
 
-  //consfirm delete
+    //consfirm delete
   const confirmDelete = () => {
     if (window.confirm("Are you sure you want to delete this note?")) {
-      deleteNote();
+      trashNote();
     }
   };
+
+
+  //delete note
+  // const deleteNote = async () => {
+
+  //   if (!selectedNote?._id) {
+  //     console.error("Error: Note ID is missing!");
+  //     setError("Note ID is missing!");
+  //     return;
+  //   }
+
+  //   try {
+  //     const res = await axios.delete(`http://localhost:3000/api/note/delete-note/${selectedNote._id}`, { withCredentials: true })
+
+  //     if (res.data.success === false) {
+  //       console.log(res.data.message)
+  //       setError(res.data.message)
+  //       return
+  //     }
+
+  //     getAllNotes()
+  //     onClose()
+
+  //   } catch (error) {
+  //     console.log(error.message)
+  //     setError(error.message)
+  //   }
+  // }
+
+  // //consfirm delete
+  // const confirmDelete = () => {
+  //   if (window.confirm("Are you sure you want to delete this note?")) {
+  //     deleteNote();
+  //   }
+  // };
 
   // edit note
   const editNote = async () => {

@@ -15,23 +15,26 @@ const Notespage = ({getAllNotes, onNewNote, allNotes, isCreateOpen, onEditNote, 
     else if(activeTab === 'pinned'){
       return <p>Pinned Notes</p>
     }
+    else if(activeTab === 'trash'){
+      return <p>Trash Notes</p>
+    }
     else {
       return <p>All Notes</p>
     }
   }
 
   //delete note
-  const deleteNote = async (noteId) => {
+  const trashNote = async (noteId) => {
 
     try {
-      const res = await axios.delete(`http://localhost:3000/api/note/delete-note/${noteId}`, {withCredentials: true})
+      const res = await axios.put(`http://localhost:3000/api/note/move-to-trash/${noteId}`,{}, {withCredentials: true})
       
       if (res.data.success === false) {
         console.log(res.data.message)
         return
       }
 
-      getAllNotes()
+      await getAllNotes()
       if(isCreateOpen){
         closeEditor()
       }
@@ -70,7 +73,7 @@ const Notespage = ({getAllNotes, onNewNote, allNotes, isCreateOpen, onEditNote, 
             tags={note.tags}
             isPinned={note.isPinned}
             onClick={()=> onEditNote(note)}
-            onDelete={()=>deleteNote(note._id)}
+            onDelete={()=>trashNote(note._id)}
           />
         ))}
       </div>

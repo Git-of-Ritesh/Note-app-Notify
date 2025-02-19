@@ -23,6 +23,10 @@ const noteSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    deletedAt: {
+        type: Date,
+        default: null,
+    },
     userId: {
         type: String,
         required: true,
