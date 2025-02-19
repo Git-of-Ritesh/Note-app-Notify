@@ -5,9 +5,10 @@ import Tagcard from "../Tagcards/Tagcard"
 import { TiPinOutline, TiPin } from "react-icons/ti";
 import { PiDotsThreeOutlineLight } from "react-icons/pi";
 
-const Notecard = ({ title, content, date, tags, isPinned, onClick, onDelete }) => {
+const Notecard = ({ title, content, date, tags, isPinned, onClick, onDelete, onRestore, activeTab }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const plainText = content.replace(/<[^>]+>/g, "");
+
 
     return (
         <div className='w-80 h-fit border-b group' onClick={onClick}>
@@ -23,8 +24,12 @@ const Notecard = ({ title, content, date, tags, isPinned, onClick, onDelete }) =
                                 </div>
 
                                 {dropdownOpen && (
-                                    <div className="absolute right-0 w-28 bg-white border shadow-md rounded-md">
+                                    <div className="absolute right-0 w-28 gap-1 p-1 bg-white border shadow-md rounded-md">
                                         <button className='flex w-full font-light gap-x-2 text-sm items-center p-1 rounded-md hover:bg-gray-100' onClick={(e) => { e.stopPropagation(); onDelete(); }} ><AiOutlineDelete />Delete</button>
+
+                                        {activeTab === 'trash' && (
+                                             <button className='flex w-full font-light gap-x-2 text-sm items-center p-1 rounded-md hover:bg-gray-100' onClick={(e) => { e.stopPropagation(); onRestore(); }} ><AiOutlineDelete />Restore</button>
+                                        )}        
                                     </div>
                                 )}
                             </div>

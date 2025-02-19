@@ -98,7 +98,7 @@ const Home = () => {
         </div>
 
         <div className={`transition-all duration-[0.4s] ease-in-out ${noteOpen ? "max-w-[400px]" : "max-w-0"}`}>
-          <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor} isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} closeEditor={() => { setIsCreateOpen(false) }} activeTab={activeTab} />
+          <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor} isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} getTrashNotes={getTrashNotes} closeEditor={() => { setIsCreateOpen(false) }} activeTab={activeTab} />
         </div>
 
         <div className={`w-full h-full p-7 transition-all ${isCreateOpen ? 'hidden' : 'block'}`}>
