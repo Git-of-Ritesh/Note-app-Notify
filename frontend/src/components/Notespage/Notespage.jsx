@@ -6,6 +6,10 @@ import Searchbar from '../searchbar/searchbar'
 
 
 const Notespage = ({getAllNotes, getTrashNotes, onNewNote, allNotes, isCreateOpen, onEditNote, closeEditor, activeTab }) => {
+  const [searchQuery, setSearchQuery] = useState("")
+
+  // filter notes by search query
+  const filteredNotes = allNotes.filter(note => note.title.toLowerCase().includes(searchQuery.toLowerCase()))
 
   // Rendering tabs
   const renderTabs = () => {
@@ -97,14 +101,16 @@ const Notespage = ({getAllNotes, getTrashNotes, onNewNote, allNotes, isCreateOpe
             className='flex items-center gap-2 shadow-md bg-gray-950 text-white text-xs font-light py-1 px-2 rounded-lg'><FiPlus />New Note</button>
         </div>
 
-        <Searchbar/>
+        <Searchbar setSearchQuery={setSearchQuery} searchQuery={searchQuery}/>
 
       </div>
 
 
 
       <div className="content-start flex flex-col overflow-y-auto overflow-x-hidden w-full h-[calc(100vh-100px)] gap-x-2">
-        {allNotes.map((note, index) => (
+      {filteredNotes.length > 0 ? (
+      filteredNotes.map((note, index) =>(
+        // {allNotes.map((note, index) => (
           <Notecard
             key={note._id}
             title={note.title}
@@ -118,7 +124,7 @@ const Notespage = ({getAllNotes, getTrashNotes, onNewNote, allNotes, isCreateOpe
             onRestore={()=>restoreNote(note._id)}
             activeTab={activeTab}
           />
-        ))}
+        ))) : (<p className="text-gray-500 text-center">No matching notes found.</p>)}
       </div>
     </div>
   )
