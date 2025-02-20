@@ -120,7 +120,6 @@ useEffect(() => {
 
       </div>
 
-{/*  transition-all duration-[0.36s] ease-in-out ${noteOpen ? "max-w-full" : "max-w-0 pointer-events-none"} */}
 
       <div className={`content-start flex flex-col min-w-[0px] max-w-full h-[calc(100vh-100px)] gap-x-2
         ${delayedOverflow ? 'overflow-y-auto overflow-x-hidden' : ''}`}>

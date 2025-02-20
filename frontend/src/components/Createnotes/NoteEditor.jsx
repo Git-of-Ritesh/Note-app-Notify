@@ -230,7 +230,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
   }
 
   return (
-    <div className="flex flex-col w-full h-full bg-white  rounded-3xl ">
+    <div className="flex flex-col w-full h-screen bg-white  rounded-3xl ">
 
       <div className="flex justify-between items-center border-b">
         <div className="flex items-center gap-x-3 px-4 py-4">
@@ -387,14 +387,6 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
           <div className={`w-full flex-grow `}>
             <TextEditor ref={editorRef} content={content} onChange={setContent} />
           </div>
-
-          {/* <textarea
-          className={`w-full h-full py-3 font-normal outline-none resize-none ${maximaize ? "px-3" : "px-52"}`}
-        placeholder="Your text here"
-        rows="1"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        ></textarea> */}
         </div>
 
       </div>
