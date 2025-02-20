@@ -64,6 +64,26 @@ const Notespage = ({getAllNotes, getTrashNotes, onNewNote, allNotes, isCreateOpe
     }
   }
 
+  const deleteNote = async (noteId) => {
+
+    try {
+      const res = await axios.delete(`http://localhost:3000/api/note/delete-note/${noteId}`,{withCredentials: true})
+      
+      if (res.data.success === false) {
+        console.log(res.data.message)
+        return
+      }
+
+      await getTrashNotes()
+      if(isCreateOpen){
+        closeEditor()
+      }
+
+    } catch (error) {
+      console.log(error.message)  
+    }
+  }
+
 
   return (
     <div className='w-80 h-screen border-r'>
@@ -93,7 +113,8 @@ const Notespage = ({getAllNotes, getTrashNotes, onNewNote, allNotes, isCreateOpe
             tags={note.tags}
             isPinned={note.isPinned}
             onClick={()=> onEditNote(note)}
-            onDelete={()=>trashNote(note._id)}
+            onTrash={()=>trashNote(note._id)}
+            onDelete={()=>deleteNote(note._id) }
             onRestore={()=>restoreNote(note._id)}
             activeTab={activeTab}
           />
