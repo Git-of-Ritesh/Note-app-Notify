@@ -54,6 +54,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
       setContent(selectedNote.content || "<p></p>"); // Ensure content is set properly
       setTags(selectedNote.tags || []);
       setIsPinned(selectedNote.isPinned || false);
+      handleConfirmTab();
     } else {
       setTitle("");
       setContent("<p></p>");
@@ -63,6 +64,13 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
   }, [selectedNote]);
 
   // rendering tabs
+  const [confirmTab, setConfirmTab] = useState("")
+
+  // handle confirm tab
+  const handleConfirmTab = () => {
+    setConfirmTab(renderTabs())
+  }
+
    // Rendering tabs
    const renderTabs = () => {
     if(activeTab === 'all'){
@@ -228,7 +236,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
         <div className="flex items-center gap-x-3 px-4 py-4">
           <button className="hover:bg-gray-200 rounded-md p-1" onClick={noteClose}><FiSidebar /></button>
           <div className="border-l px-3">
-            <Breadcrumbs selectedNote={selectedNote} renderTabs={renderTabs} />
+            <Breadcrumbs selectedNote={selectedNote} confirmTab={confirmTab} />
           </div>
         </div>
         <div className="px-2">

@@ -1,12 +1,12 @@
 import { FiChevronRight } from "react-icons/fi";
 
-const Breadcrumbs = ({ selectedNote, renderTabs }) => {
+const Breadcrumbs = ({ selectedNote, confirmTab }) => {
 
   return (
     <nav className="text-sm flex items-center space-x-2 text-gray-600">
 
-      <h1 className="text-gray-500">{renderTabs()}</h1>
-      
+      <h1 className="text-gray-500">{confirmTab}</h1>
+
       {selectedNote && (
         <>
           <FiChevronRight className="text-gray-400" />

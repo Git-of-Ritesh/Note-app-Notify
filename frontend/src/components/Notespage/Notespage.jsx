@@ -110,7 +110,6 @@ const Notespage = ({getAllNotes, getTrashNotes, onNewNote, allNotes, isCreateOpe
       <div className="content-start flex flex-col overflow-y-auto overflow-x-hidden w-full h-[calc(100vh-100px)] gap-x-2">
       {filteredNotes.length > 0 ? (
       filteredNotes.map((note, index) =>(
-        // {allNotes.map((note, index) => (
           <Notecard
             key={note._id}
             title={note.title}
@@ -124,7 +123,7 @@ const Notespage = ({getAllNotes, getTrashNotes, onNewNote, allNotes, isCreateOpe
             onRestore={()=>restoreNote(note._id)}
             activeTab={activeTab}
           />
-        ))) : (<p className="text-gray-500 text-center">No matching notes found.</p>)}
+        ))) : (<p className="text-gray-500 text-center mt-5">No matching notes found.</p>)}
       </div>
     </div>
   )
