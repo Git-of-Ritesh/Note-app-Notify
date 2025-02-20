@@ -1,12 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FiPlus } from "react-icons/fi"
 import Notecard from '../Notecard/Notecard'
 import axios from 'axios'
 import Searchbar from '../searchbar/searchbar'
 
 
-const Notespage = ({getAllNotes, getTrashNotes, onNewNote, allNotes, isCreateOpen, onEditNote, closeEditor, activeTab }) => {
+const Notespage = ({getAllNotes, getTrashNotes, onNewNote, allNotes, isCreateOpen, onEditNote, closeEditor, activeTab, noteOpen }) => {
   const [searchQuery, setSearchQuery] = useState("")
+
+  const [delayedOverflow, setDelayedOverflow] = useState(false);
+
+useEffect(() => {
+  if (noteOpen) {
+    const timeout = setTimeout(() => {
+      setDelayedOverflow(true); // Enable overflow after delay
+    }, 300); // Adjust the delay (in ms)
+    
+    return () => clearTimeout(timeout); // Cleanup timeout
+  } else {
+    setDelayedOverflow(false); // Disable overflow instantly when closing
+  }
+}, [noteOpen]);
+
 
   // filter notes by search query
   const filteredNotes = allNotes.filter(note => note.title.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -105,12 +120,13 @@ const Notespage = ({getAllNotes, getTrashNotes, onNewNote, allNotes, isCreateOpe
 
       </div>
 
+{/*  transition-all duration-[0.36s] ease-in-out ${noteOpen ? "max-w-full" : "max-w-0 pointer-events-none"} */}
 
-
-      <div className="content-start flex flex-col overflow-y-auto overflow-x-hidden w-full h-[calc(100vh-100px)] gap-x-2">
+      <div className={`content-start flex flex-col min-w-[0px] max-w-full h-[calc(100vh-100px)] gap-x-2
+        ${delayedOverflow ? 'overflow-y-auto overflow-x-hidden' : ''}`}>
       {filteredNotes.length > 0 ? (
       filteredNotes.map((note, index) =>(
-          <Notecard
+          <Notecard 
             key={note._id}
             title={note.title}
             date={note.createdAt}

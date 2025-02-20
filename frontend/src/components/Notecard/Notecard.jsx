@@ -12,7 +12,7 @@ const Notecard = ({ title, content, date, tags, isPinned, onClick, onTrash, onDe
 
 
     return (
-        <div className='w-80 h-fit border-b group' onClick={onClick}>
+        <div className='w-80 min-w-0 h-fit border-b group' onClick={onClick}>
 
             <div className="flex justify-between flex-col w-full h-40 p-4">
 
@@ -51,13 +51,8 @@ const Notecard = ({ title, content, date, tags, isPinned, onClick, onTrash, onDe
 
                 <div className='flex justify-between items-center '>
                     <Tagcard tags={tags} />
-                    <h3 className="text-xs font-light text-gray-600">{moment(date).startOf('day').fromNow()}</h3>
+                    <h3 className="text-xs font-light text-gray-600">{moment(date).fromNow()}</h3>
                 </div>
-
-                {/* <div className='flex justify-between items-center'>
-                    <h3 className={`text-xs font-light ${isSelected ? "text-white" : "text-[#6F6F6F]"}`}>{moment(date).startOf('day').fromNow()}</h3>
-                    <button className='bg-[#E7E7E7] p-2 rounded-lg' onClick={(e)=> {e.stopPropagation(); onDelete();}} ><AiOutlineDelete /></button>
-                </div> */}
 
             </div>
         </div>

@@ -23,7 +23,7 @@ const Home = () => {
 
   const [userInfo, setUserInfo] = useState(null)
   const [allNotes, setAllNotes] = useState([])
-  const [activeTab, setActiveTab] = useState('null')
+  const [activeTab, setActiveTab] = useState('all')
 
   const navigate = useNavigate()
 
@@ -97,8 +97,8 @@ const Home = () => {
           <Sidebar getAllNotes={getAllNotes} getTrashNotes={getTrashNotes} userInfo={userInfo} getPinnedNotes={getPinnedNotes} activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
 
-        <div className={`transition-all duration-[0.4s] ease-in-out ${noteOpen ? "max-w-[400px]" : "max-w-0"}`}>
-          <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor} isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} getTrashNotes={getTrashNotes} closeEditor={() => { setIsCreateOpen(false) }} activeTab={activeTab} />
+        <div className={`transition-all duration-[0.4s] ease-in-out ${noteOpen ? "max-w-[400px]" : "max-w-[0px]"}`}>
+          <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor} isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} getTrashNotes={getTrashNotes} closeEditor={() => { setIsCreateOpen(false) }} activeTab={activeTab} noteOpen={noteOpen} />
         </div>
 
         <div className={`w-full h-full p-7 transition-all ${isCreateOpen ? 'hidden' : 'block'}`}>
