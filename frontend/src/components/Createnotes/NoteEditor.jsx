@@ -130,7 +130,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
       }
   
       try {
-        const res = await axios.put(`http://localhost:3000/api/note/move-to-trash/${selectedNote._id}`,{}, { withCredentials: true })
+        const res = await axios.put(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/move-to-trash/${selectedNote._id}`,{}, { withCredentials: true })
   
         if (res.data.success === false) {
           console.log(res.data.message)
@@ -159,7 +159,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
     }
 
     try {
-      const res = await axios.delete(`http://localhost:3000/api/note/delete-note/${selectedNote._id}`, { withCredentials: true })
+      const res = await axios.delete(`${import.meta.env.VITE_API_BACKENDBASE_URL}/delete-note/${selectedNote._id}`, { withCredentials: true })
 
       if (res.data.success === false) {
         console.log(res.data.message)
@@ -186,7 +186,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
   // edit note
   const editNote = async () => {
     try {
-      const res = await axios.post(`http://localhost:3000/api/note/edit-note/${selectedNote._id}`, { title, content, tags, isPinned }, { withCredentials: true })
+      const res = await axios.post(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/edit-note/${selectedNote._id}`, { title, content, tags, isPinned }, { withCredentials: true })
 
       if (res.data.success === false) {
         console.log(res.data.message)
@@ -206,7 +206,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
   // add note
   const addNote = async () => {
     try {
-      const res = await axios.post("http://localhost:3000/api/note/add-note", { title, content, tags, isPinned }, { withCredentials: true })
+      const res = await axios.post(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/add-note`, { title, content, tags, isPinned }, { withCredentials: true })
 
       if (res.data.success === false) {
         console.log(res.data.message)

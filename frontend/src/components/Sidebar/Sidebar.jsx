@@ -24,7 +24,7 @@ const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActi
         try {
             dispatch(signOutStart())
 
-            const res = await axios.get("http://localhost:3000/api/auth/signout", { withCredentials: true })
+            const res = await axios.get(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/auth/signout`, { withCredentials: true })
 
             if (res.data.success === false) {
                 dispatch(signOutFailure(res.data.message))

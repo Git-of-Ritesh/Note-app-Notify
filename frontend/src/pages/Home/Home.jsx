@@ -38,7 +38,7 @@ const Home = () => {
   // get all notes API
   const getAllNotes = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/note/all", { withCredentials: true })
+      const res = await axios.get(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/all`, { withCredentials: true })
 
       if (res.data.success === false) {
         console.log(res.data)
@@ -56,7 +56,7 @@ const Home = () => {
 //get trash notes
   const getTrashNotes = async() => {
     try {
-      const res = await axios.get("http://localhost:3000/api/note/trash", { withCredentials: true })
+      const res = await axios.get(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/trash`, { withCredentials: true })
 
       if (res.data.success === false) {
         console.log(res.data)
@@ -74,7 +74,7 @@ const Home = () => {
   // pinned notes
   const getPinnedNotes = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/note/pinned", { withCredentials: true })
+      const res = await axios.get(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/pinned`, { withCredentials: true })
 
       if (res.data.success === false) {
         console.log(res.data)
