@@ -12,7 +12,13 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({origin: [process.env.FRONTEND_URL, "http://localhost:5173"], credentials: true}));
+// app.use(cors({origin: [process.env.FRONTEND_URL, "http://localhost:5173"], credentials: true}));
+app.use(cors({
+  origin: process.env.FRONTEND_URL,  // ✅ Use your deployed frontend URL
+  credentials: true,                 // ✅ Allow sending cookies
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');

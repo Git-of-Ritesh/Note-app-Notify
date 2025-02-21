@@ -50,9 +50,21 @@ export const signin = async (req, res, next) => {
 
         const { password: pass, ...rest } = validUser._doc;
 
-        res.cookie("access_token", token, { httpOnly: true, }).status(200).json({
+        // res.cookie("access_token", token, { httpOnly: true, }).status(200).json({
+        //     success: true,
+        //     message: "logged in successfully",
+        //     rest,
+        // });
+
+        res.cookie("access_token", token, {
+            httpOnly: true,  // Prevent JavaScript from accessing the cookie
+            secure: true,    // ✅ Required for HTTPS (which Vercel enforces)
+            sameSite: "none" // ✅ Required for cross-origin requests
+        })
+        .status(200)
+        .json({
             success: true,
-            message: "logged in successfully",
+            message: "Logged in successfully",
             rest,
         });
     } catch (error) {
