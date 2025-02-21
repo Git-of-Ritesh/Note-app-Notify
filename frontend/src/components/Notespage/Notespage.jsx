@@ -125,7 +125,7 @@ useEffect(() => {
         ${delayedOverflow ? 'overflow-y-auto overflow-x-hidden' : ''}`}>
       {filteredNotes.length > 0 ? (
       filteredNotes.map((note, index) =>(
-          <Notecard 
+          <Notecard
             key={note._id}
             title={note.title}
             date={note.createdAt}

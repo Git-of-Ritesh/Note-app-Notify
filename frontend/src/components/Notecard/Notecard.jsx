@@ -14,7 +14,7 @@ const Notecard = ({ title, content, date, tags, isPinned, onClick, onTrash, onDe
     return (
         <div className='w-80 min-w-0 h-fit border-b group' onClick={onClick}>
 
-            <div className="flex justify-between flex-col w-full h-40 p-4">
+            <div className="flex justify-between flex-col hover:bg-gray-100 w-full h-40 p-4">
 
                 <div className='flex flex-col gap-2'>
                     <h1 className="flex items-center justify-between font-normal text-gray-950">{title.length > 24 ? title.slice(0, 24) + '...' : title}
