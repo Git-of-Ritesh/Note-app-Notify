@@ -5,7 +5,6 @@ import CreateNote from '../../components/Createnotes/NoteEditor'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import illus from '../../assets/illustration2.svg'
 import logo from '../../assets/logo/logo4.png'
 
 const Home = () => {
