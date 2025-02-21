@@ -66,7 +66,7 @@ useEffect(() => {
   const restoreNote = async (noteId) => {
 
     try {
-      const res = await axios.put(`${import.meta.env.VITE_API_BACKENDBASE_URL}/note/restore-note/${noteId}`,{}, {withCredentials: true})
+      const res = await axios.put(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/restore-note/${noteId}`,{}, {withCredentials: true})
       
       if (res.data.success === false) {
         console.log(res.data.message)

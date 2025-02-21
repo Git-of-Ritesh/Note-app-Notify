@@ -148,7 +148,7 @@ export const restoreNote = async(req, res, next) => {
     const noteId = req.params.noteId;
 
     try{
-        const note = await notes.findByIdAndUpdate(noteId,{deletedAt: null},{ new: true });
+        const note = await notes.findByIdAndUpdate(noteId, {deletedAt: null},{ new: true });
         if(!note){
             return next(errorHndler(404, "Note not found"));
         }
