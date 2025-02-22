@@ -68,6 +68,7 @@ export const signin = async (req, res, next) => {
             message: "Logged in successfully",
             rest,
           });
+          console.log('Cookie set:', token); 
           
     } catch (error) {
         next(error);
