@@ -57,16 +57,18 @@ export const signin = async (req, res, next) => {
         // });
 
         res.cookie("access_token", token, {
-            httpOnly: true,  // Prevent JavaScript from accessing the cookie
-            secure: true,    // ✅ Required for HTTPS (which Vercel enforces)
-            sameSite: "none" // ✅ Required for cross-origin requests
-        })
-        .status(200)
-        .json({
+            httpOnly: true,
+            secure: true,
+            sameSite: "none", // Required for cross-origin cookies
+            domain: ".vercel.app", // Adjust this to your custom domain if needed
+          })
+          .status(200)
+          .json({
             success: true,
             message: "Logged in successfully",
             rest,
-        });
+          });
+          
     } catch (error) {
         next(error);
     }

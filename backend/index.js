@@ -14,11 +14,12 @@ app.use(express.json());
 app.use(cookieParser());
 // app.use(cors({origin: [process.env.FRONTEND_URL, "http://localhost:5173"], credentials: true}));
 app.use(cors({
-  origin: process.env.FRONTEND_URL,  // ✅ Use your deployed frontend URL
-  credentials: true,                 // ✅ Allow sending cookies
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: process.env.FRONTEND_URL, // Ensure this points to your deployed frontend
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Add OPTIONS for preflight requests
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
+
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
