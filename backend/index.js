@@ -19,8 +19,8 @@ app.use(cookieParser());
 
 // CORS setup
 app.use(cors({
-  origin: ['https://note-app-notetify.vercel.app', 'http://localhost:5173'],
-  credentials: true,
+  origin: ['https://note-app-notetify.vercel.app'], // Your frontend URL
+  credentials: true, // Allow cookies
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));

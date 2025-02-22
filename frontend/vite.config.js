@@ -4,4 +4,13 @@ import react from '@vitejs/plugin-react-swc'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://note-app-notify.vercel.app', // Your backend URL
+        changeOrigin: true,
+        secure: true, // Ensure HTTPS works properly
+      },
+    },
+  },
 })

@@ -31,50 +31,6 @@ export const signup = async (req, res, next) => {
     }
 }
 
-// export const signin = async (req, res, next) => {
-//     const { email, password } = req.body;
-
-//     try {
-//         const validUser = await User.findOne({ email });
-
-//         if (!validUser) {
-//             return next(errorHndler(404, 'User not found'));
-//         }
-
-//         const isPasswordValid = bcryptjs.compareSync(password, validUser.password);
-
-//         if (!isPasswordValid) {
-//             return next(errorHndler(401, 'Invalid credentials'));
-//         }
-//         const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
-
-//         const { password: pass, ...rest } = validUser._doc;
-
-//         // res.cookie("access_token", token, { httpOnly: true, }).status(200).json({
-//         //     success: true,
-//         //     message: "logged in successfully",
-//         //     rest,
-//         // });
-
-//         res.cookie("access_token", token, {
-//             httpOnly: true,
-//             secure: true,
-//             sameSite: "None", // Required for cross-origin cookies
-//             domain: ".vercel.app", // Adjust this to your custom domain if needed
-//           })
-//           .status(200)
-//           .json({
-//             success: true,
-//             message: "Logged in successfully",
-//             rest,
-//           });
-//           console.log('Cookie set:', token); 
-          
-//     } catch (error) {
-//         next(error);
-//     }
-// }
-
 export const signin = async (req, res, next) => {
     const { email, password } = req.body;
 
@@ -90,32 +46,27 @@ export const signin = async (req, res, next) => {
         if (!isPasswordValid) {
             return next(errorHndler(401, 'Invalid credentials'));
         }
-
-        const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
 
         const { password: pass, ...rest } = validUser._doc;
 
-        res.cookie('access_token', token, {
+        // res.cookie("access_token", token, { httpOnly: true, }).status(200).json({
+        //     success: true,
+        //     message: "logged in successfully",
+        //     rest,
+        // });
+
+        res.cookie("access_token", token, {
             httpOnly: true,
             secure: true,
-            sameSite: 'None',
-            path: '/', // Ensure cookies apply to all routes
-            domain: 'note-app-notetify.vercel.app', // Match exactly without wildcard
-        });
-
-        console.log('Token generated:', token); // Ensure the token is actually being created
-
-        res.status(200).json({
-            success: true,
-            message: 'Logged in successfully',
-            user: rest,
-        });
-
+            sameSite: "Lax",
+          })
+          .status(200)
+          .json({ success: true, message: "Logged in successfully" });  
     } catch (error) {
         next(error);
     }
-};
-
+}
 
 export const signout = async (req, res, next) => {
     try {
