@@ -14,10 +14,10 @@ app.use(express.json());
 app.use(cookieParser());
 // app.use(cors({origin: [process.env.FRONTEND_URL, "http://localhost:5173"], credentials: true}));
 app.use(cors({
-  origin: process.env.FRONTEND_URL, // Ensure this matches exactly
+  origin: ['https://note-app-notetify.vercel.app', 'http://localhost:5173'],
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.get('/api/test', (req, res) => {
