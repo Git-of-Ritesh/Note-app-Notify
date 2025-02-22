@@ -14,11 +14,16 @@ app.use(express.json());
 app.use(cookieParser());
 // app.use(cors({origin: [process.env.FRONTEND_URL, "http://localhost:5173"], credentials: true}));
 app.use(cors({
-  origin: process.env.FRONTEND_URL, // Ensure this points to your deployed frontend
+  origin: process.env.FRONTEND_URL, // Ensure this matches exactly
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Add OPTIONS for preflight requests
+  methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
+
+app.get('/api/test', (req, res) => {
+  res.json({ message: "CORS is working!" });
+});
+
 
 
 app.listen(3000, () => {
