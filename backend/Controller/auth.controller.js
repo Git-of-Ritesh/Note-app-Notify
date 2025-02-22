@@ -3,79 +3,74 @@ import bcryptjs from 'bcryptjs';
 import { errorHndler } from '../utils/error.js';
 import jwt from 'jsonwebtoken';
 
+// User signup
 export const signup = async (req, res, next) => {
-    const { username, email, password } = req.body;
-
-    const isValidUser = await User.findOne({ email });
-
-    if (isValidUser) {
-        return next(errorHndler(400, 'User already exists'));
-    }
-
-    const hashedPassword = bcryptjs.hashSync(password, 10);
-
-    const newUser = new User({
-        username,
-        email,
-        password: hashedPassword
-    });
-
     try {
+        const { username, email, password } = req.body;
+
+        // Check if the user already exists
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return next(errorHndler(400, 'User already exists'));
+        }
+
+        // Hash password
+        const hashedPassword = await bcryptjs.hash(password, 10);
+
+        // Create and save the new user
+        const newUser = new User({ username, email, password: hashedPassword });
         await newUser.save();
-        return res.status(201).json({
-            success: true,
-            message: 'User created successfully'
-        });
+
+        res.status(201).json({ success: true, message: 'User created successfully' });
     } catch (error) {
-        return next(errorHndler(500, 'Internal Server Error'));
+        next(errorHndler(500, 'Failed to create user'));
     }
-}
+};
 
+// User signin (login)
 export const signin = async (req, res, next) => {
-    const { email, password } = req.body;
-
     try {
-        const validUser = await User.findOne({ email });
+        const { email, password } = req.body;
 
-        if (!validUser) {
+        // Find user by email
+        const user = await User.findOne({ email });
+        if (!user) {
             return next(errorHndler(404, 'User not found'));
         }
 
-        const isPasswordValid = bcryptjs.compareSync(password, validUser.password);
-
-        if (!isPasswordValid) {
+        // Compare hashed password
+        const isPasswordCorrect = await bcryptjs.compare(password, user.password);
+        if (!isPasswordCorrect) {
             return next(errorHndler(401, 'Invalid credentials'));
         }
-        const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
 
-        const { password: pass, ...rest } = validUser._doc;
+        // Generate JWT token
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
-        // res.cookie("access_token", token, { httpOnly: true, }).status(200).json({
-        //     success: true,
-        //     message: "logged in successfully",
-        //     rest,
-        // });
+        // Remove password from the response
+        const { password: _, ...userData } = user._doc;
 
-        res.cookie("access_token", token, {
+        // Set cookie with token
+        res.cookie('access_token', token, {
             httpOnly: true,
             secure: true,
-            sameSite: "None",
-          })
-          .status(200)
-          .json({ success: true, message: "Logged in successfully" });  
+            sameSite: 'None',
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        }).status(200).json({ success: true, message: 'Logged in successfully', user: userData });
     } catch (error) {
-        next(error);
+        next(errorHndler(500, 'Failed to sign in'));
     }
-}
+};
 
-export const signout = async (req, res, next) => {
+// User signout (logout)
+export const signout = (req, res, next) => {
     try {
-        res.clearCookie("access_token").status(200).json({
-            success: true,
-            message: "Logged out successfully"
-        });
-
+        res.clearCookie('access_token', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None',
+        }).status(200).json({ success: true, message: 'Logged out successfully' });
     } catch (error) {
-        next(error);
+        next(errorHndler(500, 'Failed to log out'));
     }
-}
+};

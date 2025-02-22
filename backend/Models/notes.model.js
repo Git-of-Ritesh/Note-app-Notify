@@ -1,21 +1,22 @@
-import e from "express";
 import mongoose from "mongoose";
 
 const noteSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true,
-        unique: true,
+        required: [true, "Title is required"],
+        trim: true,
+        maxlength: [100, "Title cannot exceed 100 characters"],
     },
     content: {
         type: String,
-        required: true,
+        required: [true, "Content is required"],
+        trim: true,
     },
     tags: {
         type: [String],
         default: [],
     },
-    isPinned:{
+    isPinned: {
         type: Boolean,
         default: false,
     },
@@ -28,11 +29,17 @@ const noteSchema = new mongoose.Schema({
         default: null,
     },
     userId: {
-        type: String,
-        required: true,
-    }
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: [true, "User ID is required"],
+    },
 });
 
-const notes = mongoose.model('Notes', noteSchema);
+// Add indexes for faster queries
+noteSchema.index({ userId: 1 });
+noteSchema.index({ isPinned: 1 });
+noteSchema.index({ deletedAt: 1 });
 
-export default notes;
+const Note = mongoose.model("Note", noteSchema);
+
+export default Note;

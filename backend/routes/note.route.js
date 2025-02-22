@@ -1,20 +1,24 @@
 import express from 'express';
-import { addNote, editNote, getAllNotes, deleteNote, moveToTrash, restoreNote, trashNotes, getPinnedNotes } from '../Controller/note.controller.js';
+import * as noteController from '../Controller/note.controller.js';
 import { verifyToken } from '../utils/verifyUser.js';
-
-
-
 
 const router = express.Router();
 
-router.post("/add-note", verifyToken, addNote);
-router.post("/edit-note/:noteId", verifyToken, editNote);
-router.get("/all", verifyToken, getAllNotes);
-router.delete("/delete-note/:noteId", verifyToken, deleteNote);
-router.put("/move-to-trash/:noteId", verifyToken, moveToTrash);
-router.put("/restore-note/:noteId", verifyToken, restoreNote);
-router.get("/trash", verifyToken, trashNotes);
-router.get("/pinned", verifyToken, getPinnedNotes);
+// Define routes with token verification
+router.use(verifyToken);
 
+// CRUD operations
+router.post('/add-note', noteController.addNote);
+router.post('/edit-note/:noteId', noteController.editNote);
+router.delete('/delete-note/:noteId', noteController.deleteNote);
 
-export default router; 
+// Note status updates
+router.put('/move-to-trash/:noteId', noteController.moveToTrash);
+router.put('/restore-note/:noteId', noteController.restoreNote);
+
+// Get notes
+router.get('/all', noteController.getAllNotes);
+router.get('/trash', noteController.trashNotes);
+router.get('/pinned', noteController.getPinnedNotes);
+
+export default router;
