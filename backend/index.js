@@ -11,10 +11,7 @@ import cors from 'cors';
 dotenv.config();
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => console.log('Connected to MongoDB'))
+mongoose.connect(process.env.MONGO_URI).then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
 const app = express();
@@ -26,18 +23,9 @@ app.use(compression());
 app.use(helmet());
 
 // CORS setup
-const allowedOrigins = ['https://note-app-notetify.vercel.app'];
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  origin: process.env.FRONTEND_URL,
+  credentials: true
 }));
 
 // Routes

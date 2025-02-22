@@ -45,6 +45,7 @@ export const signin = async (req, res, next) => {
         }
 
         // Generate JWT token
+        console.log('JWT_SECRET:', process.env.JWT_SECRET);
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
         // Remove password from the response
@@ -53,8 +54,8 @@ export const signin = async (req, res, next) => {
         // Set cookie with token
         res.cookie('access_token', token, {
             httpOnly: true,
-            secure: true,
-            sameSite: 'None',
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         }).status(200).json({ success: true, message: 'Logged in successfully', user: userData });
     } catch (error) {

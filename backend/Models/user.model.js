@@ -35,8 +35,6 @@ userSchema.pre("save", async function (next) {
     next();
 });
 
-// Index for better query performance
-userSchema.index({ email: 1 });
 
 const User = mongoose.model("User", userSchema);
 
