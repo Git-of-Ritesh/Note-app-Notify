@@ -59,7 +59,7 @@ export const signin = async (req, res, next) => {
         res.cookie("access_token", token, {
             httpOnly: true,
             secure: true,
-            sameSite: "none", // Required for cross-origin cookies
+            sameSite: "None", // Required for cross-origin cookies
             domain: ".vercel.app", // Adjust this to your custom domain if needed
           })
           .status(200)
