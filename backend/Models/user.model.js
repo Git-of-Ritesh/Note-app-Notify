@@ -28,13 +28,6 @@ const userSchema = new mongoose.Schema({
     },
 });
 
-// Add a pre-save hook for password hashing (optional, if using bcrypt later)
-userSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) return next();
-    // Hash password logic goes here (if implemented)
-    next();
-});
-
 
 const User = mongoose.model("User", userSchema);
 

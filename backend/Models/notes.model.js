@@ -29,7 +29,7 @@ const noteSchema = new mongoose.Schema({
         default: null,
     },
     userId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: "User",
         required: [true, "User ID is required"],
     },

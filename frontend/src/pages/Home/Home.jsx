@@ -30,7 +30,7 @@ const Home = () => {
     if (currentUser == null) {
       navigate('/Login')
     } else {
-      setUserInfo(currentUser?.rest)
+      setUserInfo(currentUser?.user)
       getAllNotes()
     }
   }, [])
@@ -44,7 +44,7 @@ const Home = () => {
         console.log(res.data)
       }
       else {
-        setAllNotes(res.data.note.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+        setAllNotes(res.data.notes.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
         // setAllNotes(res.data.note || [])
       }
 
@@ -62,7 +62,7 @@ const Home = () => {
         console.log(res.data)
       }
       else {
-        setAllNotes(res.data.note.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+        setAllNotes(res.data.notes.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
         // setAllNotes(res.data.note || [])
       }
 
@@ -80,7 +80,7 @@ const Home = () => {
         console.log(res.data)
       }
       else {
-        setAllNotes(res.data.note.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+        setAllNotes(res.data.notes.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
         // setAllNotes(res.data.note || [])
       }
 

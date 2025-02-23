@@ -16,7 +16,6 @@ mongoose.connect(process.env.MONGO_URI).then(() => console.log('Connected to Mon
 
 const app = express();
 
-// Middleware
 app.use(express.json({ limit: '10kb' })); 
 app.use(cookieParser());
 app.use(compression());
@@ -31,6 +30,7 @@ app.use(cors({
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/note', noteRoutes);
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {
