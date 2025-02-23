@@ -53,6 +53,8 @@ export const signin = async (req, res, next) => {
         // Set cookie with token
         res.cookie('access_token', token, {
             httpOnly: true,
+            sameSite:'none',
+            secure: true
         }).status(200).json({ success: true, message: 'Logged in successfully', user: userData });
     } catch (error) {
         next(errorHndler(500, 'Failed to sign in'));
