@@ -56,7 +56,7 @@ const Login = () => {
     };
 
     return (
-        <div className='flex justify-between bg-gray-100 h-screen py-14 px-28'>
+        <div className='flex justify-between bg-gray-100 h-dvh  py-14 px-28'>
             <div className='flex flex-col justify-center items-center h-full w-full '>
 
                 <div className='flex justify-center items-center gap-2 mb-6'>
@@ -66,7 +66,7 @@ const Login = () => {
                     </span>
                 </div>
                 {/* Right Side */}
-                <div className='flex border flex-col rounded-xl shadow-md bg-white justify-center items-center  py-5 px-10'>
+                <div className='flex border flex-col rounded-xl shadow-md bg-white justify-center items-center sm:px-10 py-5 px-6'>
 
                     {/* header div */}
                     <div className='flex flex-col justify-between items-center'>
