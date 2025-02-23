@@ -53,17 +53,17 @@ const Signup = () => {
   };
 
   return (
-    <div className='flex justify-between bg-gray-100 h-screen py-14 px-28'>
+    <div className='flex justify-between bg-gray-100 h-dvh py-14 px-28'>
       <div className='flex flex-col justify-center items-center h-full w-full '>
 
         <div className='flex justify-center items-center gap-2 mb-6'>
-          <img className='size-8 rounded-lg' src={Logo4} alt="Logo image" />
+          <img className='sm:size-8 size-7 rounded-lg' src={Logo4} alt="Logo image" />
           <span className="text-2xl font-Logo font-semibold">
             Notify
           </span>
         </div>
         {/* Right Side */}
-        <div className='flex border flex-col rounded-xl shadow-md bg-white justify-center items-center  py-5 px-10'>
+        <div className='flex border flex-col rounded-xl shadow-md bg-white justify-center items-center sm:px-10 py-5 px-6'>
 
           {/* header div */}
           <div className='flex flex-col justify-between items-center'>
@@ -73,7 +73,7 @@ const Signup = () => {
               <h1 className="font-medium text-xl tracking-normal">
                 Welcome
               </h1>
-              <p className="text-center text-[#7C7B7B] my-2 text-sm">Enter your details to have your Notify account</p>
+              <p className="text-center text-[#7C7B7B] my-2 sm:text-sm text-xs">Enter your details to have your Notify account</p>
             </div>
 
           </div>
@@ -82,14 +82,14 @@ const Signup = () => {
           <div className='flex flex-col mt-5 gap-3'>
             <div>
               <h3 className='text-sm'>Name</h3>
-              <input className='border w-80 rounded-lg h-7 p-4 mt-2 text-sm ' type="text"
+              <input className='border w-72 sm:w-80 rounded-lg h-7 p-4 mt-2 text-sm ' type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)} placeholder='Name' />
             </div>
 
             <div >
               <h3 className='text-sm'>Email</h3>
-              <input className='border w-80 rounded-lg h-7 p-4 mt-2 text-sm ' type="text"
+              <input className='border w-72 sm:w-80 rounded-lg h-7 p-4 mt-2 text-sm ' type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)} placeholder='m@example.com' />
             </div>
@@ -99,7 +99,7 @@ const Signup = () => {
                 <h3 className='text-sm'>Password</h3>
                 <h3 className='text-sm'>Forgot password</h3>
               </div>
-              <input className='border w-80 rounded-lg h-7 p-4 mt-2 text-sm' type="password"
+              <input className='border w-72 sm:w-80 rounded-lg h-7 p-4 mt-2 text-sm' type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)} placeholder='Password' />
             </div>
@@ -108,20 +108,20 @@ const Signup = () => {
             {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
 
 
-            <button onClick={handleSubmit} className=' flex justify-center items-center w-80 rounded-lg h-7 p-4 bg-black text-white font-normal mt-2 '>Sign up</button>
+            <button onClick={handleSubmit} className=' flex justify-center items-center w-72 sm:w-80 rounded-lg h-7 p-4 bg-black text-white font-normal mt-2 '>Sign up</button>
 
             <div className='flex justify-center items-center gap-3'>
-              <hr className='w-24 border-[#A09F9F] border-1' />
+              <hr className='w-20 sm:w-24 border-[#A09F9F] border-1' />
               <span className='text-gray-500 text-sm font-light tracking-tight'>Or Signup with</span>
-              <hr className='w-24 border-[#A09F9F] border-1' />
+              <hr className='w-20 sm:w-24 border-[#A09F9F] border-1' />
             </div>
 
             <div className='flex flex-col justify-center items-center gap-3'>
-              <button className='flex gap-2 justify-center items-center border border-gray-300 w-80 rounded-lg h-7 p-4 text-sm hover:bg-gray-100'>
+              <button className='flex gap-2 justify-center items-center border border-gray-300 w-72 sm:w-80 rounded-lg h-7 p-4 text-sm hover:bg-gray-100'>
                 <FcGoogle className='size-5' />Signup with Google
               </button>
 
-              <button className='flex gap-2 justify-center items-center border border-gray-300 w-80 rounded-lg h-7 p-4 text-sm hover:bg-gray-100'>
+              <button className='flex gap-2 justify-center items-center border border-gray-300 w-72 sm:w-80 rounded-lg h-7 p-4 text-sm hover:bg-gray-100'>
                 <GrApple className='size-5' />Signup with apple
               </button>
             </div>
