@@ -101,7 +101,7 @@ const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActi
                     <img src={profile} alt="profile" className="w-10 h-8 rounded-md object-cover" />
                     <div className='flex flex-col sm:hidden'>
                         <span className="font-medium text-gray-700">{userInfo?.username}</span>
-                        <span className="font-normal text-xs -mt-1 text-gray-950">{userInfo.email}</span>
+                        <span className="font-normal text-xs -mt-1 text-gray-950">{userInfo?.email}</span>
                     </div>
                 </div>
 
