@@ -14,6 +14,8 @@ const Home = () => {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
   const [noteOpen, setNoteOpen] = useState(true);
+  const [openSidebarMobile, setOpenSidebarMobile] = useState(false);
+
 
   const handleOpenEditor = (note = null) => {
     setIsCreateOpen(true);
@@ -53,8 +55,8 @@ const Home = () => {
     }
   }
 
-//get trash notes
-  const getTrashNotes = async() => {
+  //get trash notes
+  const getTrashNotes = async () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/trash`, { withCredentials: true })
 
@@ -90,17 +92,22 @@ const Home = () => {
   }
 
   return (
-    <div className='bg-gray-50 w-screen h-screen'>
+    <div className='bg-gray-50 w-screen h-dvh sm:h-screen'>
       <div className='flex w-full h-full overflow-hidden'>
-        <div className='hidden sm:block'>
-          <Sidebar getAllNotes={getAllNotes} getTrashNotes={getTrashNotes} userInfo={userInfo} getPinnedNotes={getPinnedNotes} activeTab={activeTab} setActiveTab={setActiveTab} />
+
+        <div className={`transform transition-transform duration-300  ${openSidebarMobile ? 'z-50 absolute sm:relative sm:left-auto left-0 h-full translate-x-0' : '-translate-x-full   hidden'} sm:translate-x-0 sm:block`}>
+          <Sidebar getAllNotes={getAllNotes} getTrashNotes={getTrashNotes} userInfo={userInfo} getPinnedNotes={getPinnedNotes} activeTab={activeTab} setActiveTab={setActiveTab} openSidebarMobile={openSidebarMobile} />
         </div>
 
-        <div className={`transition-all duration-[0.4s] ease-in-out ${noteOpen ? "max-w-screen sm:max-w-[400px]" : "max-w-[0px]"}`}>
-          <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor} isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} getTrashNotes={getTrashNotes} closeEditor={() => { setIsCreateOpen(false) }} activeTab={activeTab} noteOpen={noteOpen} />
+        {openSidebarMobile && <div onClick={() => setOpenSidebarMobile(false)}
+          className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-40 sm:hidden">
+        </div>}
+
+        <div className={`transition-all  duration-[0.4s] ease-in-out ${noteOpen ? "max-w-screen sm:max-w-[400px]" : "max-w-[0px]"}`}>
+          <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor} isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} getTrashNotes={getTrashNotes} closeEditor={() => { setIsCreateOpen(false) }} activeTab={activeTab} noteOpen={noteOpen} setOpenSidebarMobile={setOpenSidebarMobile} />
         </div>
 
-        <div className={`w-full h-full p-7 hidden sm:block transition-all ${isCreateOpen ? 'hidden' : 'block'}`}>
+        <div className={`w-full h-full p-7  transition-all ${isCreateOpen ? 'sm:hidden' : 'hidden sm:block'}`}>
           <div className='flex flex-col h-full justify-center items-center '>
 
             <div className='flex justify-center items-center size-28 rounded-xl shadow-lg drop-shadow-lg border'>

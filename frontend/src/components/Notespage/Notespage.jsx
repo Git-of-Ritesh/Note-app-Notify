@@ -3,9 +3,10 @@ import { FiPlus } from "react-icons/fi"
 import Notecard from '../Notecard/Notecard'
 import axios from 'axios'
 import Searchbar from '../searchbar/searchbar'
+import logo from '../../assets/logo/logo4.png'
 
 
-const Notespage = ({getAllNotes, getTrashNotes, onNewNote, allNotes, isCreateOpen, onEditNote, closeEditor, activeTab, noteOpen }) => {
+const Notespage = ({getAllNotes, getTrashNotes, onNewNote, allNotes, isCreateOpen, onEditNote, closeEditor, activeTab, noteOpen, setOpenSidebarMobile }) => {
   const [searchQuery, setSearchQuery] = useState("")
 
   const [delayedOverflow, setDelayedOverflow] = useState(false);
@@ -110,6 +111,7 @@ useEffect(() => {
       <div className='flex flex-col w-full border-b justify-between gap-y-3 p-4'>
 
         <div className='flex w-full justify-between'>
+           <img src={logo} onClick={() => setOpenSidebarMobile((prev) => !prev)} alt="Logo" className="block sm:hidden w-7 rounded-lg" />
           <h1 className='font-instumrntalSans font-normal text-lg'>{renderTabs()}</h1>
           <button
             onClick={onNewNote}

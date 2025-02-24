@@ -25,7 +25,7 @@ const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActi
             dispatch(signOutStart())
 
             const res = await axios.post(
-                `${import.meta.env.VITE_API_BACKENDBASE_URL}/api/auth/signout`, 
+                `${import.meta.env.VITE_API_BACKENDBASE_URL}/api/auth/signout`,
                 {}, // Empty body
                 { withCredentials: true } // Config object
             );
@@ -43,26 +43,28 @@ const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActi
     }
 
     return (
-        <aside className="h-full bg-zinc-100 w-14 flex flex-col p-2 border-r border-gray-300 justify-between">
+        <aside className="h-full bg-zinc-100 w-56 sm:w-14 flex flex-col p-2 border-r border-gray-300 justify-between">
 
             <div className='space-y-8'>
                 {/* side bar logo */}
-                <div className="flex mt-3 items-center justify-center">
-                    <img src={logo} alt="Logo" className="w-8 rounded-lg" />
+                <div className="flex mt-3 gap-x-3 items-center sm:justify-center">
+                    <img src={logo} alt="Logo" className="w-7 sm:w-8 rounded-lg" />
+                    <h1 className='block sm:hidden'>Notify</h1>
                 </div>
 
 
                 <div className="flex flex-col gap-0">
-                    <button className="relative group flex items-center justify-center  px-2 py-2 font-semibold rounded-lg bg-transparent text-[#575656] hover:bg-gray-200 transition-all"
+                    <button className="relative group flex items-center sm:justify-center  px-2 py-2 font-semibold rounded-lg bg-transparent text-[#575656] hover:bg-gray-200 transition-all"
                         onClick={() => {
                             setActiveTab("all");
                             getAllNotes();
                         }}><div className="absolute left-full top-1/2 ml-2 w-20 text-sm font-normal z-50 bg-gray-950 border text-gray-50 p-1 rounded-lg shadow-lg opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 -translate-y-1/2 pointer-events-none">
                             All notes
                         </div>
-                        <FiBookOpen className='size-4' /></button>
+                        <FiBookOpen className='size-4' />
+                        <p className='block sm:hidden ml-6 text-sm font-normal'>All notes</p></button>
 
-                    <button className="relative group flex items-center justify-center  px-2 py-2  rounded-lg bg-transparent text-[#575656] hover:bg-gray-200 transition-all"
+                    <button className="relative group flex items-center sm:justify-center  px-2 py-2  rounded-lg bg-transparent text-[#575656] hover:bg-gray-200 transition-all"
                         onClick={() => {
                             setActiveTab("pinned");
                             getPinnedNotes();
@@ -70,15 +72,17 @@ const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActi
                     ><div className="absolute left-full top-1/2 ml-2 w-20 text-sm font-normal z-50 bg-gray-950 border text-gray-50 p-1 rounded-lg shadow-lg opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 -translate-y-1/2 pointer-events-none">
                             Pinned
                         </div>
-                        <FiBookmark className='size-4' /></button>
+                        <FiBookmark className='size-4' />
+                        <p className='block sm:hidden ml-6 text-sm font-normal'>Pinned Notes</p></button>
 
-                    <button className='relative group flex items-center justify-center gap-5 w-full px-2 py-2 font-semibold text-sm text-[#575656] bg-transparent hover:bg-gray-200 rounded-lg transition-all'
+                    <button className='relative group flex items-center sm:justify-center w-full px-2 py-2 font-semibold text-sm text-[#575656] bg-transparent hover:bg-gray-200 rounded-lg transition-all'
                         onClick={() => {
                             setActiveTab("trash");
                             getTrashNotes();
                         }}>
                         <div className='absolute left-full top-1/2 ml-2 w-20 text-sm font-normal z-50 bg-gray-950 border text-gray-50 p-1 rounded-lg shadow-lg opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 -translate-y-1/2 pointer-events-none' >Trash</div>
-                        <FiTrash2 className='size-4' /></button>
+                        <FiTrash2 className='size-4' />
+                        <p className='block sm:hidden ml-6 text-sm font-normal'>Trash Notes</p></button>
 
                 </div>
 
@@ -94,7 +98,11 @@ const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActi
                     className="flex items-center gap-3  rounded-md cursor-pointer hover:bg-gray-100 transition"
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                 >
-                    <img src={profile} alt="profile" className="w-14 h-8 rounded-md object-cover" />
+                    <img src={profile} alt="profile" className="w-10 h-8 rounded-md object-cover" />
+                    <div className='flex flex-col sm:hidden'>
+                        <span className="font-medium text-gray-700">{userInfo?.username}</span>
+                        <span className="font-normal text-xs -mt-1 text-gray-950">{userInfo.email}</span>
+                    </div>
                 </div>
 
                 {dropdownOpen && (
