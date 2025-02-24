@@ -117,7 +117,7 @@ const Login = () => {
                                 <FcGoogle className='size-5' />Login with Google
                             </button>
 
-                            <button className='flex gap-2 justify-center items-center border border-gray-300 w-72 sm:w-80rounded-lg h-7 p-4 text-sm hover:bg-gray-100'>
+                            <button className='flex gap-2 justify-center items-center border border-gray-300 w-72 sm:w-80 rounded-lg h-7 p-4 text-sm hover:bg-gray-100'>
                                 <GrApple className='size-5' />Login with apple
                             </button>
                         </div>
