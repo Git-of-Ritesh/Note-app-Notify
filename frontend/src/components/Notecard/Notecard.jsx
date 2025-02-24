@@ -12,7 +12,7 @@ const Notecard = ({ title, content, date, tags, isPinned, onClick, onTrash, onDe
 
 
     return (
-        <div className='w-80 min-w-0 h-fit border-b group' onClick={onClick}>
+        <div className='sm:w-80 w-dvw min-w-0 h-fit border-b group' onClick={onClick}>
 
             <div className="flex justify-between flex-col hover:bg-gray-100 w-full h-40 p-4">
 

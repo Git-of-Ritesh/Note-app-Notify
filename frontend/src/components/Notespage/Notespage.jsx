@@ -105,7 +105,7 @@ useEffect(() => {
 
 
   return (
-    <div className='w-80 h-screen border-r'>
+    <div className='sm:w-80 w-dvw h-dvh sm:h-screen border-r'>
 
       <div className='flex flex-col w-full border-b justify-between gap-y-3 p-4'>
 

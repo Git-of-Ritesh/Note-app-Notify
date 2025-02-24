@@ -92,15 +92,15 @@ const Home = () => {
   return (
     <div className='bg-gray-50 w-screen h-screen'>
       <div className='flex w-full h-full overflow-hidden'>
-        <div>
+        <div className='hidden sm:block'>
           <Sidebar getAllNotes={getAllNotes} getTrashNotes={getTrashNotes} userInfo={userInfo} getPinnedNotes={getPinnedNotes} activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
 
-        <div className={`transition-all duration-[0.4s] ease-in-out ${noteOpen ? "max-w-[400px]" : "max-w-[0px]"}`}>
+        <div className={`transition-all duration-[0.4s] ease-in-out ${noteOpen ? "max-w-screen sm:max-w-[400px]" : "max-w-[0px]"}`}>
           <Notespage allNotes={allNotes} onNewNote={() => handleOpenEditor()} onEditNote={handleOpenEditor} isCreateOpen={isCreateOpen} getAllNotes={getAllNotes} getTrashNotes={getTrashNotes} closeEditor={() => { setIsCreateOpen(false) }} activeTab={activeTab} noteOpen={noteOpen} />
         </div>
 
-        <div className={`w-full h-full p-7 transition-all ${isCreateOpen ? 'hidden' : 'block'}`}>
+        <div className={`w-full h-full p-7 hidden sm:block transition-all ${isCreateOpen ? 'hidden' : 'block'}`}>
           <div className='flex flex-col h-full justify-center items-center '>
 
             <div className='flex justify-center items-center size-28 rounded-xl shadow-lg drop-shadow-lg border'>
