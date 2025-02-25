@@ -95,7 +95,7 @@ const Home = () => {
     <div className='bg-gray-50 w-screen h-dvh sm:h-screen'>
       <div className='flex w-full h-full overflow-hidden'>
 
-        <div className={`transform transition-transform duration-300  ${openSidebarMobile ? 'z-50 absolute sm:relative sm:left-auto left-0 h-full translate-x-0' : '-translate-x-full   hidden'} sm:translate-x-0 sm:block`}>
+        <div className={`transform transition-transform duration-300 absolute sm:relative sm:left-auto left-0 h-full ${openSidebarMobile ? 'z-50  translate-x-0' : '-translate-x-full '} sm:translate-x-0 sm:block`}>
           <Sidebar getAllNotes={getAllNotes} getTrashNotes={getTrashNotes} userInfo={userInfo} getPinnedNotes={getPinnedNotes} activeTab={activeTab} setActiveTab={setActiveTab} openSidebarMobile={openSidebarMobile} />
         </div>
 
@@ -121,7 +121,8 @@ const Home = () => {
           </div>
         </div>
 
-        <div className={`w-full pb-0 transition-all ${isCreateOpen ? 'block' : 'hidden'}`}>
+        <div className={`transition-all duration-300 ease-in-out z-50 ${isCreateOpen ? 'translate-x-0 sm:block' : 'translate-x-full sm:hidden'} fixed top-0 right-0 w-full sm:static sm:translate-x-0 sm:w-full sm:h-full sm:shadow-none sm:transition-none`}
+        >
           <CreateNote onClose={() => { setIsCreateOpen(false); setSelectedNote(null); }} getAllNotes={getAllNotes} selectedNote={selectedNote} noteClose={() => { setNoteOpen(!noteOpen) }} activeTab={activeTab} />
         </div>
       </div>

@@ -58,7 +58,7 @@ const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActi
                         onClick={() => {
                             setActiveTab("all");
                             getAllNotes();
-                        }}><div className="absolute left-full top-1/2 ml-2 w-20 text-sm font-normal z-50 bg-gray-950 border text-gray-50 p-1 rounded-lg shadow-lg opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 -translate-y-1/2 pointer-events-none">
+                        }}><div className="absolute left-full top-1/2 ml-2 w-20 text-sm font-normal z-50 bg-gray-950 border text-gray-50 p-1 rounded-lg shadow-lg opacity-0 translate-x-2 sm:group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 -translate-y-1/2 pointer-events-none">
                             All notes
                         </div>
                         <FiBookOpen className='size-4' />
@@ -69,7 +69,7 @@ const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActi
                             setActiveTab("pinned");
                             getPinnedNotes();
                         }}
-                    ><div className="absolute left-full top-1/2 ml-2 w-20 text-sm font-normal z-50 bg-gray-950 border text-gray-50 p-1 rounded-lg shadow-lg opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 -translate-y-1/2 pointer-events-none">
+                    ><div className="absolute left-full top-1/2 ml-2 w-20 text-sm font-normal z-50 bg-gray-950 border text-gray-50 p-1 rounded-lg shadow-lg opacity-0 translate-x-2 sm:group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 -translate-y-1/2 pointer-events-none">
                             Pinned
                         </div>
                         <FiBookmark className='size-4' />
@@ -80,7 +80,7 @@ const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActi
                             setActiveTab("trash");
                             getTrashNotes();
                         }}>
-                        <div className='absolute left-full top-1/2 ml-2 w-20 text-sm font-normal z-50 bg-gray-950 border text-gray-50 p-1 rounded-lg shadow-lg opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 -translate-y-1/2 pointer-events-none' >Trash</div>
+                        <div className='absolute left-full top-1/2 ml-2 w-20 text-sm font-normal z-50 bg-gray-950 border text-gray-50 p-1 rounded-lg shadow-lg opacity-0 translate-x-2 sm:group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 -translate-y-1/2 pointer-events-none' >Trash</div>
                         <FiTrash2 className='size-4' />
                         <p className='block sm:hidden ml-6 text-sm font-normal'>Trash Notes</p></button>
 
