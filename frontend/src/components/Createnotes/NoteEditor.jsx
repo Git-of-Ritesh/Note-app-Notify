@@ -245,7 +245,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
   }
 
   return (
-    <div className="flex flex-col w-full h-dvh sm:h-screen bg-white  rounded-3xl ">
+    <div className="flex flex-col w-full min-h-dvh sm:h-screen bg-white  rounded-3xl ">
 
       {/* Top section of editor */}
       <div className="flex justify-between items-center border-b">
