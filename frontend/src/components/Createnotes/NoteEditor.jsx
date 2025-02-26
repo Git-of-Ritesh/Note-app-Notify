@@ -251,31 +251,31 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
   return (
     <div className="flex flex-col w-full h-dvh sm:h-screen bg-white  rounded-3xl ">
 
+      {/* Top section of editor */}
       <div className="flex justify-between items-center border-b">
+
+        {/* Notepage open/close button & Breadcrumbs */}
         <div className="flex items-center gap-x-3 px-4 py-4">
           <button className="hidden sm:block hover:bg-gray-200 rounded-md p-1" onClick={noteClose}><FiSidebar /></button>
           <div className="sm:border-l px-3">
             <Breadcrumbs selectedNote={selectedNote} confirmTab={confirmTab} />
           </div>
         </div>
+
         <div className="flex px-2">
           {/* maximaize button */}
           <button onClick={() => setMaximaize(!maximaize)} className="hidden sm:block p-2 rounded-md text-gray-950 hover:bg-gray-200">{maximaize ? <FiMinimize2 /> : <FiMaximize2 />}</button>
 
           {/* mobile option button */}
-          <button onClick={() => setMobileOptionButtonOpen((prev) => !prev)}
-            className="block sm:hidden relative"><PiDotsThreeCircleVertical className="size-4" />
-
+          <button onClick={() => setMobileOptionButtonOpen((prev) => !prev)} className="block sm:hidden relative"><PiDotsThreeCircleVertical className="size-4" />
             {mobileOptionButtonOpen && (
               <div className="absolute z-50 flex-col -right-[200%] top-full mt-1 bg-gray-50 border border-gray-300 shadow-md rounded-lg p-2 ">
-
                 <button className="flex gap-x-2 px-2 py-1 rounded-md hover:bg-gray-200" onClick={togglePin}>
                   {isPinned ? <TiPin className="size-5" /> : <TiPinOutline className="size-5" />}
                   Pin</button>
                 <button className="flex gap-x-2 px-2 py-1 rounded-md hover:bg-gray-200" onClick={() => (activeTab === 'trash' ? confirmDelete() : trashNote())}  ><FiTrash className="size-4" />Trash</button>
                 <button className="flex gap-x-2 items-center px-2 py-1 gap-2 text-sm font-light rounded-md text-white bg-gray-950"
                   onClick={selectedNote ? editNote : addNote}  ><FiSave className="size-4" /> {selectedNote ? "Update" : "Save"}</button>
-
               </div>
             )}
           </button>
@@ -289,64 +289,8 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
 
       {/* Toolbar */}
       <div className="flex items-center justify-around sm:justify-between border-b px-3 py-2 ">
-        <div className="flex gap-2">
 
-          {/* mobile all buttons */}
-          <button  onClick={() => setAaButtonOpen(!aaButtonOpen)} className="block sm:hidden relative" ><PiTextAa className="size-5" />
-
-            {aaButtonOpen && (
-              <div className="absolute z-50 flex-col space-y-2 -left-[150%] top-full mt-5 bg-white border border-gray-300 shadow-md rounded-lg p-2 ">
-
-                <div className="flex">
-                  <button onClick={() => editorRef.current?.toggleHeadingL1()} className="px-3 rounded-md text-2xl">Heading</button>
-
-                  <button onClick={() => editorRef.current?.toggleHeadingL2()} className="px-3 rounded-md text-xl">Body</button>
-
-                  <button onClick={() => editorRef.current?.toggleHeadingL3()} className="px-3 rounded-md text-lg">text</button>
-                </div>
-
-                <div className="flex justify-between">
-                  <div className="bg-gray-200 rounded-md">
-                    <button onClick={toggleHandleBold} className={`py-2 px-3  border-r border-gray-400  ${isBold ? "bg-gray-300" : ""}`} ><FiBold className="size-4" /></button>
-
-                    <button onClick={toggleHandleItalic} className={`py-2 px-3 border-r border-gray-400  ${isItalic ? "bg-gray-300" : ""}`}><FiItalic className="size-4" /></button>
-
-                    <button onClick={() => editorRef.current?.toggleUnderline()} className="py-2 px-3 rounded-md "><FiUnderline className="size-4" /></button>
-                  </div>
-
-                  <button onClick={() => editorRef.current?.toggleBulletList()} className="p-2 rounded-md bg-gray-200"><FiList className="size-4" /></button>
-
-                  <div className="bg-gray-200 rounded-md">
-                    <button onClick={() => { console.log("toggled"), editorRef.current?.toggleHighlight() }} className="p-2 border-r border-gray-400 "><PiHighlighterFill className="size-4" /></button>
-
-                    <button onClick={() => editorRef.current?.toggleBlockquote()} className="p-2 "><BsBlockquoteLeft className="size-4" /></button>
-                  </div>
-
-                </div>
-
-                <div className="flex justify-between">
-
-                  <div className="bg-gray-200 rounded-md">
-                    <button onClick={() => editorRef.current?.setTextAlignLeft()} className="py-2 px-3 border-r border-gray-400 "><FiAlignLeft className="size-4" /></button>
-
-                    <button onClick={() => editorRef.current?.setTextAlignCenter()} className="py-2 px-3 border-r border-gray-400 "><FiAlignCenter className="size-4" /></button>
-
-                    <button onClick={() => editorRef.current?.setTextAlignRight()} className="py-2 px-3 rounded-md "><FiAlignRight className="size-4" /></button>
-                  </div>
-
-                  <button onClick={() => editorRef.current?.toggleOrderedList()} className="p-2 rounded-md bg-gray-200"><MdOutlineFormatListNumbered className="size-4" /></button>
-
-                  <div className="bg-gray-200 rounded-md">
-                    <button onClick={() => editorRef.current?.toggleStrike()} className="p-2 border-r border-gray-400 "><AiOutlineStrikethrough className="size-4" /></button>
-
-                    <button onClick={() => editorRef.current?.setHorizontalRule()} className="p-2 "><VscHorizontalRule className="size-4" /></button>
-                  </div>
-
-                </div>
-
-              </div>
-            )}
-          </button>
+        <div className="hidden sm:flex gap-2">
 
           <button onClick={toggleHandleBold} className={`hidden sm:block p-2 rounded-md hover:bg-gray-200 ${isBold ? "bg-gray-300" : ""}`} ><FiBold className="size-4" /></button>
 
@@ -453,6 +397,63 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
 
         </div>
 
+        {/* mobile all buttons */}
+        <button onClick={() => setAaButtonOpen(!aaButtonOpen)} className="block sm:hidden relative" ><PiTextAa className="size-5" />
+
+          {aaButtonOpen && (
+            <div className="absolute z-50 flex-col space-y-2 -left-[150%] top-full mt-5 bg-white border border-gray-300 shadow-md rounded-lg p-2 ">
+
+              <div className="flex">
+                <button onClick={() => editorRef.current?.toggleHeadingL1()} className="px-3 rounded-md text-2xl">Heading</button>
+
+                <button onClick={() => editorRef.current?.toggleHeadingL2()} className="px-3 rounded-md text-xl">Body</button>
+
+                <button onClick={() => editorRef.current?.toggleHeadingL3()} className="px-3 rounded-md text-lg">text</button>
+              </div>
+
+              <div className="flex justify-between">
+                <div className="bg-gray-200 rounded-md">
+                  <button onClick={toggleHandleBold} className={`py-2 px-3  border-r border-gray-400  ${isBold ? "bg-gray-300" : ""}`} ><FiBold className="size-4" /></button>
+
+                  <button onClick={toggleHandleItalic} className={`py-2 px-3 border-r border-gray-400  ${isItalic ? "bg-gray-300" : ""}`}><FiItalic className="size-4" /></button>
+
+                  <button onClick={() => editorRef.current?.toggleUnderline()} className="py-2 px-3 rounded-md "><FiUnderline className="size-4" /></button>
+                </div>
+
+                <button onClick={() => editorRef.current?.toggleBulletList()} className="p-2 rounded-md bg-gray-200"><FiList className="size-4" /></button>
+
+                <div className="bg-gray-200 rounded-md">
+                  <button onClick={() => { console.log("toggled"), editorRef.current?.toggleHighlight() }} className="p-2 border-r border-gray-400 "><PiHighlighterFill className="size-4" /></button>
+
+                  <button onClick={() => editorRef.current?.toggleBlockquote()} className="p-2 "><BsBlockquoteLeft className="size-4" /></button>
+                </div>
+
+              </div>
+
+              <div className="flex justify-between">
+
+                <div className="bg-gray-200 rounded-md">
+                  <button onClick={() => editorRef.current?.setTextAlignLeft()} className="py-2 px-3 border-r border-gray-400 "><FiAlignLeft className="size-4" /></button>
+
+                  <button onClick={() => editorRef.current?.setTextAlignCenter()} className="py-2 px-3 border-r border-gray-400 "><FiAlignCenter className="size-4" /></button>
+
+                  <button onClick={() => editorRef.current?.setTextAlignRight()} className="py-2 px-3 rounded-md "><FiAlignRight className="size-4" /></button>
+                </div>
+
+                <button onClick={() => editorRef.current?.toggleOrderedList()} className="p-2 rounded-md bg-gray-200"><MdOutlineFormatListNumbered className="size-4" /></button>
+
+                <div className="bg-gray-200 rounded-md">
+                  <button onClick={() => editorRef.current?.toggleStrike()} className="p-2 border-r border-gray-400 "><AiOutlineStrikethrough className="size-4" /></button>
+
+                  <button onClick={() => editorRef.current?.setHorizontalRule()} className="p-2 "><VscHorizontalRule className="size-4" /></button>
+                </div>
+
+              </div>
+
+            </div>
+          )}
+        </button>
+
         {/* mobile check box button */}
         <button onClick={() => editorRef.current?.toggleTaskList()} className="block sm:hidden" ><CiBoxList className="size-6" /></button>
 
@@ -474,9 +475,9 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
 
               <div className="flex justify-between px-2 ">Coloum
                 <div className="flex  bg-gray-200 rounded-md ">
-                  <button onClick={() => editorRef.current?.addColumnAfter()} className="p-2 border-r border-gray-400 "><FiPlus/></button>
+                  <button onClick={() => editorRef.current?.addColumnAfter()} className="p-2 border-r border-gray-400 "><FiPlus /></button>
 
-                  <button onClick={() => editorRef.current?.deleteColumn()} className="p-2 "><FiX/></button>
+                  <button onClick={() => editorRef.current?.deleteColumn()} className="p-2 "><FiX /></button>
                 </div>
               </div>
 
