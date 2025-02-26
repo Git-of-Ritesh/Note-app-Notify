@@ -292,7 +292,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
         <div className="flex gap-2">
 
           {/* mobile all buttons */}
-          <button ref={dropdownRef} onClick={() => setAaButtonOpen(!aaButtonOpen)} className="block sm:hidden relative" ><PiTextAa className="size-5" />
+          <button  onClick={() => setAaButtonOpen(!aaButtonOpen)} className="block sm:hidden relative" ><PiTextAa className="size-5" />
 
             {aaButtonOpen && (
               <div className="absolute z-50 flex-col space-y-2 -left-[150%] top-full mt-5 bg-white border border-gray-300 shadow-md rounded-lg p-2 ">
@@ -350,7 +350,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
 
           <button onClick={toggleHandleBold} className={`hidden sm:block p-2 rounded-md hover:bg-gray-200 ${isBold ? "bg-gray-300" : ""}`} ><FiBold className="size-4" /></button>
 
-          <button onClick={toggleHandleItalic} className={`hidden sm:blockp-2 rounded-md hover:bg-gray-200 ${isItalic ? "bg-gray-300" : ""}`}><FiItalic className="size-4" /></button>
+          <button onClick={toggleHandleItalic} className={`hidden sm:block p-2 rounded-md hover:bg-gray-200 ${isItalic ? "bg-gray-300" : ""}`}><FiItalic className="size-4" /></button>
 
           <button onClick={() => editorRef.current?.toggleUnderline()} className="hidden sm:block p-2 rounded-md hover:bg-gray-200"><FiUnderline className="size-4" /></button>
 
@@ -451,35 +451,13 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
 
           <button onClick={() => editorRef.current?.toggleTaskList()} className="hidden sm:block p-2 rounded-md hover:bg-gray-200"><GoTasklist className="size-4" /></button>
 
-          {/* <button ref={dropdownRef} onClick={() => setToolButtonOpen(!toolButtonOpen)} className={`relative flex gap-x-2 text-sm border justify-center items-center py-1 px-3 rounded-md 
-            ${toolButtonOpen ?
-              'border-gray-300' :
-              'border-gray-400'
-            }`}>
-            <FiChevronRight className={`size-4 ${toolButtonOpen ? 'rotate-90' : ''}`} />Tools
-            {toolButtonOpen && (
-
-              <div className={`absolute top-full w-40 left-0 mt-2 flex flex-col bg-white shadow-md rounded-lg  border-x border  border-gray-300 p-1 z-10 transition-transform duration-500 origin-top ${toolButtonOpen ? 'opacity-100 scale-100 visible' : 'invisible scale-0'
-                }`}>
-                <button onClick={() => editorRef.current?.toggleCodeBlock()} className="flex items-center gap-x-2 p-2 rounded-md hover:bg-gray-200"><RiCodeSSlashFill className="size-4" />Inser code</button>
-
-                <button onClick={() => editorRef.current?.toggleStrike()} className="flex items-center gap-x-2 p-2 rounded-md hover:bg-gray-200"><AiOutlineStrikethrough className="size-4" />Toggle Strike</button>
-
-                <button onClick={() => editorRef.current?.addImage()} className="flex items-center gap-x-2 p-2 rounded-md hover:bg-gray-200"><FiImage className="size-4" />Insert image</button>
-
-                <button onClick={() => editorRef.current?.toggleTaskList()} className="flex items-center gap-x-2 p-2 rounded-md hover:bg-gray-200"><GoTasklist className="size-4" />Insert checkbox</button>
-              </div>
-
-            )}
-          </button> */}
-
         </div>
 
         {/* mobile check box button */}
         <button onClick={() => editorRef.current?.toggleTaskList()} className="block sm:hidden" ><CiBoxList className="size-6" /></button>
 
         {/* mobile table button */}
-        <button ref={dropdownRef} onClick={() => setMobileTableOpen(!mobileTableOpen)} className="block sm:hidden relative"><CiViewTable className="size-6" />
+        <button onClick={() => setMobileTableOpen(!mobileTableOpen)} className="block sm:hidden relative"><CiViewTable className="size-6" />
 
           {mobileTableOpen && (
             <div className="absolute flex flex-col z-50 space-y-1 w-44 top-full left-0 mt-4 border p-1 rounded-md shadow-md  bg-white ">
@@ -518,7 +496,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
         </button>
 
         {/* Mobile tool button */}
-        <button ref={dropdownRef} onClick={() => setToolButtonOpen(!toolButtonOpen)} className={`relative flex gap-x-2 text-sm border justify-center items-center py-1 px-3 rounded-md 
+        <button ref={dropdownRef} onClick={() => setToolButtonOpen(!toolButtonOpen)} className={`sm:hidden relative flex gap-x-2 text-sm border justify-center items-center py-1 px-3 rounded-md 
             ${toolButtonOpen ?
             'border-gray-300' :
             'border-gray-400'
