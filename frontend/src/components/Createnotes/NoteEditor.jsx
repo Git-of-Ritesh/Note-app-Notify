@@ -53,10 +53,6 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
         setHeaderButtonOpen(false);
         setListButtonOpen(false);
         setAlignButtonOpen(false);
-        setToolButtonOpen(false);
-        setOptionButtonOpen(false);
-        setAaButtonOpen(false);
-        setMobileTableOpen(false);
       }
     }
 
@@ -412,6 +408,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
               </div>
 
               <div className="flex justify-between">
+
                 <div className="bg-gray-200 rounded-md">
                   <button onClick={toggleHandleBold} className={`py-2 px-3  border-r border-gray-400  ${isBold ? "bg-gray-300" : ""}`} ><FiBold className="size-4" /></button>
 
