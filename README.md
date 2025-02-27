@@ -3,9 +3,10 @@
 ![Image](https://github.com/user-attachments/assets/d4707f1c-091e-4a88-a54e-56d95f8a4d6b)
 ![Notify App]
 
+<img width="1440" alt="Image" src="https://github.com/user-attachments/assets/580afed9-8c23-46cf-ac27-14f30d139826" />
 ## 📹 Demo Video
 Check out the live demo of Notify on LinkedIn:
-[Watch the Demo]([https://www.linkedin.com/posts/your-linkedin-profile/demo-video](https://www.linkedin.com/posts/ritesh-kumar-pandey-9b3296305_notifyapp-mernstack-react-activity-7300946368104140801-Iz6w?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE3RbxcB5-KDrsULMJbtWe77Pstj2lrkSKw))
+[Watch the Demo](https://www.linkedin.com/posts/your-linkedin-profile/demo-video](https://www.linkedin.com/posts/ritesh-kumar-pandey-9b3296305_notifyapp-mernstack-react-activity-7300946368104140801-Iz6w?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE3RbxcB5-KDrsULMJbtWe77Pstj2lrkSKw))
 
 ## 📒 About Notify
 Notify is a sleek, fast, and user-friendly note-taking web app designed to help you capture thoughts, organize ideas, and stay productive. Built with a modern tech stack and a minimal UI/UX, it ensures seamless interaction.
