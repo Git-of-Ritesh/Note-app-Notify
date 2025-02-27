@@ -1,6 +1,6 @@
 # 🚀 Notify - A Smart Note-Taking Web App
 
-![Notify App]
+![Notify App](![Image](https://github.com/user-attachments/assets/d4707f1c-091e-4a88-a54e-56d95f8a4d6b))
 
 ## 📹 Demo Video
 Check out the live demo of Notify on LinkedIn:
