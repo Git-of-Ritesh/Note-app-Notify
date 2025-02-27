@@ -50,9 +50,6 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsTableOpen(false);
-        setHeaderButtonOpen(false);
-        setListButtonOpen(false);
-        setAlignButtonOpen(false);
       }
     }
 
@@ -245,7 +242,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
   }
 
   return (
-    <div className="flex flex-col w-full h-dvh sm:h-screen bg-white  rounded-3xl ">
+    <div className="flex flex-col w-full h-dvh sm:h-screen bg-white  rounded-3xl">
 
       {/* Top section of editor */}
       <div className="flex justify-between items-center border-b">
@@ -263,22 +260,24 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
           <button onClick={() => setMaximaize(!maximaize)} className="hidden sm:block p-2 rounded-md text-gray-950 hover:bg-gray-200">{maximaize ? <FiMinimize2 /> : <FiMaximize2 />}</button>
 
           {/* mobile option button */}
-          <button onClick={() => setMobileOptionButtonOpen((prev) => !prev)} className="block sm:hidden relative"><PiDotsThreeCircleVertical className="size-4" />
+          <button onClick={() => setMobileOptionButtonOpen((prev) => !prev)} className={`block sm:hidden relative`}><PiDotsThreeCircleVertical className={`size-6 ${mobileOptionButtonOpen ? "text-gray-400" : ""}`} />
             {mobileOptionButtonOpen && (
-              <div className="absolute z-50 flex-col -right-[200%] top-full mt-1 bg-gray-50 border border-gray-300 shadow-md rounded-lg p-2 ">
-                <button className="flex gap-x-2 px-2 py-1 rounded-md hover:bg-gray-200" onClick={togglePin}>
+              <div className="absolute z-50 flex-col -right-[140%] top-full mt-1 bg-white border border-gray-400 shadow-md rounded-lg p-2 ">
+                <button className="flex gap-x-2 items-center px-2 py-1 gap-2 text-sm font-light text-blue-600 rounded-md "
+                  onClick={selectedNote ? editNote : addNote}  ><FiSave className="size-4" /> {selectedNote ? "Update" : "Save"}</button>
+                  <hr className="my-1"/>
+                <button className="flex gap-x-2 items-center px-2 py-1 w-full gap-2 text-sm font-light rounded-md" onClick={togglePin}>
                   {isPinned ? <TiPin className="size-5" /> : <TiPinOutline className="size-5" />}
                   Pin</button>
-                <button className="flex gap-x-2 px-2 py-1 rounded-md hover:bg-gray-200" onClick={() => (activeTab === 'trash' ? confirmDelete() : trashNote())}  ><FiTrash className="size-4" />Trash</button>
-                <button className="flex gap-x-2 items-center px-2 py-1 gap-2 text-sm font-light rounded-md text-white bg-gray-950"
-                  onClick={selectedNote ? editNote : addNote}  ><FiSave className="size-4" /> {selectedNote ? "Update" : "Save"}</button>
+                  <hr className="my-1"/>
+                <button className="flex gap-x-2 px-2 py-1 text-sm font-light text-red-500 rounded-md " onClick={() => (activeTab === 'trash' ? confirmDelete() : trashNote())}  ><FiTrash className="size-4" />Trash</button>
               </div>
             )}
           </button>
 
           {/* Close Button */}
-          <button onClick={onClose} className=" p-2 rounded-md text-gray-950 hover:bg-gray-200">
-            <FiX className="size-4" />
+          <button onClick={onClose} className=" p-2 rounded-md text-gray-950 sm:hover:bg-gray-200">
+            <FiX className="size-5 sm:size-4" />
           </button>
         </div>
       </div>
@@ -294,38 +293,44 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
 
           <button onClick={() => editorRef.current?.toggleUnderline()} className="hidden sm:block p-2 rounded-md hover:bg-gray-200"><FiUnderline className="size-4" /></button>
 
-          <button ref={dropdownRef} onClick={() => setHeaderButtonOpen(!headerButtonOpen)} className="relative hidden sm:block group p-2 rounded-md hover:bg-gray-200"><LuHeading className="size-4" />
+          <button onClick={() => setHeaderButtonOpen(!headerButtonOpen)} className="relative hidden sm:block group p-2 rounded-md hover:bg-gray-200"><LuHeading className="size-4" />
             {headerButtonOpen && (
-              <div className="absolute top-full -left-8 mt-2 flex bg-white shadow-md rounded-lg transition-opacity duration-200 border border-gray-300 p-1 z-10 ">
+              <div className="absolute top-full left-0 mt-3 flex flex-col bg-white shadow-md rounded-lg transition-opacity duration-200 border border-gray-300 p-1 z-10 ">
 
-                <button onClick={() => editorRef.current?.toggleHeadingL1()} className="p-2 rounded-md hover:bg-gray-200"><BsTypeH1 className="size-4" /></button>
+                <button onClick={() => editorRef.current?.toggleHeadingL1()} className="p-1  text-2xl rounded-md hover:bg-gray-200">Heading</button>
 
-                <button onClick={() => editorRef.current?.toggleHeadingL2()} className="p-2 rounded-md hover:bg-gray-200"><BsTypeH2 className="size-4" /></button>
+                <hr className="my-1" />
 
-                <button onClick={() => editorRef.current?.toggleHeadingL3()} className="p-2 rounded-md hover:bg-gray-200"><BsTypeH3 className="size-4" /></button>
+                <button onClick={() => editorRef.current?.toggleHeadingL2()} className="p-1 text-xl rounded-md hover:bg-gray-200">Heading</button>
+                <hr className="my-1" />
+
+                <button onClick={() => editorRef.current?.toggleHeadingL3()} className="p-1 text-lg rounded-md hover:bg-gray-200">Heading</button>
 
               </div>
             )}
           </button>
 
-          <button ref={dropdownRef} onClick={() => setListButtonOpen(!listButtonOpen)} className="relative hidden sm:block group p-2 rounded-md hover:bg-gray-200" ><FiList className="size-4" />
+          <button onClick={() => setListButtonOpen(!listButtonOpen)} className="relative hidden sm:block group p-2 rounded-md hover:bg-gray-200" ><FiList className="size-4" />
             {listButtonOpen && (
-              <div className="absolute top-full -left-5 mt-2 flex bg-white shadow-md rounded-lg transition-opacity duration-200 border border-gray-300 p-1 z-10 ">
-                <button onClick={() => editorRef.current?.toggleBulletList()} className="p-2 rounded-md hover:bg-gray-200"><FiList className="size-4" /></button>
+              <div className="absolute top-full left-0 mt-3 flex-col w-36 bg-white shadow-md rounded-lg transition-opacity duration-200 border border-gray-300 p-1 z-10 ">
+                <button onClick={() => editorRef.current?.toggleBulletList()} className="flex items-center text-sm w-full gap-x-1 p-1 rounded-md hover:bg-gray-200"><FiList className="size-4" />Bulleted list</button>
+                <hr className="my-1" />
 
-                <button onClick={() => editorRef.current?.toggleOrderedList()} className="p-2 rounded-md hover:bg-gray-200"><MdOutlineFormatListNumbered className="size-4" /></button>
+                <button onClick={() => editorRef.current?.toggleOrderedList()} className="flex items-center text-sm w-full gap-x-1 p-1 rounded-md hover:bg-gray-200"><MdOutlineFormatListNumbered className="size-4" />Ordered list</button>
               </div>
             )}
           </button>
 
-          <button ref={dropdownRef} onClick={() => setAlignButtonOpen(!alignButtonOpen)} className="relative hidden sm:block group p-2 rounded-md hover:bg-gray-200"><FiAlignCenter className="size-4" />
+          <button onClick={() => setAlignButtonOpen(!alignButtonOpen)} className="relative hidden sm:block group p-2 rounded-md hover:bg-gray-200"><FiAlignCenter className="size-4" />
             {alignButtonOpen && (
-              <div className="absolute top-full -left-8 mt-2 flex bg-white shadow-md rounded-lg transition-opacity duration-200 border border-gray-300 p-1 z-10">
-                <button onClick={() => editorRef.current?.setTextAlignLeft()} className="p-2 rounded-md hover:bg-gray-200"><FiAlignLeft className="size-4" /></button>
+              <div className="absolute top-full left-0 mt-3 flex-col bg-white shadow-md rounded-lg transition-opacity duration-200 border border-gray-300 p-1 z-10">
+                <button onClick={() => editorRef.current?.setTextAlignLeft()} className="flex w-full text-sm items-center gap-x-2 p-1 rounded-md hover:bg-gray-200"><FiAlignLeft className="size-4" />Left</button>
+                <hr className="my-1" />
 
-                <button onClick={() => editorRef.current?.setTextAlignCenter()} className="p-2 rounded-md hover:bg-gray-200"><FiAlignCenter className="size-4" /></button>
+                <button onClick={() => editorRef.current?.setTextAlignCenter()} className="flex items-center text-sm gap-x-2 p-1 rounded-md hover:bg-gray-200"><FiAlignCenter className="size-4" />Center</button>
+                <hr className="my-1" />
 
-                <button onClick={() => editorRef.current?.setTextAlignRight()} className="p-2 rounded-md hover:bg-gray-200"><FiAlignRight className="size-4" /></button>
+                <button onClick={() => editorRef.current?.setTextAlignRight()} className="flex w-full text-sm items-center gap-x-2 p-1 rounded-md hover:bg-gray-200"><FiAlignRight className="size-4" />Right</button>
               </div>
             )}
           </button>
@@ -333,37 +338,52 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
           <button ref={dropdownRef} onClick={() => setIsTableOpen(!isTableOpen)} className="relative hidden sm:block group p-2 rounded-md hover:bg-gray-200"><FiTable className="size-4" />
 
             {isTableOpen && (
-              <div className="absolute top-full -left-40 mt-2 flex bg-white shadow-md rounded-lg transition-opacity duration-200 border border-gray-300 p-1 z-10">
+              <div className="absolute top-full left-0 w-44 mt-3 flex flex-col bg-white shadow-md rounded-lg transition-opacity duration-200 border border-gray-300 p-1 z-10">
 
                 {/* add table */}
-                <button onClick={() => editorRef.current?.insertTable()} className="p-2 rounded-md hover:bg-gray-200"><FiTable className="size-4" /></button>
+                <button onClick={() => editorRef.current?.insertTable()} className="py-1 px-2 text-sm text-left text-blue-500 rounded-md hover:bg-gray-200">Add table</button>
+                <hr className="my-1" />
 
                 {/* insert row */}
-                <button onClick={() => editorRef.current?.addRowAfter()} className="p-2 rounded-md hover:bg-gray-200"><TbTableRow className="size-4" /></button>
+                <div className="flex items-center justify-between text-sm px-2">Row
+                  <div>
+                    <button onClick={() => editorRef.current?.addRowAfter()} className="p-2 rounded-md hover:bg-blue-100"><FiPlus className="size-4" /></button>
 
-                {/* delete row */}
-                <button onClick={() => editorRef.current?.deleteRow()} className="p-2 rounded-md hover:bg-gray-200"><TbRowRemove className="size-4" /></button>
+                    {/* delete row */}
+                    <button onClick={() => editorRef.current?.deleteRow()} className="p-2 rounded-md hover:bg-red-100"><FiTrash className="size-4" /></button>
+                  </div>
+                </div>
+                <hr className="my-1" />
 
                 {/* insert coloum */}
-                <button onClick={() => editorRef.current?.addColumnAfter()} className="p-2 rounded-md hover:bg-gray-200"><TbTableColumn className="size-4" /></button>
+                <div className="flex items-center justify-between text-sm px-2" >Column
+                  <div>
+                    <button onClick={() => editorRef.current?.addColumnAfter()} className="p-2 rounded-md hover:bg-blue-100"><FiPlus className="size-4" /></button>
 
-                {/* delete coloum */}
-                <button onClick={() => editorRef.current?.deleteColumn()} className="p-2 rounded-md hover:bg-gray-200"><TbColumnRemove className="size-4" /></button>
+                    {/* delete coloum */}
+                    <button onClick={() => editorRef.current?.deleteColumn()} className="p-2 rounded-md hover:bg-red-100"><FiTrash className="size-4" /></button>
+                  </div>
+                </div>
+                <hr className="my-1" />
 
                 {/* merge cell */}
-                <button onClick={() => editorRef.current?.mergeCells()} className="p-2 rounded-md hover:bg-gray-200"><AiOutlineMergeCells className="size-4" /></button>
+                <button onClick={() => editorRef.current?.mergeCells()} className="py-1 px-2 text-sm text-left rounded-md hover:bg-gray-200">Merge cells</button>
+                <hr className="my-1" />
 
                 {/* split cell */}
-                <button onClick={() => editorRef.current?.splitCell()} className="p-2 rounded-md hover:bg-gray-200"><AiOutlineSplitCells className="size-4" /></button>
+                <button onClick={() => editorRef.current?.splitCell()} className="py-1 px-2 text-sm text-left rounded-md hover:bg-gray-200">Split cells</button>
+                <hr className="my-1" />
 
                 {/* toggle header coloum */}
-                <button onClick={() => editorRef.current?.toggleHeaderColumn()} className="p-2 rounded-md hover:bg-gray-200"><PiColumnsDuotone className="size-4" /></button>
+                <button onClick={() => editorRef.current?.toggleHeaderColumn()} className="py-1 px-2 text-sm text-left rounded-md hover:bg-gray-200">Header column</button>
+                <hr className="my-1" />
 
                 {/* header cell */}
-                <button onClick={() => editorRef.current?.toggleHeaderCell()} className="p-2 rounded-md hover:bg-gray-200"><PiRectangleDuotone className="size-4" /></button>
+                <button onClick={() => editorRef.current?.toggleHeaderCell()} className="py-1 px-2 text-sm text-left rounded-md hover:bg-gray-200">Header cells</button>
+                <hr className="my-1" />
 
                 {/* delete table */}
-                <button onClick={() => editorRef.current?.deleteTable()} className="p-2 rounded-md hover:bg-gray-200"><TbTableOff className="size-4" /></button>
+                <button onClick={() => editorRef.current?.deleteTable()} className="py-1 px-2 text-sm text-left text-red-500 rounded-md hover:bg-gray-200">Delete table</button>
 
               </div>
             )}
@@ -377,11 +397,9 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
 
           <button onClick={() => { console.log("toggled"), editorRef.current?.toggleHighlight() }} className="hidden sm:block p-2 rounded-md hover:bg-gray-200"><PiHighlighterFill className="size-4" /></button>
 
-          <button onClick={() => editorRef.current?.toggleBlockquote()} className="hidden sm:block p-2 rounded-md hover:bg-gray-200"><BsBlockquoteLeft className="size-4" /></button>
+          <button onClick={() => editorRef.current?.toggleBlockquote()} className="hidden sm:block p-1 rounded-md hover:bg-gray-200"><BsBlockquoteLeft className="size-5" /></button>
 
-
-
-          <button onClick={() => editorRef.current?.setHorizontalRule()} className="hidden sm:block p-2 rounded-md hover:bg-gray-200"><VscHorizontalRule className="size-4" /></button>
+          <button onClick={() => editorRef.current?.setHorizontalRule()} className="hidden sm:block p-1 rounded-md hover:bg-gray-200"><VscHorizontalRule className="size-5" /></button>
 
           <button onClick={() => editorRef.current?.toggleCodeBlock()} className="hidden sm:block p-2 rounded-md hover:bg-gray-200"><RiCodeSSlashFill className="size-4" /></button>
 
@@ -389,7 +407,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
 
           <button onClick={() => editorRef.current?.addImage()} className="hidden sm:block p-2 rounded-md hover:bg-gray-200"><FiImage className="size-4" /></button>
 
-          <button onClick={() => editorRef.current?.toggleTaskList()} className="hidden sm:block p-2 rounded-md hover:bg-gray-200"><GoTasklist className="size-4" /></button>
+          <button onClick={() => editorRef.current?.toggleTaskList()} className="hidden sm:block p-1  rounded-md hover:bg-gray-200"><GoTasklist className="size-5" /></button>
 
         </div>
 
@@ -517,18 +535,19 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
         </button>
 
         <div className="hidden sm:flex gap-2">
-          <button ref={dropdownRef} onClick={() => setOptionButtonOpen(!optionButtonOpen)} className={` relative flex gap-x-2 text-sm border justify-center items-center py-1 px-3 rounded-md 
-            ${optionButtonOpen ? 'w-24 border-gray-300 ' : 'border-gray-400'}`}><FiChevronRight className={`size-4 ${optionButtonOpen ? 'rotate-90' : ''}`} />Options
-
+          <button onClick={() => setOptionButtonOpen(!optionButtonOpen)} className={` relative flex gap-x-2 text-sm border justify-center items-center py-1 px-3 rounded-md 
+            ${optionButtonOpen ? ' border-gray-300 ' : 'border-gray-400'}`}><FiChevronRight className={`size-4 ${optionButtonOpen ? 'rotate-90' : ''}`} />Options
             {optionButtonOpen && (
-              <div className={`absolute top-0 w-24 left-auto  flex flex-col bg-white shadow-md rounded-lg  border-x border-b  border-gray-300 p-1 z-10 transition-transform duration-500 origin-top ${optionButtonOpen ? 'opacity-100 scale-100 visible' : 'invisible scale-0'
+              <div className={`absolute top-full w-24 left-0 mt-4 flex flex-col bg-white shadow-md rounded-lg  border  border-gray-300 p-1 z-10 transition-transform duration-500 origin-top ${optionButtonOpen ? 'opacity-100 scale-100 visible' : 'invisible scale-0'
                 }`}>
-                <button className="flex gap-x-2 px-2 py-1 rounded-md hover:bg-gray-200" onClick={togglePin}>
+                <button className="flex gap-x-2 items-center px-2 py-1 gap-2 text-sm font-light rounded-md hover:bg-blue-100"
+                  onClick={selectedNote ? editNote : addNote}  ><FiSave className="size-4" /> {selectedNote ? "Update" : "Save"}</button>
+                  <hr className="my-1"/>
+                <button className="flex gap-x-2 items-center px-2 py-1 gap-2 text-sm font-light rounded-md  hover:bg-gray-200" onClick={togglePin}>
                   {isPinned ? <TiPin className="size-5" /> : <TiPinOutline className="size-5" />}
                   Pin</button>
-                <button className="flex gap-x-2 px-2 py-1 rounded-md hover:bg-gray-200" onClick={() => (activeTab === 'trash' ? confirmDelete() : trashNote())}  ><FiTrash className="size-4" />Trash</button>
-                <button className="flex gap-x-2 items-center px-2 py-1 gap-2 text-sm font-light rounded-md text-white bg-gray-950"
-                  onClick={selectedNote ? editNote : addNote}  ><FiSave className="size-4" /> {selectedNote ? "Update" : "Save"}</button>
+                  <hr className="my-1"/>
+                <button className="flex gap-x-2 px-2 py-1 text-sm font-light rounded-md hover:bg-red-200" onClick={() => (activeTab === 'trash' ? confirmDelete() : trashNote())}  ><FiTrash className="size-4" />Trash</button>
               </div>
             )}
           </button>
@@ -537,7 +556,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
 
 
       {/* Editor space */}
-      <div className={`flex flex-col ${maximaize ? "px-3" : "px-4 sm:px-52"} overflow-y-auto `}>
+      <div className={`flex flex-col ${maximaize ? "px-8" : "px-5 sm:px-52"} overflow-y-auto `}>
 
         <div className={`flex py-3 mt-9 `}>
           {/* Title Input */}
@@ -574,7 +593,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
         {/* Editable Content Area */}
         <div
           className="w-full h-full flex-grow text-gray-700  ">
-          <div className={`w-full flex-grow `}>
+          <div className={`w-full flex-grow pb-5 sm:pb-0 `}>
             <TextEditor ref={editorRef} content={content} onChange={setContent} />
           </div>
         </div>

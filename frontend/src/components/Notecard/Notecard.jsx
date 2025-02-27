@@ -14,7 +14,7 @@ const Notecard = ({ title, content, date, tags, isPinned, onClick, onTrash, onDe
     return (
         <div className='sm:w-80 bg-gray-50 w-dvw min-w-0 h-fit border-b group' onClick={onClick}>
 
-            <div className="flex justify-between flex-col hover:bg-gray-100 w-full h-40 p-4">
+            <div className="flex justify-between flex-col sm:hover:bg-gray-100 w-full h-40 p-4">
 
                 <div className='flex flex-col gap-2'>
                     <h1 className="flex items-center justify-between font-normal text-gray-950">{title.length > 24 ? title.slice(0, 24) + '...' : title}
@@ -32,8 +32,8 @@ const Notecard = ({ title, content, date, tags, isPinned, onClick, onTrash, onDe
 
                                         {activeTab === 'trash' && (
                                             <>
-                                            <button className='flex w-full font-light gap-x-2 text-sm items-center p-1 rounded-md hover:bg-gray-100' onClick={(e) => { e.stopPropagation(); onDelete(); }} ><AiOutlineDelete />Delete</button>
-                                            <button className='flex w-full font-light gap-x-2 text-sm items-center p-1 rounded-md hover:bg-gray-100' onClick={(e) => { e.stopPropagation(); onRestore(); }} ><TbRestore />Restore</button>
+                                                <button className='flex w-full font-light gap-x-2 text-sm items-center p-1 rounded-md hover:bg-gray-100' onClick={(e) => { e.stopPropagation(); onDelete(); }} ><AiOutlineDelete />Delete</button>
+                                                <button className='flex w-full font-light gap-x-2 text-sm items-center p-1 rounded-md hover:bg-gray-100' onClick={(e) => { e.stopPropagation(); onRestore(); }} ><TbRestore />Restore</button>
                                             </>
                                         )}
                                     </div>
@@ -51,7 +51,15 @@ const Notecard = ({ title, content, date, tags, isPinned, onClick, onTrash, onDe
 
                 <div className='flex justify-between items-center '>
                     <Tagcard tags={tags} />
-                    <h3 className="text-xs font-light text-gray-600">{moment(date).fromNow()}</h3>
+                    <h3 className="text-xs font-light text-gray-600">{
+                    moment().diff(moment(date), 'seconds') < 10
+                        ? "Now"
+                        : moment().isSame(moment(date), 'day')
+                            ? moment(date).fromNow()
+                            : moment().diff(moment(date), 'hours') < 24
+                                ? "Yesterday"
+                                : moment(date).format("MMMM D, YYYY")
+                    }</h3>
                 </div>
 
             </div>

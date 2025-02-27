@@ -19,6 +19,7 @@ import TableRow from '@tiptap/extension-table-row'
 import { common, createLowlight } from 'lowlight'
 import { useEffect } from "react";
 import { forwardRef, useImperativeHandle } from "react";
+import Placeholder from '@tiptap/extension-placeholder'
 
 
 
@@ -54,7 +55,11 @@ const TextEditor = forwardRef(({ content, onChange }, ref) => {
               }),
               TableRow,
               TableHeader,
-              TableCell,],
+              TableCell,
+              Placeholder.configure({
+                emptyEditorClass: 'is-editor-empty',
+              })
+              ,],
         content: content || "<p></p>",
         onUpdate: ({ editor }) => {
             onChange(editor.getHTML());
