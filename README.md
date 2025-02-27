@@ -5,7 +5,7 @@
 
 <img width="1440" alt="Image" src="https://github.com/user-attachments/assets/580afed9-8c23-46cf-ac27-14f30d139826" />
 ## 📹 Demo Video
-Check out the live demo of Notify on LinkedIn:
+Check out the live demo of Notify on MY LinkedIn:
 [Watch the Demo]([https://www.linkedin.com/posts/your-linkedin-profile/demo-video](https://www.linkedin.com/posts/ritesh-kumar-pandey-9b3296305_notifyapp-mernstack-react-activity-7300946368104140801-Iz6w?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE3RbxcB5-KDrsULMJbtWe77Pstj2lrkSKw)](https://www.linkedin.com/posts/ritesh-kumar-pandey-9b3296305_notifyapp-mernstack-react-activity-7300946368104140801-Iz6w?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE3RbxcB5-KDrsULMJbtWe77Pstj2lrkSKw))
 
 ## 📒 About Notify
@@ -48,9 +48,10 @@ Notify is designed to offer a smooth and secure experience, featuring:
 
 ## 🤝 Connect with Me
 I'm always open to feedback and collaboration!
-- **LinkedIn**: [Your LinkedIn Profile](https://www.linkedin.com/in/your-linkedin-profile)
-- **GitHub**: [Your GitHub Profile](https://github.com/your-username)
-- **Email**: your.email@example.com
+- **LinkedIn**: [LinkedIn Profile](www.linkedin.com/in/ritesh-kumar-pandey-9b3296305)
+- **Threads**: [Threads Profile](https://www.threads.net/@rajjj.pandeyy?igshid=NTc4MTIwNjQ2YQ==)
+- **GitHub**: [GitHub Profile](https://github.com/your-username)
+- **Email**: pvtriteshpandey08@gmail.com
 
 ---
 
@@ -58,5 +59,5 @@ I'm always open to feedback and collaboration!
 
 ---
 
-Made with ❤️ by [Your Name]
+Made with ❤️ by [Ritesh Kumar Pandey]
 
