@@ -44,7 +44,7 @@ const Notecard = ({ title, content, date, tags, isPinned, onClick, onTrash, onDe
 
 
                     <p className="break-words text-xs text-gray-600">
-                        {plainText.length > 120 ? plainText.slice(0, 120) + "..." : plainText}
+                        {plainText.length > 120 ? plainText.slice(0, 120) + "." : plainText}
                     </p>
                 </div>
 
