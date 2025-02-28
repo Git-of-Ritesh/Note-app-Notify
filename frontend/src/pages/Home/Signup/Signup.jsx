@@ -21,11 +21,6 @@ const Signup = () => {
     if (!name || !email || !password) {
       setError("All fields are required");
     }
-
-    else if (password !== confirmPassword) {
-      setError("Passwords do not match");
-    }
-
     else {
       setError("");
     }
