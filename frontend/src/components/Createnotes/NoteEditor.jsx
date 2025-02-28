@@ -265,11 +265,11 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
               <div className="absolute z-50 flex-col -right-[140%] top-full mt-1 bg-white border border-gray-400 shadow-md rounded-lg p-2 ">
                 <button className="flex gap-x-2 items-center px-2 py-1 gap-2 text-sm font-light text-blue-600 rounded-md "
                   onClick={selectedNote ? editNote : addNote}  ><FiSave className="size-4" /> {selectedNote ? "Update" : "Save"}</button>
-                  <hr className="my-1"/>
+                <hr className="my-1" />
                 <button className="flex gap-x-2 items-center px-2 py-1 w-full gap-2 text-sm font-light rounded-md" onClick={togglePin}>
                   {isPinned ? <TiPin className="size-5" /> : <TiPinOutline className="size-5" />}
                   Pin</button>
-                  <hr className="my-1"/>
+                <hr className="my-1" />
                 <button className="flex gap-x-2 px-2 py-1 text-sm font-light text-red-500 rounded-md " onClick={() => (activeTab === 'trash' ? confirmDelete() : trashNote())}  ><FiTrash className="size-4" />Trash</button>
               </div>
             )}
@@ -511,8 +511,17 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
           )}
         </button>
 
+        <button onClick={() => editorRef.current?.toggleCodeBlock()} className="flex items-center gap-x-2 rounded-md hover:bg-gray-200"><RiCodeSSlashFill className="size-5 text-gray-600" style={{ strokeWidth: 0.1 }}/></button>
+
+        <button onClick={() => {
+            const url = prompt("Enter URL:");
+            if (url) editorRef.current?.setLink(url);
+          }} className="sm:hidden block rounded-md hover:bg-gray-200"><FiLink2 className="size-5" style={{strokeWidth: 1.4}} /></button>
+
+        <button onClick={() => editorRef.current?.addImage()} className="flex items-center gap-x-2 rounded-md hover:bg-gray-200"><FiImage className="size-5" style={{strokeWidth: 1.2}} /></button>
+
         {/* Mobile tool button */}
-        <button ref={dropdownRef} onClick={() => setToolButtonOpen(!toolButtonOpen)} className={`sm:hidden relative flex gap-x-2 text-sm border justify-center items-center py-1 px-3 rounded-md 
+        {/* <button ref={dropdownRef} onClick={() => setToolButtonOpen(!toolButtonOpen)} className={`sm:hidden relative flex gap-x-2 text-sm border justify-center items-center py-1 px-3 rounded-md 
             ${toolButtonOpen ?
             'border-gray-300' :
             'border-gray-400'
@@ -522,17 +531,13 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
 
             <div className={`absolute top-full w-40 -left-[60%] mt-2 flex flex-col bg-white shadow-md rounded-lg  border-x border  border-gray-300 p-1 z-10 transition-transform duration-500 origin-top ${toolButtonOpen ? 'opacity-100 scale-100 visible' : 'invisible scale-0'
               }`}>
-              <button onClick={() => editorRef.current?.toggleCodeBlock()} className="flex items-center gap-x-2 p-2 rounded-md hover:bg-gray-200"><RiCodeSSlashFill className="size-4" />Inser code</button>
-
-              <button onClick={() => editorRef.current?.toggleStrike()} className="flex items-center gap-x-2 p-2 rounded-md hover:bg-gray-200"><AiOutlineStrikethrough className="size-4" />Toggle Strike</button>
+              <button onClick={() => editorRef.current?.toggleCodeBlock()} className="flex items-center gap-x-2 p-2 rounded-md hover:bg-gray-200"><RiCodeSSlashFill className="size-4" />Inser code</button>    
 
               <button onClick={() => editorRef.current?.addImage()} className="flex items-center gap-x-2 p-2 rounded-md hover:bg-gray-200"><FiImage className="size-4" />Insert image</button>
-
-              <button onClick={() => editorRef.current?.toggleTaskList()} className="flex items-center gap-x-2 p-2 rounded-md hover:bg-gray-200"><GoTasklist className="size-4" />Insert checkbox</button>
             </div>
 
           )}
-        </button>
+        </button> */}
 
         <div className="hidden sm:flex gap-2">
           <button onClick={() => setOptionButtonOpen(!optionButtonOpen)} className={` relative flex gap-x-2 text-sm border justify-center items-center py-1 px-3 rounded-md 
@@ -542,11 +547,11 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
                 }`}>
                 <button className="flex gap-x-2 items-center px-2 py-1 gap-2 text-sm font-light rounded-md hover:bg-blue-100"
                   onClick={selectedNote ? editNote : addNote}  ><FiSave className="size-4" /> {selectedNote ? "Update" : "Save"}</button>
-                  <hr className="my-1"/>
+                <hr className="my-1" />
                 <button className="flex gap-x-2 items-center px-2 py-1 gap-2 text-sm font-light rounded-md  hover:bg-gray-200" onClick={togglePin}>
                   {isPinned ? <TiPin className="size-5" /> : <TiPinOutline className="size-5" />}
                   Pin</button>
-                  <hr className="my-1"/>
+                <hr className="my-1" />
                 <button className="flex gap-x-2 px-2 py-1 text-sm font-light rounded-md hover:bg-red-200" onClick={() => (activeTab === 'trash' ? confirmDelete() : trashNote())}  ><FiTrash className="size-4" />Trash</button>
               </div>
             )}
