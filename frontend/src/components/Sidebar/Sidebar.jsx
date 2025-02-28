@@ -24,11 +24,16 @@ const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActi
         try {
             dispatch(signOutStart())
 
+            const token = sessionStorage.getItem('authToken'); // Retrieve the token from session storage
             const res = await axios.post(
                 `${import.meta.env.VITE_API_BACKENDBASE_URL}/api/auth/signout`,
                 {}, // Empty body
-                { withCredentials: true } // Config object
-            );
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }// Config object
+                });
 
             if (res.data.success === false) {
                 dispatch(signOutFailure(res.data.message))
@@ -36,6 +41,7 @@ const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActi
 
             dispatch(signOutSuccess())
             navigate('/Login')
+            sessionStorage.removeItem('authToken'); // Remove token from session storage
 
         } catch (error) {
             dispatch(signOutFailure(error.message))

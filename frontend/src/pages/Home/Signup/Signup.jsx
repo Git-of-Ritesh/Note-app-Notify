@@ -27,7 +27,7 @@ const Signup = () => {
 
     // singup API call
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/auth/signup`, { username: name, email, password }, { withCredentials: true });
+      const res = await axios.post(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/auth/signup`, { username: name, email, password });
 
       if (res.data.status === false) {
         setError(res.data.message);

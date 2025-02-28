@@ -45,19 +45,13 @@ export const signin = async (req, res, next) => {
         }
 
         // Generate JWT token
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
         // Remove password from the response
         const { password: _, ...userData } = user._doc;
 
         // Set cookie with token
-        res.cookie('access_token', token, {
-            httpOnly: true,
-            sameSite: 'none',
-            secure: true,
-            path: '/',
-            maxAge: 7 * 24 * 60 * 60 * 1000
-        }).status(200).json({ success: true, message: 'Logged in successfully', user: userData, token: token });
+        res.status(200).json({ success: true, message: 'Logged in successfully', user: userData, token: token });
     } catch (error) {
         next(errorHndler(500, 'Failed to sign in'));
     }
@@ -66,8 +60,7 @@ export const signin = async (req, res, next) => {
 // User signout (logout)
 export const signout = (req, res, next) => {
     try {
-        res.clearCookie('access_token')
-        .status(200).json({ success: true, message: 'Logged out successfully' });
+        res.status(200).json({ success: true, message: 'Logged out successfully' });
     } catch (error) {
         next(errorHndler(500, 'Failed to log out'));
     }

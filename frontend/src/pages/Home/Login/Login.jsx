@@ -29,16 +29,21 @@ const Login = () => {
         //Login API
         try {
             dispatch(signInStart());
-            
+
             const res = await axios.post(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/auth/signin`, {
                 email,
                 password
-            }, { withCredentials: true });
+            });
 
             if (res.data.status === false) {
                 console.log(res.data);
                 dispatch(signInFailure(res.data.message));
                 return;
+            }
+
+            // Store token in sessionStorage
+            if (res.data.token) {
+                sessionStorage.setItem('authToken', res.data.token);
             }
 
             dispatch(signInSuccess(res.data));
@@ -92,8 +97,8 @@ const Login = () => {
 
                         <div>
                             <div className='flex justify-between'>
-                            <h3 className='text-sm'>Password</h3>
-                            <h3 className='text-sm'>Forgot password</h3>
+                                <h3 className='text-sm'>Password</h3>
+                                <h3 className='text-sm'>Forgot password</h3>
                             </div>
                             <input className='border w-72 sm:w-80 rounded-lg h-7 p-4 mt-2 text-sm' type="password"
                                 value={password}

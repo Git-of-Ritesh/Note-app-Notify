@@ -142,7 +142,12 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
     }
 
     try {
-      const res = await axios.put(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/move-to-trash/${selectedNote._id}`, {}, { withCredentials: true })
+      const token = sessionStorage.getItem('authToken'); // Retrieve the token from session storage
+      const res = await axios.put(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/move-to-trash/${selectedNote._id}`, {}, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }})
 
       if (res.data.success === false) {
         console.log(res.data.message)
@@ -171,7 +176,12 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
     }
 
     try {
-      const res = await axios.delete(`${import.meta.env.VITE_API_BACKENDBASE_URL}/delete-note/${selectedNote._id}`, { withCredentials: true })
+      const token = sessionStorage.getItem('authToken'); // Retrieve the token from session storage
+      const res = await axios.delete(`${import.meta.env.VITE_API_BACKENDBASE_URL}/delete-note/${selectedNote._id}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }})
 
       if (res.data.success === false) {
         console.log(res.data.message)
@@ -198,7 +208,12 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
   // edit note
   const editNote = async () => {
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/edit-note/${selectedNote._id}`, { title, content, tags, isPinned }, { withCredentials: true })
+      const token = sessionStorage.getItem('authToken'); // Retrieve the token from session storage
+      const res = await axios.post(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/edit-note/${selectedNote._id}`, { title, content, tags, isPinned }, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }})
 
       if (res.data.success === false) {
         console.log(res.data.message)
@@ -218,7 +233,12 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
   // add note
   const addNote = async () => {
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/add-note`, { title, content, tags, isPinned }, { withCredentials: true })
+      const token = sessionStorage.getItem('authToken'); // Retrieve the token from session storage
+      const res = await axios.post(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/add-note`, { title, content, tags, isPinned }, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }})
 
       if (res.data.success === false) {
         console.log(res.data.message)
@@ -506,14 +526,14 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
           )}
         </button>
 
-        <button onClick={() => editorRef.current?.toggleCodeBlock()} className="flex items-center gap-x-2 rounded-md hover:bg-gray-200"><RiCodeSSlashFill className="size-5 text-gray-600" style={{ strokeWidth: 0.1 }}/></button>
+        <button onClick={() => editorRef.current?.toggleCodeBlock()} className="sm:hidden flex items-center gap-x-2 rounded-md hover:bg-gray-200"><RiCodeSSlashFill className="size-5 text-gray-600" style={{ strokeWidth: 0.1 }}/></button>
 
         <button onClick={() => {
             const url = prompt("Enter URL:");
             if (url) editorRef.current?.setLink(url);
           }} className="sm:hidden block rounded-md hover:bg-gray-200"><FiLink2 className="size-5" style={{strokeWidth: 1.4}} /></button>
 
-        <button onClick={() => editorRef.current?.addImage()} className="flex items-center gap-x-2 rounded-md hover:bg-gray-200"><FiImage className="size-5" style={{strokeWidth: 1.2}} /></button>
+        <button onClick={() => editorRef.current?.addImage()} className="sm:hidden flex items-center gap-x-2 rounded-md hover:bg-gray-200"><FiImage className="size-5" style={{strokeWidth: 1.2}} /></button>
 
         <div className="hidden sm:flex gap-2">
           <button onClick={() => setOptionButtonOpen(!optionButtonOpen)} className={` relative flex gap-x-2 text-sm border justify-center items-center py-1 px-3 rounded-md 

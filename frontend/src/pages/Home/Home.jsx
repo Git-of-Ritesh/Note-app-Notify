@@ -37,28 +37,40 @@ const Home = () => {
     }
   }, [])
 
-  // get all notes API
   const getAllNotes = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/all`, { withCredentials: true })
+        const token = sessionStorage.getItem('authToken'); // Retrieve the token from session storage
 
-      if (res.data.success === false) {
-        console.log(res.data)
-      }
-      else {
-        setAllNotes(res.data.notes.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
-        // setAllNotes(res.data.note || [])
-      }
+        const res = await axios.get(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/all`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (res.data.success === false) {
+            console.log(res.data);
+        } else {
+            setAllNotes(res.data.notes.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+        }
 
     } catch (error) {
-      console.log(error)
+        console.log('Error fetching notes:', error.message);
     }
-  }
+};
+
 
   //get trash notes
   const getTrashNotes = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/trash`, { withCredentials: true })
+      const token = sessionStorage.getItem('authToken'); // Retrieve the token from session storage
+
+      const res = await axios.get(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/trash`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+        });
 
       if (res.data.success === false) {
         console.log(res.data)
@@ -76,7 +88,14 @@ const Home = () => {
   // pinned notes
   const getPinnedNotes = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/pinned`, { withCredentials: true })
+
+      const token = sessionStorage.getItem('authToken'); // Retrieve the token from session storage
+      const res = await axios.get(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/pinned`,{
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+        });
 
       if (res.data.success === false) {
         console.log(res.data)

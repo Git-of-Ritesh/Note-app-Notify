@@ -47,7 +47,13 @@ useEffect(() => {
   const trashNote = async (noteId) => {
 
     try {
-      const res = await axios.put(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/move-to-trash/${noteId}`,{}, {withCredentials: true})
+
+      const token = sessionStorage.getItem('authToken'); // Retrieve the token from session storage
+      const res = await axios.put(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/move-to-trash/${noteId}`,{}, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }});
       
       if (res.data.success === false) {
         console.log(res.data.message)
@@ -67,7 +73,12 @@ useEffect(() => {
   const restoreNote = async (noteId) => {
 
     try {
-      const res = await axios.put(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/restore-note/${noteId}`,{}, {withCredentials: true})
+      const token = sessionStorage.getItem('authToken'); // Retrieve the token from session storage
+      const res = await axios.put(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/restore-note/${noteId}`,{}, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }})
       
       if (res.data.success === false) {
         console.log(res.data.message)
@@ -87,7 +98,12 @@ useEffect(() => {
   const deleteNote = async (noteId) => {
 
     try {
-      const res = await axios.delete(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/delete-note/${noteId}`,{withCredentials: true})
+      const token = sessionStorage.getItem('authToken'); // Retrieve the token from session storage
+      const res = await axios.delete(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/delete-note/${noteId}`,{
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }})
       
       if (res.data.success === false) {
         console.log(res.data.message)
