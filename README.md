@@ -4,6 +4,8 @@
 ![Notify App]
 
 <img width="1440" alt="Image" src="https://github.com/user-attachments/assets/580afed9-8c23-46cf-ac27-14f30d139826" />
+<img width="494" alt="Image" src="https://github.com/user-attachments/assets/9a4b4d06-e009-425e-81f1-6e6c124ad53b" />
+<img width="494" alt="Image" src="https://github.com/user-attachments/assets/f1817b68-ae95-4d08-8840-1d0a48e64d19" />
 ## 📹 Demo Video
 Check out the live demo of Notify on MY LinkedIn:
 [Watch the Demo]([https://www.linkedin.com/posts/your-linkedin-profile/demo-video](https://www.linkedin.com/posts/ritesh-kumar-pandey-9b3296305_notifyapp-mernstack-react-activity-7300946368104140801-Iz6w?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE3RbxcB5-KDrsULMJbtWe77Pstj2lrkSKw)](https://www.linkedin.com/posts/ritesh-kumar-pandey-9b3296305_notifyapp-mernstack-react-activity-7300946368104140801-Iz6w?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE3RbxcB5-KDrsULMJbtWe77Pstj2lrkSKw))
