@@ -520,25 +520,6 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
 
         <button onClick={() => editorRef.current?.addImage()} className="flex items-center gap-x-2 rounded-md hover:bg-gray-200"><FiImage className="size-5" style={{strokeWidth: 1.2}} /></button>
 
-        {/* Mobile tool button */}
-        {/* <button ref={dropdownRef} onClick={() => setToolButtonOpen(!toolButtonOpen)} className={`sm:hidden relative flex gap-x-2 text-sm border justify-center items-center py-1 px-3 rounded-md 
-            ${toolButtonOpen ?
-            'border-gray-300' :
-            'border-gray-400'
-          }`}>
-          <FiChevronRight className={`size-4 ${toolButtonOpen ? 'rotate-90' : ''}`} />Tools
-          {toolButtonOpen && (
-
-            <div className={`absolute top-full w-40 -left-[60%] mt-2 flex flex-col bg-white shadow-md rounded-lg  border-x border  border-gray-300 p-1 z-10 transition-transform duration-500 origin-top ${toolButtonOpen ? 'opacity-100 scale-100 visible' : 'invisible scale-0'
-              }`}>
-              <button onClick={() => editorRef.current?.toggleCodeBlock()} className="flex items-center gap-x-2 p-2 rounded-md hover:bg-gray-200"><RiCodeSSlashFill className="size-4" />Inser code</button>    
-
-              <button onClick={() => editorRef.current?.addImage()} className="flex items-center gap-x-2 p-2 rounded-md hover:bg-gray-200"><FiImage className="size-4" />Insert image</button>
-            </div>
-
-          )}
-        </button> */}
-
         <div className="hidden sm:flex gap-2">
           <button onClick={() => setOptionButtonOpen(!optionButtonOpen)} className={` relative flex gap-x-2 text-sm border justify-center items-center py-1 px-3 rounded-md 
             ${optionButtonOpen ? ' border-gray-300 ' : 'border-gray-400'}`}><FiChevronRight className={`size-4 ${optionButtonOpen ? 'rotate-90' : ''}`} />Options
