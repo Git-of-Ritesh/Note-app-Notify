@@ -496,11 +496,6 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
                 </div>
               </div>
 
-
-              <button onClick={() => editorRef.current?.mergeCells()} className="p-2 text-left">Merge cell</button>
-
-              <button onClick={() => editorRef.current?.splitCell()} className="p-2 text-left">Split cell</button>
-
               <button onClick={() => editorRef.current?.toggleHeaderColumn()} className="p-2 text-left">Header column</button>
 
               <button onClick={() => editorRef.current?.toggleHeaderCell()} className="p-2 text-left">Header cell</button>
