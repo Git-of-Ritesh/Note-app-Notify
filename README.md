@@ -1,5 +1,5 @@
 # 🚀 Notify - A Smart Note-Taking Web App
-![Notify App]
+Notify App
 Full web app view and Mobile view
 <img width="1440" alt="Image" src="https://github.com/user-attachments/assets/580afed9-8c23-46cf-ac27-14f30d139826" />
 <img width="407" alt="Image" src="https://github.com/user-attachments/assets/9a4b4d06-e009-425e-81f1-6e6c124ad53b" />
