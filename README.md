@@ -2,8 +2,10 @@
 
 ![Image](https://github.com/user-attachments/assets/d4707f1c-091e-4a88-a54e-56d95f8a4d6b)
 ![Notify App]
-
+Full web app view
 <img width="1440" alt="Image" src="https://github.com/user-attachments/assets/580afed9-8c23-46cf-ac27-14f30d139826" />
+
+Mobile view
 <img width="405" alt="Image" src="https://github.com/user-attachments/assets/9a4b4d06-e009-425e-81f1-6e6c124ad53b" />
 <img width="405" alt="Image" src="https://github.com/user-attachments/assets/f1817b68-ae95-4d08-8840-1d0a48e64d19" />
 ## 📹 Demo Video
