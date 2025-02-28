@@ -18,7 +18,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !email || !password || !confirmPassword) {
+    if (!name || !email || !password) {
       setError("All fields are required");
     }
 
