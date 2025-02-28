@@ -34,7 +34,7 @@ Notify is designed to offer a smooth and secure experience, featuring:
 ## 📚 Getting Started
 1. **Clone the repo:**
    ```bash
-   git clone https://github.com/your-username/notify.git
+   git clone https://github.com/Git-of-Ritesh/notify.git
    ```
 2. **Install dependencies:**
    ```bash
