@@ -215,7 +215,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
 
     try {
       const token = sessionStorage.getItem('authToken'); // Retrieve the token from session storage
-      const res = await axios.delete(`${import.meta.env.VITE_API_BACKENDBASE_URL}/delete-note/${selectedNote._id}`, {
+      const res = await axios.delete(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/note/delete-note/${selectedNote._id}`, {
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -240,8 +240,8 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
   //consfirm delete
   const confirmDelete = () => {
     if (window.confirm("Are you sure you want to delete this note?")) {
-      NoteDeletedNotify()
       deleteNote();
+      NoteDeletedNotify();
     }
   };
 
