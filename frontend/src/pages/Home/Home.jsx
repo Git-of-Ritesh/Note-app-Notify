@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import logo from '../../assets/logo/logo4.png'
+import { Slide, ToastContainer, Zoom} from 'react-toastify'
 
 const Home = () => {
 
@@ -112,6 +113,10 @@ const Home = () => {
 
   return (
     <div className='bg-white w-screen h-dvh sm:h-screen'>
+      <ToastContainer
+      position='top-center'
+      transition={Slide}
+      />
       <div className='flex w-full h-full overflow-hidden'>
 
         <div className={`transform transition-transform duration-300 absolute sm:relative sm:left-auto left-0 h-full ${openSidebarMobile ? 'z-50  translate-x-0' : '-translate-x-full '} sm:translate-x-0 sm:block`}>

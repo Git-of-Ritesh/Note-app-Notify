@@ -17,6 +17,7 @@ import { TbTableOff, TbTableRow, TbTableColumn, TbRowRemove, TbColumnRemove } fr
 import { AiOutlineMergeCells, AiOutlineSplitCells } from "react-icons/ai";
 import { LuHeading } from "react-icons/lu";
 import { CiBoxList, CiViewTable } from "react-icons/ci";
+import { toast } from "react-toastify";
 
 
 
@@ -44,6 +45,41 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
   const [mobileOptionButtonOpen, setMobileOptionButtonOpen] = useState(false);
   const [mobileTableOpen, setMobileTableOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const NoteCreatedNotify = () => toast('Note Creted 📋', {
+    className: "w-[350px] rounded-2xl bg-gray-100/20  backdrop-blur-xl text-lg text-gray-600 px-10 shadow-xl",
+    hideProgressBar: true,
+    autoClose: 800,
+  })
+
+  const NoteEditedNotify = () => toast('Note Edited 📋', {
+    className: "w-[350px] rounded-2xl bg-gray-100/20  backdrop-blur-xl text-lg text-gray-600 px-10 shadow-xl",
+    hideProgressBar: true,
+    autoClose: 800,
+  })
+
+  const NoteDeletedNotify = () => toast('Note Deleted ⚰️', {
+    className: "w-[350px] rounded-2xl bg-white/20  backdrop-blur-xl text-lg text-gray-600 px-10 shadow-xl",
+    hideProgressBar: true,
+    autoClose: 800,
+  })
+
+  const NoteTrashNotify = () => toast('Note Moved to trash 🗑️', {
+    className: "w-[350px] rounded-2xl bg-white/20  backdrop-blur-xl text-lg text-gray-600 px-10 shadow-xl",
+    hideProgressBar: true,
+    autoClose: 800,
+  })
+
+  const NotePinnedNotify = () => toast('Note is Pinned 📌', {
+    className: "w-[350px] rounded-2xl bg-white/20  backdrop-blur-xl text-lg text-gray-600 px-10 shadow-xl",
+    hideProgressBar: true,
+    autoClose: 800,
+  })
+
+  const NoteUnpinnedNotify = () => toast('Note is Unpinned 📌', {
+    className: "w-[350px] rounded-2xl bg-white/20  backdrop-blur-xl text-lg text-gray-600 px-10 shadow-xl",
+    hideProgressBar: true,
+    autoClose: 800,
+  })
 
   //drop down of tables
   useEffect(() => {
@@ -114,6 +150,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
   const togglePin = () => {
     setIsPinned((prev) => {
       const newPinState = !prev;
+      isPinned ? NoteUnpinnedNotify() : NotePinnedNotify();
       console.log("Toggled isPinned:", newPinState);  // ✅ Log the new state here
       return newPinState;
     });
@@ -156,6 +193,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
       }
 
       await getAllNotes();
+      NoteTrashNotify()
       onClose()
 
     } catch (error) {
@@ -191,6 +229,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
 
       getAllNotes()
       onClose()
+      NoteDeletedNotify()
 
     } catch (error) {
       console.log(error.message)
@@ -223,6 +262,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
 
       getAllNotes()
       onClose()
+      NoteEditedNotify()
 
     } catch (error) {
       console.log(error.message)
@@ -248,6 +288,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
 
       getAllNotes()
       onClose()
+      NoteCreatedNotify()
 
       setTitle("");
       setContent("");
@@ -286,7 +327,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
                 <button className="flex gap-x-2 items-center px-2 py-1 gap-2 text-sm font-light text-blue-600 rounded-md "
                   onClick={selectedNote ? editNote : addNote}  ><FiSave className="size-4" /> {selectedNote ? "Update" : "Save"}</button>
                 <hr className="my-1" />
-                <button className="flex gap-x-2 items-center px-2 py-1 w-full gap-2 text-sm font-light rounded-md" onClick={togglePin}>
+                <button className="flex gap-x-2 items-center px-2 py-1 w-full gap-2 text-sm font-light rounded-md" onClick= {togglePin}>
                   {isPinned ? <TiPin className="size-5" /> : <TiPinOutline className="size-5" />}
                   Pin</button>
                 <hr className="my-1" />

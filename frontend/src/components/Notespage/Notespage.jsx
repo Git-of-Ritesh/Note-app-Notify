@@ -4,12 +4,25 @@ import Notecard from '../Notecard/Notecard'
 import axios from 'axios'
 import Searchbar from '../searchbar/searchbar'
 import logo from '../../assets/logo/logo4.png'
+import { toast } from 'react-toastify'
 
 
 const Notespage = ({getAllNotes, getTrashNotes, onNewNote, allNotes, isCreateOpen, onEditNote, closeEditor, activeTab, noteOpen, setOpenSidebarMobile }) => {
   const [searchQuery, setSearchQuery] = useState("")
 
   const [delayedOverflow, setDelayedOverflow] = useState(false);
+
+   const NoteRestoredNotify = () => toast('Note Restored back 😉', {
+      className: "w-[350px] rounded-2xl bg-gray-100/20  backdrop-blur-xl text-lg text-gray-600 px-10 shadow-xl",
+      hideProgressBar: true,
+      autoClose: 800,
+    })
+
+    const NoteTrashNotify = () => toast('Note Moved to trash 😟', {
+      className: "w-[350px] rounded-2xl bg-gray-100/20  backdrop-blur-xl text-lg text-gray-600 px-10 shadow-xl",
+      hideProgressBar: true,
+      autoClose: 800,
+    })
 
 useEffect(() => {
   if (noteOpen) {
@@ -61,6 +74,7 @@ useEffect(() => {
       }
 
       await getAllNotes()
+      NoteTrashNotify()
       if(isCreateOpen){
         closeEditor()
       }
@@ -86,6 +100,7 @@ useEffect(() => {
       }
 
       await getTrashNotes()
+      NoteRestoredNotify()
       if(isCreateOpen){
         closeEditor()
       }

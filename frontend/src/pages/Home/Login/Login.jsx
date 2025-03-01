@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { signInFailure } from '../../../redux/user/userSlice';
 import { signInStart } from '../../../redux/user/userSlice';
 import { signInSuccess } from '../../../redux/user/userSlice';
+import { Slide, ToastContainer, Zoom, toast } from 'react-toastify';
 import axios from 'axios';
 
 const Login = () => {
@@ -45,10 +46,15 @@ const Login = () => {
             if (res.data.token) {
                 sessionStorage.setItem('authToken', res.data.token);
             }
-
             dispatch(signInSuccess(res.data));
-            navigate('/');
 
+            // Show success toast, then navigate after a short delay
+            toast('Login Successfully  👍', {
+                className: "w-[350px] rounded-2xl bg-white/20  backdrop-blur-xl text-lg text-gray-600 px-10 shadow-xl",
+                hideProgressBar: true,
+                onClose: () => navigate('/'),
+                autoClose: 1000,// Toast duration (adjust as needed)
+            });
 
         } catch (error) {
             console.log(error.message);
@@ -110,6 +116,10 @@ const Login = () => {
 
 
                         <button onClick={handleSubmit} className=' flex justify-center items-center w-72 sm:w-80 rounded-lg h-7 p-4 bg-black text-white font-normal mt-2 '>Sign in</button>
+                        <ToastContainer
+                            position='top-center'
+                            transition={Slide}
+                        />
 
                         <div className='flex justify-center items-center gap-3'>
                             <hr className='w-20 sm:w-24 border-[#A09F9F] border-1' />

@@ -5,6 +5,7 @@ import { signOutFailure, signOutStart, signOutSuccess } from '../../redux/user/u
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify'
 import { FiLogOut, FiSettings, FiLock, FiStar, FiBookOpen, FiBookmark, FiTrash2 } from "react-icons/fi";
 
 
@@ -17,8 +18,6 @@ const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActi
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
-
 
     const onLogOut = async () => {
         try {
@@ -40,7 +39,13 @@ const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActi
             }
 
             dispatch(signOutSuccess())
-            navigate('/Login')
+            // Show success toast, then navigate after a short delay
+            toast('Logout Successfully  👍', {
+                className: "w-[350px] rounded-2xl bg-white/20  backdrop-blur-xl text-lg text-gray-600 px-10 shadow-xl",
+                hideProgressBar: true,
+                onClose: () => navigate('/Login'),
+                autoClose: 600,// Toast duration (adjust as needed)
+            });
             sessionStorage.removeItem('authToken'); // Remove token from session storage
 
         } catch (error) {
@@ -69,6 +74,7 @@ const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActi
                         </div>
                         <FiBookOpen className='size-4' />
                         <p className='block sm:hidden ml-6 text-sm font-normal'>All notes</p></button>
+
 
                     <button className="relative group flex items-center sm:justify-center  px-2 py-2  rounded-lg bg-transparent text-[#575656] hover:bg-gray-200 transition-all"
                         onClick={() => {
@@ -145,7 +151,6 @@ const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActi
                     </div>
                 )}
             </div>
-
         </aside>
     )
 }

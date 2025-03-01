@@ -228,3 +228,15 @@ table {
   background: #a0a0a0;
   /* Scroll thumb color on hover */
 }
+
+
+.Toastify__close-button {
+  margin: 18px;
+}
+
+.Toastify__toast-container {
+  margin-top: 5px;
+}
+
+
+
