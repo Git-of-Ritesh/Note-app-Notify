@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import logo from '../../assets/logo/logo4.png'
 import profile from '../../assets/logo/profile/Profile2.jpg'
 import { signOutFailure, signOutStart, signOutSuccess } from '../../redux/user/userSlice'
@@ -11,9 +11,24 @@ import { FiLogOut, FiSettings, FiLock, FiStar, FiBookOpen, FiBookmark, FiTrash2 
 
 
 
-const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActiveTab }) => {
+const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActiveTab, openSidebarMobile}) => {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    const handleDropdownOpen = () => {
+        setDropdownOpen((prev) => !prev);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if(dropdownRef.current && !dropdownRef.current.contains(e.target)){
+                setDropdownOpen(false);
+            }   
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside); 
+    }, [])
 
 
     const dispatch = useDispatch()
@@ -105,10 +120,11 @@ const Sidebar = ({ userInfo, getAllNotes, getTrashNotes, getPinnedNotes, setActi
 
 
             {/* user icon */}
-            <div className="relative">
+            <div className="relative" ref={dropdownRef}>
                 <div
                     className="flex items-center gap-3  rounded-md cursor-pointer hover:bg-gray-100 transition"
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    onClick={() => {handleDropdownOpen()
+                    }}              
                 >
                     <img src={profile} alt="profile" className="w-10 h-8 rounded-md object-cover" />
                     <div className='flex flex-col sm:hidden'>
