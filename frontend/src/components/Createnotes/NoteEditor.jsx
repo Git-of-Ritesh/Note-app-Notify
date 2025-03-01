@@ -229,7 +229,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
 
       getAllNotes()
       onClose()
-      NoteDeletedNotify()
+      
 
     } catch (error) {
       console.log(error.message)
@@ -240,6 +240,7 @@ const NoteEditor = ({ onClose, getAllNotes, selectedNote, noteClose, activeTab }
   //consfirm delete
   const confirmDelete = () => {
     if (window.confirm("Are you sure you want to delete this note?")) {
+      NoteDeletedNotify()
       deleteNote();
     }
   };
