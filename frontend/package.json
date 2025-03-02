@@ -31,6 +31,7 @@
     "@tiptap/pm": "^2.11.5",
     "@tiptap/react": "^2.11.5",
     "@tiptap/starter-kit": "^2.11.5",
+    "@vercel/analytics": "^1.5.0",
     "axios": "^1.7.9",
     "lodash": "^4.17.21",
     "lowlight": "^3.3.0",
