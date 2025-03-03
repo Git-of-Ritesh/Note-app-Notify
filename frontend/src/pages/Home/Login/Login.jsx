@@ -8,12 +8,14 @@ import { signInFailure } from '../../../redux/user/userSlice';
 import { signInStart } from '../../../redux/user/userSlice';
 import { signInSuccess } from '../../../redux/user/userSlice';
 import { Slide, ToastContainer, Zoom, toast } from 'react-toastify';
+import LoadingAnimation from '../../../components/LoadingAnimation/LoadingAnimation';
 import axios from 'axios';
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -23,13 +25,16 @@ const Login = () => {
 
         if (!email || !password) {
             setError("Email and Password are required");
+            return;
         } else {
             setError("");
         }
 
         //Login API
+        
         try {
             dispatch(signInStart());
+            setLoading(true);
 
             const res = await axios.post(`${import.meta.env.VITE_API_BACKENDBASE_URL}/api/auth/signin`, {
                 email,
@@ -47,14 +52,18 @@ const Login = () => {
                 sessionStorage.setItem('authToken', res.data.token);
             }
             dispatch(signInSuccess(res.data));
+            setLoading(false); 
+            navigate('/');
 
             // Show success toast, then navigate after a short delay
-            toast('Login Successfully  👍', {
-                className: "w-[350px] rounded-2xl bg-white/20  backdrop-blur-xl text-lg text-gray-600 px-10 shadow-xl",
-                hideProgressBar: true,
-                onClose: () => navigate('/'),
-                autoClose: 1000,// Toast duration (adjust as needed)
-            });
+            // toast('Login Successfully  👍', {
+            //     className: "w-[350px] rounded-2xl bg-white/20  backdrop-blur-xl text-lg text-gray-600 px-10 shadow-xl",
+            //     hideProgressBar: true,
+            //     onClose: () => { 
+            //         setLoading(false); 
+            //         navigate('/'); },
+            //     autoClose: 1000,// Toast duration (adjust as needed)
+            // });
 
         } catch (error) {
             console.log(error.message);
@@ -67,7 +76,11 @@ const Login = () => {
     };
 
     return (
-        <div className='flex justify-between bg-gray-100 h-dvh  py-14 px-28'>
+        <div className='bg-gray-100 h-dvh  '>
+
+            {loading ? <LoadingAnimation /> : (
+            
+
             <div className='flex flex-col justify-center items-center h-full w-full '>
 
                 <div className='flex justify-center items-center gap-2 mb-6'>
@@ -152,6 +165,7 @@ const Login = () => {
 
                 </div>
             </div>
+            )}
         </div>
     );
 };
