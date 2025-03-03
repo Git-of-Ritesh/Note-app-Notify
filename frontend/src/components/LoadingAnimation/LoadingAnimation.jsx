@@ -21,7 +21,7 @@ const LoadingAnimation = ({ onComplete }) => {
             const timer = setTimeout(() => {
                 setLines((prevLines) => [...prevLines, loadingMessages[index]]);
                 setIndex((prevIndex) => prevIndex + 1);
-            }, 700); // Adjust speed here (700ms per line)
+            }, 1000); // Adjust speed here (700ms per line)
             return () => clearTimeout(timer);
         } else if (onComplete) {
             onComplete(); // Trigger onComplete when all lines are shown
