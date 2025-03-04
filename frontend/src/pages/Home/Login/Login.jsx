@@ -57,15 +57,6 @@ const Login = () => {
                 navigate('/');
             }, 9500);
 
-            // Show success toast, then navigate after a short delay
-            // toast('Login Successfully  👍', {
-            //     className: "w-[350px] rounded-2xl bg-white/20  backdrop-blur-xl text-lg text-gray-600 px-10 shadow-xl",
-            //     hideProgressBar: true,
-            //     onClose: () => { 
-            //         setLoading(false); 
-            //         navigate('/'); },
-            //     autoClose: 1000,// Toast duration (adjust as needed)
-            // });
 
         } catch (error) {
             console.log(error.message);
