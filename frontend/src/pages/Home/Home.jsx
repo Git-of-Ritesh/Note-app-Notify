@@ -78,7 +78,6 @@ const Home = () => {
       }
       else {
         setAllNotes(res.data.notes.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
-        // setAllNotes(res.data.note || [])
       }
 
     } catch (error) {
