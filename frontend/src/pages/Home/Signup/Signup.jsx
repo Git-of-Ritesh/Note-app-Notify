@@ -4,6 +4,7 @@ import Logo4 from '../../../assets/logo/logo4.png'
 import { FcGoogle } from "react-icons/fc";
 import { GrApple } from "react-icons/gr";
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify'
 import axios from 'axios';
 
 const Signup = () => {
@@ -34,8 +35,12 @@ const Signup = () => {
       }
 
       setError("");
-
-      navigate('/Login'); // Redirect to login page
+      navigate('/Login'); 
+      toast('Account created successfully ✅', {
+        className: "w-[350px] rounded-2xl bg-white/20  backdrop-blur-xl text-lg text-gray-600 px-10 shadow-xl",
+        hideProgressBar: true,
+        autoClose: 600,
+      })
 
     } catch (error) {
       console.log(error.message)

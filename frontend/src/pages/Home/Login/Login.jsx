@@ -125,6 +125,7 @@ const Login = () => {
                             <ToastContainer
                                 position='top-center'
                                 transition={Slide}
+                                hideProgressBar={true}
                             />
 
                             <div className='flex justify-center items-center gap-3'>
